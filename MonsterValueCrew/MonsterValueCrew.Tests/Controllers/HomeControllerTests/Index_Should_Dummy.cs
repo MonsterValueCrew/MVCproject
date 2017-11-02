@@ -13,8 +13,8 @@ namespace MonsterValueCrew.Tests.Controllers.HomeControllerTests
         [TestMethod]
         public void ShouldBeSuccessfull()
         {
-            bool success = true;
-            Assert.IsTrue(success);
+            bool success = false;
+            Assert.IsFalse(success);
         }
     }
 }
