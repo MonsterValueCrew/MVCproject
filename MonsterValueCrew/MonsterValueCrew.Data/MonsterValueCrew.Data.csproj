@@ -70,8 +70,21 @@
     <Compile Include="Migrations\201711060820214_Initial.Designer.cs">
       <DependentUpon>201711060820214_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061017356_FirstAndLastNameForIdentityUser.cs" />
+    <Compile Include="Migrations\201711061017356_FirstAndLastNameForIdentityUser.Designer.cs">
+      <DependentUpon>201711061017356_FirstAndLastNameForIdentityUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061023066_Departments.cs" />
+    <Compile Include="Migrations\201711061023066_Departments.Designer.cs">
+      <DependentUpon>201711061023066_Departments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061028557_ApplicationUserDepartmentRelationShip.cs" />
+    <Compile Include="Migrations\201711061028557_ApplicationUserDepartmentRelationShip.Designer.cs">
+      <DependentUpon>201711061028557_ApplicationUserDepartmentRelationShip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +94,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711060820214_Initial.resx">
       <DependentUpon>201711060820214_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061017356_FirstAndLastNameForIdentityUser.resx">
+      <DependentUpon>201711061017356_FirstAndLastNameForIdentityUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061023066_Departments.resx">
+      <DependentUpon>201711061023066_Departments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061028557_ApplicationUserDepartmentRelationShip.resx">
+      <DependentUpon>201711061028557_ApplicationUserDepartmentRelationShip.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
