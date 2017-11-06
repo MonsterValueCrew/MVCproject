@@ -66,6 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Migrations\201711061543277_AddingCourseDepartmentAndAssignmentInitial.cs" />
+    <Compile Include="Migrations\201711061543277_AddingCourseDepartmentAndAssignmentInitial.Designer.cs">
+      <DependentUpon>201711061543277_AddingCourseDepartmentAndAssignmentInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061544452_AddingRelations.cs" />
+    <Compile Include="Migrations\201711061544452_AddingRelations.Designer.cs">
+      <DependentUpon>201711061544452_AddingRelations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Course.cs" />
@@ -82,6 +90,14 @@
       <Project>{ed7a2b46-20b2-4590-ae51-e1023a157f2e}</Project>
       <Name>MonsterValueCrew.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711061543277_AddingCourseDepartmentAndAssignmentInitial.resx">
+      <DependentUpon>201711061543277_AddingCourseDepartmentAndAssignmentInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061544452_AddingRelations.resx">
+      <DependentUpon>201711061544452_AddingRelations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

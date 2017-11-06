@@ -29,9 +29,10 @@ namespace MonsterValueCrew.Data.Models
         [Required]
         public int PassScore { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<UserCourseAssignment> UserCourseAssignments { get; set; }
 
-        public bool IsDeleted { get; set; }
 
 
     }
