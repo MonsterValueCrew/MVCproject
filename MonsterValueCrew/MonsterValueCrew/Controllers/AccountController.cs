@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MonsterValueCrew.Models;
+using MonsterValueCrew.Data.Models;
 
 namespace MonsterValueCrew.Controllers
 {

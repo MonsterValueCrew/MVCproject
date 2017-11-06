@@ -11,11 +11,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MonsterValueCrew.Tests</RootNamespace>
     <AssemblyName>MonsterValueCrew.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -124,6 +125,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
+      <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
+      <Name>MonsterValueCrew.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew\MonsterValueCrew.csproj">
       <Project>{096810D4-713C-4E40-A2C0-F9080FE3B75D}</Project>
       <Name>MonsterValueCrew</Name>

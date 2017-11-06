@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using MonsterValueCrew.Models;
+using MonsterValueCrew.Data.Models;
+using MonsterValueCrew.Data;
 
 namespace MonsterValueCrew
 {
