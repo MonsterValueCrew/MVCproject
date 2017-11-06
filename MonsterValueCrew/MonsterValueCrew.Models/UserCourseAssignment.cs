@@ -15,7 +15,6 @@ namespace MonsterValueCrew.Models
 
         public int EmployeeId { get; set; }
 
-        public virtual Employee Employee { get; set; }
 
         public int CourseId { get; set; }
 

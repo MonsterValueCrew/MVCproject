@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using MonsterValueCrew.Data.Models;
+using System.Data.Entity;
 
 namespace MonsterValueCrew.Data
 {
@@ -9,6 +10,9 @@ namespace MonsterValueCrew.Data
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public virtual IDbSet<Department> Departments { get; set; }
+        public virtual IDbSet<Course> Courses { get; set; }
 
         public static ApplicationDbContext Create()
         {
