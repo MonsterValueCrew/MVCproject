@@ -66,13 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Migrations\201711061543277_AddingCourseDepartmentAndAssignmentInitial.cs" />
-    <Compile Include="Migrations\201711061543277_AddingCourseDepartmentAndAssignmentInitial.Designer.cs">
-      <DependentUpon>201711061543277_AddingCourseDepartmentAndAssignmentInitial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711061544452_AddingRelations.cs" />
-    <Compile Include="Migrations\201711061544452_AddingRelations.Designer.cs">
-      <DependentUpon>201711061544452_AddingRelations.cs</DependentUpon>
+    <Compile Include="Migrations\201711061601145_First.cs" />
+    <Compile Include="Migrations\201711061601145_First.Designer.cs">
+      <DependentUpon>201711061601145_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -92,11 +88,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711061543277_AddingCourseDepartmentAndAssignmentInitial.resx">
-      <DependentUpon>201711061543277_AddingCourseDepartmentAndAssignmentInitial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711061544452_AddingRelations.resx">
-      <DependentUpon>201711061544452_AddingRelations.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711061601145_First.resx">
+      <DependentUpon>201711061601145_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MonsterValueCrew.Data.Migrations
 {
-   
+
 
     public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
