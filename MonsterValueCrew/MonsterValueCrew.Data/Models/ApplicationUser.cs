@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,6 +9,11 @@ namespace MonsterValueCrew.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            this.UserCourseAssignments = new HashSet<UserCourseAssignment>();
+        }
+
         [Required]
         [StringLength(50,
             MinimumLength = 3,
@@ -25,6 +31,7 @@ namespace MonsterValueCrew.Data.Models
 
         public virtual Department Department { get; set; }
 
+        public virtual ICollection<UserCourseAssignment> UserCourseAssignments { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

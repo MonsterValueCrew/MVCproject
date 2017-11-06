@@ -86,10 +86,19 @@
     <Compile Include="Migrations\201711061041361_CourseAdded.Designer.cs">
       <DependentUpon>201711061041361_CourseAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061240426_AddingUserCourseAssignment.cs" />
+    <Compile Include="Migrations\201711061240426_AddingUserCourseAssignment.Designer.cs">
+      <DependentUpon>201711061240426_AddingUserCourseAssignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061257510_RelationshipOfAssignmentWithUserAndCourse.cs" />
+    <Compile Include="Migrations\201711061257510_RelationshipOfAssignmentWithUserAndCourse.Designer.cs">
+      <DependentUpon>201711061257510_RelationshipOfAssignmentWithUserAndCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\UserCourseAssignment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +121,18 @@
     <EmbeddedResource Include="Migrations\201711061041361_CourseAdded.resx">
       <DependentUpon>201711061041361_CourseAdded.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061240426_AddingUserCourseAssignment.resx">
+      <DependentUpon>201711061240426_AddingUserCourseAssignment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061257510_RelationshipOfAssignmentWithUserAndCourse.resx">
+      <DependentUpon>201711061257510_RelationshipOfAssignmentWithUserAndCourse.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.Common\MonsterValueCrew.Common.csproj">
+      <Project>{ed7a2b46-20b2-4590-ae51-e1023a157f2e}</Project>
+      <Name>MonsterValueCrew.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

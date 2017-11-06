@@ -9,10 +9,10 @@ namespace MonsterValueCrew.Data.Models
 {
     public class Course
     {
-        //public Course()
-        //{
-        //    this.UserCourseAssignments = new HashSet<UserCourseAssignment>();
-        //}
+        public Course()
+        {
+            this.UserCourseAssignments = new HashSet<UserCourseAssignment>();
+        }
 
         public int Id { get; set; }
 
@@ -29,7 +29,7 @@ namespace MonsterValueCrew.Data.Models
         [Required]
         public int PassScore { get; set; }
 
-        //public virtual ICollection<UserCourseAssignment> UserCourseAssignments { get; set; }
+        public virtual ICollection<UserCourseAssignment> UserCourseAssignments { get; set; }
 
         public bool IsDeleted { get; set; }
 
