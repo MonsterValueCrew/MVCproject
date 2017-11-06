@@ -14,13 +14,11 @@ namespace MonsterValueCrew.Data.Models
             this.UserCourseAssignments = new HashSet<UserCourseAssignment>();
         }
 
-        [Required]
         [StringLength(50,
             MinimumLength = 3,
             ErrorMessage = "Enter a first name between 3 and 50 symbols")]
         public string FirstName { get; set; }
 
-        [Required]
         [StringLength(50,
             MinimumLength = 3,
             ErrorMessage = "Enter a last name between 3 and 50 symbols")]
