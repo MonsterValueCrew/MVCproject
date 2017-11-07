@@ -16,9 +16,9 @@ namespace MonsterValueCrew.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Courses()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your courses page.";
 
             return View();
         }

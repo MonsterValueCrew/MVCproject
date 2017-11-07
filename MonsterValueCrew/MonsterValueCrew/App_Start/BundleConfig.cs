@@ -32,9 +32,16 @@ namespace MonsterValueCrew
                         "~/Content/materialize.css",
                         "~/Content/style.css"));
 
+            bundles.Add(new StyleBundle("~/Content/carousel").Include(
+                        "~/Content/carousel.css"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/materializeJS").Include(
                         "~/Scripts/materialize.js",
                         "~/Scripts/init.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/carouselJS").Include(
+                        "~/Scripts/carouselJS.js"));
         }
     }
 }

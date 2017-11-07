@@ -17,7 +17,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-md-10 input-field col offset-s4 s4">
+                            <div class="col-md-10 input-field col offset-s2 s8">
                                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-md-10 input-field col offset-s4 s4">
+                            <div class="col-md-10 input-field col offset-s2 s8">
                                 @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
