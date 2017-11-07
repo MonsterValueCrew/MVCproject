@@ -37,7 +37,7 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
 
             AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object);
 
-            //Act and Assert
+            //Act & Assert
             controller
                 .WithCallTo(c => c.AllUsers())
                 .ShouldRenderDefaultView()
