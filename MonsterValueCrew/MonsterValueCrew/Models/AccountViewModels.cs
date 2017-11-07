@@ -79,6 +79,16 @@ namespace MonsterValueCrew.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Please enter your first name!")]
+        [MinLength(3, ErrorMessage = "First name needs to contain at least 3 symbols!")]
+        [MaxLength(25, ErrorMessage = "First name needs to contain a maximum of 25 symbols!")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name!")]
+        [MinLength(3, ErrorMessage = "Last name needs to contain at least 3 symbols!")]
+        [MaxLength(25, ErrorMessage = "Last name needs to contain a maximum of 25 symbols!")]
+        public string LastName { get; set; }
     }
 
     public class ResetPasswordViewModel
