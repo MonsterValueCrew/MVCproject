@@ -1,9 +1,6 @@
-using System;
-using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using MonsterValueCrew.Data;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MonsterValueCrew.Data.Migrations
 {
