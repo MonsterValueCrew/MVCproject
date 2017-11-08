@@ -1,6 +1,6 @@
 ﻿@model UserViewModel
 
-<h2>Edit user:</h2>
+<h2>Edit user: @Model.UserName</h2>
 @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "col s12", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -9,14 +9,19 @@
     @Html.HiddenFor(m => m.Id)
 
     <div class="input-field col s6 offset-s3">
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email)
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+    </div>
+
+    <div class="input-field col s6 offset-s3">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
     </div>
 
     <div>
         @Model.UserName
     </div>   
-    <div type="checkbox">
+    <div type="radiobutton">
             @Html.CheckBoxFor(m => m.IsAdmin)
     </div>
     <div>

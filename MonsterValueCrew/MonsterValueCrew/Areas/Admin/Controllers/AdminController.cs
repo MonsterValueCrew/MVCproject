@@ -55,6 +55,12 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
                 await this.userManager.RemoveFromRoleAsync(userViewModel.Id, "Admin");
             }
 
+            var user = await this.userManager.FindByNameAsync(userViewModel.UserName);
+            user.FirstName = userViewModel.FirstName;
+            user.LastName = userViewModel.LastName;
+
+            dbContext.SaveChanges();
+
             return RedirectToAction("AllUsers");
         }
     }
