@@ -8,6 +8,7 @@
         @Html.ValidationSummary(true, "", new { @class = "col s8 offset-s4 error-sumarry" })
 
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.UserName)
 
         <div class="input-field col s6 offset-s3">
             @Html.LabelFor(m => m.FirstName)
@@ -28,7 +29,7 @@
         </div>
         <p>
             <input type="checkbox" id="test5" />
-            <label for="test5">Red</label>
+           
         </p>
         <div>
             <input type="submit" value="Save" class="btn waves-effect" />

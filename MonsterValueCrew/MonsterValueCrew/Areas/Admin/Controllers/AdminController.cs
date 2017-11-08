@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace MonsterValueCrew.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationUserManager userManager;
