@@ -66,6 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Migrations\201711081514476_ImageAndQuestion.cs" />
+    <Compile Include="Migrations\201711081514476_ImageAndQuestion.Designer.cs">
+      <DependentUpon>201711081514476_ImageAndQuestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Migrations\201711061601145_First.cs" />
     <Compile Include="Migrations\201711061601145_First.Designer.cs">
       <DependentUpon>201711061601145_First.cs</DependentUpon>
@@ -74,6 +79,7 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Questions.cs" />
     <Compile Include="Models\UserCourseAssignment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,6 +96,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711061601145_First.resx">
       <DependentUpon>201711061601145_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081514476_ImageAndQuestion.resx">
+      <DependentUpon>201711081514476_ImageAndQuestion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

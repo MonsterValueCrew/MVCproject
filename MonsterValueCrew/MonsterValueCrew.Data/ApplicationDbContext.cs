@@ -14,6 +14,8 @@ namespace MonsterValueCrew.Data
         public virtual IDbSet<Department> Departments { get; set; }
         public virtual IDbSet<Course> Courses { get; set; }
         public virtual IDbSet<UserCourseAssignment> UserCourseAssignments { get; set; }
+        public virtual IDbSet<Image> Images { get; set; }
+        public virtual IDbSet<Question> Questions { get; set; }
 
         public static ApplicationDbContext Create()
         {
