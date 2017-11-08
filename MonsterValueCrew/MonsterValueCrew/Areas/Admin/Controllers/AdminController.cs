@@ -30,6 +30,11 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         public async Task<ActionResult> EditUser(string username)
         {
             var user = await this.userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
             var userViewModel = UserViewModel.Create.Compile()(user);
 
             userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");

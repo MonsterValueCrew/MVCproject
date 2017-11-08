@@ -13,6 +13,10 @@ namespace MonsterValueCrew.Areas.Admin.Models
 
         public string UserName { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
         public bool IsAdmin { get; set; }
 
         public static Expression<Func<ApplicationUser, UserViewModel>> Create
@@ -22,7 +26,9 @@ namespace MonsterValueCrew.Areas.Admin.Models
                 return u => new UserViewModel()
                 {
                     Id = u.Id,
-                    UserName = u.UserName
+                    UserName = u.UserName,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
                 };
             }
         }
