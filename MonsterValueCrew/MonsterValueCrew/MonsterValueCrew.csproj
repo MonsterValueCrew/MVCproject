@@ -254,12 +254,15 @@
     <Content Include="fonts\Roboto\Roboto-Regular.woff2" />
     <Content Include="fonts\Roboto\Roboto-Thin.woff" />
     <Content Include="fonts\Roboto\Roboto-Thin.woff2" />
+    <Content Include="Areas\Admin\Views\Shared\_EditUser.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\carouselJS.js" />
     <Content Include="Scripts\init.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

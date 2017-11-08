@@ -18,7 +18,7 @@ namespace MonsterValueCrew.Models
 
         public int CourseId { get; set; }
 
-        public virtual Course Course { get; set; }
+        //public virtual Course Course { get; set; }
         
         public StatusName Name { get; set; }
 

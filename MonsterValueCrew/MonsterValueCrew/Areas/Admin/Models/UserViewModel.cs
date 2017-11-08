@@ -13,7 +13,7 @@ namespace MonsterValueCrew.Areas.Admin.Models
 
         public string UserName { get; set; }
 
-        public string IsAdmin { get; set; }
+        public bool IsAdmin { get; set; }
 
         public static Expression<Func<ApplicationUser, UserViewModel>> Create
         {

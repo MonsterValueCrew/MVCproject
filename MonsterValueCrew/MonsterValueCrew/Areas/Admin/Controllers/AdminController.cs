@@ -1,9 +1,8 @@
 ﻿using MonsterValueCrew.Areas.Admin.Models;
 using MonsterValueCrew.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MonsterValueCrew.Areas.Admin.Controllers
@@ -21,9 +20,37 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
         public ActionResult AllUsers()
         {
-            var userViewModel = this.dbContext.Users.Select(UserViewModel.Create).ToList();
+            var userViewModel = this.dbContext
+                .Users
+                .Select(UserViewModel.Create).ToList();
 
             return this.View(userViewModel);
+        }
+
+        public async Task<ActionResult> EditUser(string username)
+        {
+            var user = await this.userManager.FindByNameAsync(username);
+            var userViewModel = UserViewModel.Create.Compile()(user);
+
+            userViewModel.IsAdmin = await this.userManager.IsInRoleAsync(user.Id, "Admin");
+
+            return this.PartialView("_EditUser", userViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser(UserViewModel userViewModel)
+        {
+            if (userViewModel.IsAdmin)
+            {
+                await this.userManager.AddToRoleAsync(userViewModel.Id, "Admin");
+            }
+            else
+            {
+                await this.userManager.RemoveFromRoleAsync(userViewModel.Id, "Admin");
+            }
+
+            return RedirectToAction("AllUsers");
         }
     }
 }
