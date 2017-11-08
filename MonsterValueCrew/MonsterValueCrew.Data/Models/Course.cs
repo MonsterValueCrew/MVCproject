@@ -28,6 +28,10 @@ namespace MonsterValueCrew.Data.Models
 
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<Question> Questions { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
+
         public virtual ICollection<UserCourseAssignment> UserCourseAssignments { get; set; }
 
 
