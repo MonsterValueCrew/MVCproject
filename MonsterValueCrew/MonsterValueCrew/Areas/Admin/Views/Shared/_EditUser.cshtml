@@ -1,32 +1,42 @@
 ﻿@model UserViewModel
 
-<h2>Edit user: @Model.UserName</h2>
-@using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "col s12", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "col s8 offset-s4 error-sumarry" })
+<div class="container">
+    <h2>Edit user: @Model.UserName</h2>
+    @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "col s12", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "col s8 offset-s4 error-sumarry" })
 
-    @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Id)
 
-    <div class="input-field col s6 offset-s3">
-        @Html.LabelFor(m => m.FirstName)
-        @Html.TextBoxFor(m => m.FirstName)
-    </div>
+        <div class="input-field col s6 offset-s3">
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.FirstName)
+        </div>
 
-    <div class="input-field col s6 offset-s3">
-        @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName)
-    </div>
+        <div class="input-field col s6 offset-s3">
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName)
+        </div>
 
-    <div>
-        @Model.UserName
-    </div>   
-    <div type="radiobutton">
-            @Html.CheckBoxFor(m => m.IsAdmin)
-    </div>
-    <div>
-        <input type="submit" value="Save" />
-    </div>
-
-}
-
+        <div>
+            @Model.UserName
+        </div>
+        <div>
+            @Html.CheckBoxFor(m => m.IsAdmin, new { @type = "checkbox"})
+            @Html.LabelFor(m => m.IsAdmin, new { @for = "IsAdmin" })
+        </div>
+        <p>
+            <input type="checkbox" id="test5" />
+            <label for="test5">Red</label>
+        </p>
+        <div>
+            <input type="submit" value="Save" class="btn waves-effect" />
+        </div>
+    }
+</div>
+<script>
+    $("input[type='hidden']").each(function (index, element) {
+        $(this).appendTo($(element).parent());
+    });
+</script>   
