@@ -49,11 +49,18 @@ namespace MonsterValueCrew.DataServices
             await Run();
         }
 
-        public Task AssignCourseToDepartment(int departmentID, int courseId,
+        public async Task AssignCourseToDepartment(int departmentID, int courseId,
             bool isAssigned, bool isMandatory, DateTime dueDate)
         {
-            throw new NotImplementedException();
+            var users = this.dbContext.Users.Where(u => u.DepartmentId == departmentID);
 
+            foreach (var user in users)
+            {
+                await AssignCourseToUser(user.UserName, courseId, true, isMandatory, dueDate);
+
+            }
+
+            await Run();
         }
 
         public async Task AssignCourseToUser(string userName, int courseId,
@@ -109,9 +116,15 @@ namespace MonsterValueCrew.DataServices
             throw new NotImplementedException();
         }
 
-        public Task UnassignCourseFromUser(int courseId, string username)
+        public async Task UnassignCourseFromUser(int courseId, string username)
         {
-            throw new NotImplementedException();
+            var assignment = this.dbContext.
+                UserCourseAssignments.
+                First(a => a.ApplicationUser.UserName == username && a.CourseId == courseId);
+
+            assignment.IsAssigned = false;
+
+            await Run();
         }
 
         private async Task Run()
@@ -121,7 +134,7 @@ namespace MonsterValueCrew.DataServices
 
         private ApplicationUser GetUserByUserName(string username)
         {
-            var user = dbContext.Users.FirstOrDefault(u => u.UserName == username);
+            var user = this.dbContext.Users.FirstOrDefault(u => u.UserName == username);
             Guard.WhenArgument(user, "this user doesn't exist").IsNull().Throw();
 
             return user;
@@ -129,11 +142,12 @@ namespace MonsterValueCrew.DataServices
 
         private Course GetCourseByCourseID(int courseId)
         {
-            var course = dbContext.Courses.First(c => c.Id == courseId);
+            var course = this.dbContext.Courses.First(c => c.Id == courseId);
             Guard.WhenArgument(course, "this course doesn't exist").IsNull().Throw();
 
             return course;
         }
+
 
 
     }
