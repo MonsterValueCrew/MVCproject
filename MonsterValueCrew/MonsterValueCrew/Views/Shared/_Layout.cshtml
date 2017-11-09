@@ -24,7 +24,7 @@
                     <a class='dropdown-button btn' data-activates='dropdown1'>Admin</a>
                     <ul id='dropdown1' class='dropdown-content'>
                         <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Courses", "Courses", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
                     </ul>
                 }
             </ul>
@@ -35,6 +35,12 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("About", "About", "Home")</li>
                 <li>@Html.ActionLink("Courses", "Courses", "Home")</li>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("AdminUsers", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("AdminCourses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
+                }
+               
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>

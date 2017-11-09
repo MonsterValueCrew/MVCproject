@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MonsterValueCrew.Data.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace MonsterValueCrew.Models

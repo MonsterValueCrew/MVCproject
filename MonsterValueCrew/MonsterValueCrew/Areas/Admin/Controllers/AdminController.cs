@@ -33,7 +33,10 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return this.View(userViewModel);
         }
-
+        public ActionResult UploadCourses()
+        {
+            return this.View();
+        }
         public async Task<ActionResult> EditUser(string username)
         {
             var user = await this.userManager.FindByNameAsync(username);

@@ -39,8 +39,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
@@ -52,6 +61,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +73,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Contracts\IUserService.cs" />
+    <Compile Include="Account\UserService.cs" />
+    <Compile Include="Courses\Contracts\ICourseService.cs" />
+    <Compile Include="Courses\CourseService.cs" />
     <Compile Include="DateTimeService.cs" />
     <Compile Include="Contracts\IImageService.cs" />
     <Compile Include="Contracts\IDateTimeService.cs" />
@@ -72,6 +86,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
+      <Project>{C9729FE9-C14B-4F7A-A43B-22F5E9BCA401}</Project>
+      <Name>MonsterValueCrew.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonsterValueCrew\MonsterValueCrew.csproj">
+      <Project>{096810D4-713C-4E40-A2C0-F9080FE3B75D}</Project>
+      <Name>MonsterValueCrew</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
