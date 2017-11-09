@@ -13,11 +13,13 @@
         <div class="input-field col s6 offset-s3">
             @Html.LabelFor(m => m.FirstName)
             @Html.TextBoxFor(m => m.FirstName)
+            @Html.ValidationMessageFor(m => m.FirstName)
         </div>
 
         <div class="input-field col s6 offset-s3">
             @Html.LabelFor(m => m.LastName)
             @Html.TextBoxFor(m => m.LastName)
+            @Html.ValidationMessageFor(m => m.LastName)
         </div>
 
         <div>
@@ -41,3 +43,7 @@
         $(this).appendTo($(element).parent());
     });
 </script>   
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.Designer.cs">
       <DependentUpon>201711081514476_ImageAndQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711091042078_FirstAndLastNameUserRequired.cs" />
+    <Compile Include="Migrations\201711091042078_FirstAndLastNameUserRequired.Designer.cs">
+      <DependentUpon>201711091042078_FirstAndLastNameUserRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Image.cs" />
     <Compile Include="Migrations\201711061601145_First.cs" />
     <Compile Include="Migrations\201711061601145_First.Designer.cs">
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081514476_ImageAndQuestion.resx">
       <DependentUpon>201711081514476_ImageAndQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091042078_FirstAndLastNameUserRequired.resx">
+      <DependentUpon>201711091042078_FirstAndLastNameUserRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

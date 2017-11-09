@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace MonsterValueCrew.Data.Models
 {
     public class UserCourseAssignment
