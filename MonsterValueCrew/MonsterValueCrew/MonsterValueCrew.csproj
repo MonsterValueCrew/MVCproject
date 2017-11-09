@@ -263,6 +263,7 @@
     <Content Include="Areas\Admin\Views\Shared\_EditUser.cshtml" />
     <Content Include="App_Data\FirstCourse.json" />
     <Content Include="Areas\Admin\Views\Admin\UploadCourses.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\UploadPictures.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\dropzone.min.js" />
