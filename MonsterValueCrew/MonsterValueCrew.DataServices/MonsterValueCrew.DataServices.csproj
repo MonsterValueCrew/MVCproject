@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{98533D98-2B73-4AA1-9F9D-C7C5052BDA7B}</ProjectGuid>
+    <ProjectGuid>{52152330-DD5D-4EF0-9AEC-02FD56FFA91A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonsterValueCrew.Models</RootNamespace>
-    <AssemblyName>MonsterValueCrew.Models</AssemblyName>
+    <RootNamespace>MonsterValueCrew.DataServices</RootNamespace>
+    <AssemblyName>MonsterValueCrew.DataServices</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,23 +33,7 @@
     <Reference Include="Bytes2you.Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=a7d501dd757e0442, processorArchitecture=MSIL">
       <HintPath>..\packages\Bytes2you.Validation.2.0.0.0\lib\portable-win+net40+sl40+wp+Xbox40\Bytes2you.Validation.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -57,20 +41,33 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Course.cs" />
-    <Compile Include="Enums\StatusNameEnum.cs" />
+    <Compile Include="CourseService.cs" />
+    <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserCourseAssignment.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\MonsterValueCrew.Common\MonsterValueCrew.Common.csproj">
+      <Project>{ed7a2b46-20b2-4590-ae51-e1023a157f2e}</Project>
+      <Name>MonsterValueCrew.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
+      <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
+      <Name>MonsterValueCrew.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonsterValueCrew.Models\MonsterValueCrew.Models.csproj">
+      <Project>{98533d98-2b73-4aa1-9f9d-c7c5052bda7b}</Project>
+      <Name>MonsterValueCrew.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonsterValueCrew\MonsterValueCrew.csproj">
+      <Project>{096810d4-713c-4e40-a2c0-f9080fe3b75d}</Project>
+      <Name>MonsterValueCrew</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
