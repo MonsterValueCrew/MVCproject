@@ -2,15 +2,14 @@
 @{
     ViewBag.Title = "Courses";
 }
-
 <section class="container">
     <section class="row z-depth-3 shadow-container">
         @using (Html.BeginForm("UploadCourses", "Admin", FormMethod.Post,
-                                            new { id = "file-upload-form", @class = "uploader", enctype = "multipart/form-data" }))
+                                                new { id = "file-upload-form", @class = "uploader", enctype = "multipart/form-data" }))
         {
             <h3> Upload Course .JSON here </h3>
             <div class="file-field input-field">
-                <div class="btn">
+                <div class="btn waves-effect waves-light">
                     <span>File</span>
                     <input type="file" name="file">
                 </div>
@@ -19,7 +18,7 @@
                 </div>
             </div>
             <div class="input-field col s6">
-                <button type="submit" name="action" value="Upload" class="waves-effect btn">
+                <button type="submit" name="action" value="Upload" class="waves-effect btn teal">
                     Upload
                     <i class="material-icons right">send</i>
                 </button>
@@ -27,3 +26,75 @@
         }
     </section>
 </section>
+
+@*Най-добре да се направи на Partial View, за да можем да го преизползваме и в CoursesEdit
+    https://www.codeseek.co/oclockvn/dropzone-js-materialize-Qbvode*@
+<div class="container">
+
+    <div class="card-panel waves-effect waves-block waves-green pt0 hovicon" id="zdrop">
+
+        Drop files here or browse files to upload
+
+    </div>
+
+    <div class="collection" id="previews">
+        <div class="collection-item clearhack valign-wrapper item-template" id="zdrop-template">
+            <div class="left pv zdrop-info" data-dz-thumbnail>
+                <div>
+                    <span data-dz-name></span> <span data-dz-size></span>
+                </div>
+                <div class="progress">
+                    <div class="determinate" style="width:0" data-dz-uploadprogress></div>
+                </div>
+            </div>
+
+            <div class="secondary-content actions">
+                <a href="#!" class="btn waves-effect waves-light start">upload</a>
+                <a href="#!" data-dz-remove class="btn ph red white-text waves-effect waves-light"><i class="mdi-content-clear"></i></a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        var previewNode = document.querySelector("#zdrop-template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+
+        var zdrop = new Dropzone("#zdrop", {
+            url: '/Home/UploadFile',
+            maxFilesize: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false,
+            previewsContainer: "#previews",
+            clickable: "#zdrop"
+        });
+
+        zdrop.on("totaluploadprogress", function (progress) {
+            var progr = document.querySelector(".progress .determinate");
+            if (progr === undefined || progr === null)
+                return;
+
+            progr.style.width = progress + "%";
+        });
+
+        zdrop.on('dragenter', function () {
+            // $('#zdrop').css({ background: '#41ab6b', color: '#fff' });
+            $('#zdrop').addClass('green lighten-1 white-text');
+        });
+
+        zdrop.on('dragleave', function () {
+            // $('#zdrop').css({ background: '#fff', color: '#000' });
+            $('#zdrop').addClass('white black-text').removeClass('green lighten-1 white-text');
+        });
+
+        zdrop.on('drop', function () {
+            //  $('#zdrop').css({ background: '#fff', color: '#333' });
+            $('#zdrop').addClass('white black-text').removeClass('green lighten-1 white-text');
+        });
+
+    });</script>

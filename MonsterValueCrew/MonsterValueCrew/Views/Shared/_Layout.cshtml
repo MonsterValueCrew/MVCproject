@@ -18,23 +18,23 @@
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("Courses", "Courses", "Home", new { area = "" }, null)</li>
-
+            </ul>
                 @if (this.User.IsInRole("Admin"))
                 {
-                    <a class='dropdown-button btn' data-activates='dropdown1'>Admin</a>
-                    <ul id='dropdown1' class='dropdown-content'>
+                    <a class='hide-on-med-and-down dropdown-button btn' data-activates='dropdown1'>Admin</a>
+                    <ul id='dropdown1' class='left hide-on-med-and-down dropdown-content'>
                         <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
                     </ul>
                 }
-            </ul>
+            
             <div class="right">
                 @Html.Partial("_LoginPartial")
             </div>
             <ul id="nav-mobile" class="side-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("About", "About", "Home")</li>
-                <li>@Html.ActionLink("Courses", "Courses", "Home")</li>
+                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Courses", "Courses", "Home", new { area = "" }, null)</li>
                 @if (this.User.IsInRole("Admin"))
                 {
                     <li>@Html.ActionLink("AdminUsers", "AllUsers", "Admin", new { area = "Admin" }, null)</li>

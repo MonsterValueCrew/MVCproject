@@ -18,23 +18,16 @@ namespace MonsterValueCrew
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
 
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-            
             bundles.Add(new StyleBundle("~/Content/materializeCSS").Include(
                         "~/Content/materialize.css",
-                        "~/Content/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/carousel").Include(
-                        "~/Content/carousel.css"));
-
+                        "~/Content/site.css",
+                        "~/Content/dropzone.css",
+                        "~/Content/basic.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/materializeJS").Include(
                         "~/Scripts/materialize.js",
-                        "~/Scripts/init.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/carouselJS").Include(
-                        "~/Scripts/carouselJS.js"));
+                        "~/Scripts/init.js",
+                        "~/Scripts/dropzone.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
                 "~/Scripts/jquery.unobtrusive-ajax.js"));

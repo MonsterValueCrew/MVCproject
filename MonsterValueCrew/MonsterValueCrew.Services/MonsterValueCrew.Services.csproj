@@ -73,8 +73,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\Contracts\IUserService.cs" />
-    <Compile Include="Account\UserService.cs" />
     <Compile Include="DateTimeService.cs" />
     <Compile Include="Contracts\IImageService.cs" />
     <Compile Include="Contracts\IDateTimeService.cs" />

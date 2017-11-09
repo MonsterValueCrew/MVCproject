@@ -14,7 +14,6 @@ namespace MonsterValueCrew.Services
     public class CourseService : ICourseService
     {
         private readonly ApplicationDbContext context;
-        private int currentCourseId;
 
         public CourseService(ApplicationDbContext context)
         {
@@ -22,11 +21,7 @@ namespace MonsterValueCrew.Services
 
             this.context = context;
         }
-
-        public int GetCourseById()
-        {
-            return this.currentCourseId;
-        }
+        
         // Ask BigVik how to make reusable, maybe string,reader, file or something else
         public void SaveCourse(HttpPostedFileBase json)
         {
@@ -53,8 +48,17 @@ namespace MonsterValueCrew.Services
                 }
 
                 this.context.SaveChanges();
-                this.currentCourseId = course.Id;
             }
+        }
+        public void SaveImagesToCourse(int courseId, List<ImageViewModel> imagesView)
+        {
+            foreach (var imageView in imagesView)
+            {
+                var image = new Image(imageView.Name, imageView.ImageInBase64, imageView.Order);
+                image.CourseId = courseId;
+                this.context.Images.Add(image);
+            }
+            this.context.SaveChanges();
         }
     }
 }

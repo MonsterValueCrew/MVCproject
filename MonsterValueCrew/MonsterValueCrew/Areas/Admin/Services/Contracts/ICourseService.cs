@@ -6,10 +6,9 @@ namespace MonsterValueCrew.Services.Contracts
 {
     public interface ICourseService
     {
-        int GetCourseById();
-
         void SaveCourse(HttpPostedFileBase json);
 
+        void SaveImagesToCourse(int courseId, List<ImageViewModel> imagesView);
     }
 
 }

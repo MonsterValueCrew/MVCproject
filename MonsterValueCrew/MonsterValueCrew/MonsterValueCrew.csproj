@@ -227,8 +227,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\basic.css" />
+    <Content Include="Content\basic.min.css" />
+    <Content Include="Content\dropzone.css" />
+    <Content Include="Content\dropzone.min.css" />
     <Content Include="Content\Images\background1.jpg" />
     <Content Include="Content\Images\background2.jpg" />
     <Content Include="Content\Images\background3.jpg" />
@@ -242,8 +244,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -264,7 +264,8 @@
     <Content Include="App_Data\FirstCourse.json" />
     <Content Include="Areas\Admin\Views\Admin\UploadCourses.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\carouselJS.js" />
+    <Content Include="Scripts\dropzone.js" />
+    <Content Include="Scripts\dropzone.min.js" />
     <Content Include="Scripts\init.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -277,7 +278,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\materialize.js" />
     <Content Include="Scripts\materialize.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\Web.config" />

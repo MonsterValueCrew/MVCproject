@@ -59,8 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseService.cs" />
-    <Compile Include="Interfaces\ICourseService.cs" />
+    <Compile Include="Account\Contracts\IUserService.cs" />
+    <Compile Include="Account\UserService.cs" />
+    <Compile Include="Course\CourseService.cs" />
+    <Compile Include="Course\Contracts\ICourseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 	"Name": "Programming",
 	"Description": "Importantest",
 	"DateCreated":"\/Date(1330848000000-0800)\/",
-	"RequiredScore" : "2",
+	"PassScore" : "2",
 	"Questions": [
 		{
 			"QuestionName": "Which one is a Scripting Language?",
