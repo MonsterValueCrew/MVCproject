@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201711091042078_FirstAndLastNameUserRequired.Designer.cs">
       <DependentUpon>201711091042078_FirstAndLastNameUserRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711091447308_FixDatabase.cs" />
+    <Compile Include="Migrations\201711091447308_FixDatabase.Designer.cs">
+      <DependentUpon>201711091447308_FixDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Image.cs" />
     <Compile Include="Migrations\201711061601145_First.cs" />
     <Compile Include="Migrations\201711061601145_First.Designer.cs">
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711091042078_FirstAndLastNameUserRequired.resx">
       <DependentUpon>201711091042078_FirstAndLastNameUserRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711091447308_FixDatabase.resx">
+      <DependentUpon>201711091447308_FixDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
