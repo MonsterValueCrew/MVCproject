@@ -1,9 +1,11 @@
-﻿using MonsterValueCrew.Areas.Admin.Models;
+﻿using Bytes2you.Validation;
+using MonsterValueCrew.Areas.Admin.Models;
 using MonsterValueCrew.Data;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+
 
 namespace MonsterValueCrew.Areas.Admin.Controllers
 {
@@ -15,8 +17,12 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
         public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext)
         {
-            this.userManager = userManager ?? throw new ArgumentNullException("userManager");
-            this.dbContext = dbContext ?? throw new ArgumentNullException("userManager");
+            this.userManager = userManager;
+            this.dbContext = dbContext;
+
+            Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
+            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+
         }
 
         public ActionResult AllUsers()
