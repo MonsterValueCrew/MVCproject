@@ -29,6 +29,7 @@ namespace MonsterValueCrew.DataServices
 
         public async Task AddCourseObjectToDb(Course course)
         {
+            Guard.WhenArgument(course, "course").IsNull().Throw();
             dbContext.Courses.Add(course);
 
             await Run();
@@ -37,6 +38,10 @@ namespace MonsterValueCrew.DataServices
         public async Task AddCourseToDb(string name, string description,
             int passScore, bool isDeleted)
         {
+            Guard.WhenArgument(name, "name").IsNull().Throw();
+            Guard.WhenArgument(description, "description").IsNull().Throw();
+            Guard.WhenArgument(passScore, "passScore").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(isDeleted, "isDeleted").IsTrue().Throw();
             Course course = new Course
             {
                 Name = name,
@@ -54,6 +59,11 @@ namespace MonsterValueCrew.DataServices
         public async Task AssignCourseToDepartment(int departmentID, int courseId,
             bool isAssigned, bool isMandatory, DateTime dueDate)
         {
+            Guard.WhenArgument(departmentID, "departmentID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(isAssigned, "isAssignet").IsFalse().Throw();
+            Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
+            Guard.WhenArgument(dueDate, "dueDate").IsLessThanOrEqual(DateTime.Now).Throw();
             var users = this.dbContext.Users.Where(u => u.DepartmentId == departmentID);
 
             foreach (var user in users)
@@ -68,6 +78,10 @@ namespace MonsterValueCrew.DataServices
         public async Task AssignCourseToUser(string userName, int courseId,
             bool isAssigned, bool isMandatory, DateTime dueDate)
         {
+            Guard.WhenArgument(userName, "userName").IsNull().Throw();
+            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
+            Guard.WhenArgument(dueDate, "dueDate").IsLessThanOrEqual(DateTime.Now).Throw();
             var user = GetUserByUserName(userName);
             Course course = GetCourseByCourseID(courseId);
 
@@ -89,12 +103,13 @@ namespace MonsterValueCrew.DataServices
         public IEnumerable<Course> GetAllCourses()
         {
             IEnumerable<Course> courses = this.dbContext.Courses.ToList();
-
+            Guard.WhenArgument(courses, "courses").IsNullOrEmpty().Throw();
             return courses;
         }
 
         public Course GetCourseById(int courseId)
         {
+            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             Course course = this.dbContext.Courses.Single(c => c.Id == courseId);
 
             return course;
@@ -109,7 +124,8 @@ namespace MonsterValueCrew.DataServices
             //    .UserCourseAssignments
             //    .Where(a => a.ApplicationUserId == user.Id)
             //    .Select(a => a.Course);
-
+            Guard.WhenArgument(user, "user").IsNull().Throw();
+            Guard.WhenArgument(courses, "courses").IsNullOrEmpty().Throw();
             return courses;
         }
 
@@ -120,6 +136,9 @@ namespace MonsterValueCrew.DataServices
 
         public async Task UnassignCourseFromUser(int courseId, string username)
         {
+           
+            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(username, "userName").IsNull().Throw();
             var assignment = this.dbContext.
                 UserCourseAssignments.
                 First(a => a.ApplicationUser.UserName == username && a.CourseId == courseId);
