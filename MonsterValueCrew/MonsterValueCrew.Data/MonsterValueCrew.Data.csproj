@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="DataModels\UserCourseAssignmentModel.cs" />
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.cs" />
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.Designer.cs">
       <DependentUpon>201711081514476_ImageAndQuestion.cs</DependentUpon>
