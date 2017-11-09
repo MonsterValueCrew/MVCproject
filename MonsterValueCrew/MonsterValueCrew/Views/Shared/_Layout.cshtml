@@ -18,9 +18,18 @@
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("Courses", "Courses", "Home", new { area = "" }, null)</li>
-                @if (this.User.IsInRole("Admin"))
+                @*@if (this.User.IsInRole("Admin"))
                 {
                     <li>@Html.ActionLink("Admin", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
+                }*@
+
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Admin</a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Courses", "Courses", "Admin", new { area = "Admin" }, null)</li>
+                    </ul>
                 }
             </ul>
             <div class="right">
