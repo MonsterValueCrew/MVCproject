@@ -9,6 +9,9 @@ namespace MonsterValueCrew.Data.Models
         public Course()
         {
             this.UserCourseAssignments = new HashSet<UserCourseAssignment>();
+            this.Questions = new HashSet<Question>();
+            this.Images = new HashSet<Image>();
+            this.DateAdded = DateTime.Now;
         }
 
         public int Id { get; set; }
@@ -16,6 +19,10 @@ namespace MonsterValueCrew.Data.Models
         [Required]
         [StringLength(50,
             ErrorMessage = "Enter a course name with maximum 50 symbols.")]
+        public string Name { get; set; }
+        [Required]
+        [StringLength(500,
+            ErrorMessage = "Enter a course description with maximum 500 symbols.")]
         public string Description { get; set; }
 
         [Display(Name = "Date Added")]

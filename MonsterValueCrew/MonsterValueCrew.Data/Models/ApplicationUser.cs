@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
@@ -13,6 +14,7 @@ namespace MonsterValueCrew.Data.Models
         public ApplicationUser()
         {
             this.UserCourseAssignments = new HashSet<UserCourseAssignment>();
+            this.RegisteredOn = DateTime.Now;
         }
 
         [Required]
@@ -27,10 +29,13 @@ namespace MonsterValueCrew.Data.Models
             ErrorMessage = "Enter a last name between 3 and 50 symbols")]
         public string LastName { get; set; }
 
-
         public int? DepartmentId { get; set; }
 
         public virtual Department Department { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public DateTime RegisteredOn { get; set; }
 
         public virtual ICollection<UserCourseAssignment> UserCourseAssignments { get; set; }
 

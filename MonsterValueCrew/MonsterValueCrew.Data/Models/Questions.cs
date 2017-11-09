@@ -22,7 +22,7 @@ namespace MonsterValueCrew.Data.Models
         [Required]
         public string D { get; set; }
         [Required]  
-        public string RightAnswer { get; set; }
+        public string CorrectAnswer { get; set; }
         [Required]
         public int CourseId { get; set; }
 
