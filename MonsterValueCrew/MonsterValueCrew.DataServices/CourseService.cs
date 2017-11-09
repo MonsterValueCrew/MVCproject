@@ -25,44 +25,116 @@ namespace MonsterValueCrew.DataServices
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
         }
 
-        public Task AddCourseObjectToDb(Course course)
+        public async Task AddCourseObjectToDb(Course course)
         {
-            throw new NotImplementedException();
+            dbContext.Courses.Add(course);
+
+            await Run();
         }
 
-        public Task AddCourseToDb(string description, DateTime DateAdded, int passScore, bool isDeleted)
+        public async Task AddCourseToDb(string name, string description,
+            int passScore, bool isDeleted)
         {
-            throw new NotImplementedException();
+            Course course = new Course
+            {
+                Name = name,
+                Description = description,
+                DateAdded = DateTime.Now,
+                PassScore = passScore,
+                IsDeleted = false
+            };
+
+            this.dbContext.Courses.Add(course);
+
+            await Run();
         }
 
-        public Task AssignCourseToDepartment(int departmentID, int courseId, bool isAssigned, bool isMandatory, DateTime dueDate)
+        public Task AssignCourseToDepartment(int departmentID, int courseId,
+            bool isAssigned, bool isMandatory, DateTime dueDate)
         {
             throw new NotImplementedException();
+
         }
 
-        public Task AssignCourseToUser(string userName, int courseId, bool isAssigned, bool isMandatory, DateTime dueDate)
+        public async Task AssignCourseToUser(string userName, int courseId,
+            bool isAssigned, bool isMandatory, DateTime dueDate)
         {
-            throw new NotImplementedException();
+            var user = GetUserByUserName(userName);
+            Course course = GetCourseByCourseID(courseId);
+
+            UserCourseAssignment assignment = new UserCourseAssignment
+            {
+                Course = course,
+                ApplicationUser = user,
+                IsAssigned = true,
+                IsMandatory = isMandatory,
+                DueDate = dueDate
+            };
+
+            this.dbContext.UserCourseAssignments.Add(assignment);
+
+            await Run();
+
         }
 
         public IEnumerable<Course> GetAllCourses()
         {
-            throw new NotImplementedException();
+            IEnumerable<Course> courses = this.dbContext.Courses.ToList();
+
+            return courses;
         }
 
         public Course GetCourseById(int courseId)
         {
-            throw new NotImplementedException();
+            Course course = this.dbContext.Courses.Single(c => c.Id == courseId);
+
+            return course;
+
         }
 
         public IEnumerable<Course> GetCoursesByUserName(string username)
         {
-            throw new NotImplementedException();
+            var user = GetUserByUserName(username);
+            var courses = user.UserCourseAssignments.Select(a => a.Course).ToList();
+            //IEnumerable<Course> courses = this.dbContext
+            //    .UserCourseAssignments
+            //    .Where(a => a.ApplicationUserId == user.Id)
+            //    .Select(a => a.Course);
+
+            return courses;
         }
 
         public IEnumerable<UserCourseAssignmentModel> GetInfoCoursesForUser(string username)
         {
             throw new NotImplementedException();
         }
+
+        public Task UnassignCourseFromUser(int courseId, string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task Run()
+        {
+            await dbContext.SaveChangesAsync();
+        }
+
+        private ApplicationUser GetUserByUserName(string username)
+        {
+            var user = dbContext.Users.FirstOrDefault(u => u.UserName == username);
+            Guard.WhenArgument(user, "this user doesn't exist").IsNull().Throw();
+
+            return user;
+        }
+
+        private Course GetCourseByCourseID(int courseId)
+        {
+            var course = dbContext.Courses.First(c => c.Id == courseId);
+            Guard.WhenArgument(course, "this course doesn't exist").IsNull().Throw();
+
+            return course;
+        }
+
+
     }
 }
