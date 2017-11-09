@@ -27,7 +27,7 @@ namespace MonsterValueCrew.Services
         {
             return this.currentCourseId;
         }
-
+        // Ask BigVik how to make reusable, maybe string,reader, file or something else
         public void SaveCourse(HttpPostedFileBase json)
         {
             Guard.WhenArgument(json, "json").IsNull().Throw();

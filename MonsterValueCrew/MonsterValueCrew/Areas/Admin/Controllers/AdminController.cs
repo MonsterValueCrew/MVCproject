@@ -17,19 +17,17 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         private readonly ApplicationDbContext dbContext;
         private readonly ICourseService courseService;
 
-        public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext)
+        public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, ICourseService courseService)
         {
             Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
+
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+            Guard.WhenArgument(courseService, "courseService").IsNull().Throw();
             this.userManager = userManager;
             this.dbContext = dbContext;
-        }
-
-        public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, ICourseService courseService) : this(userManager, dbContext)
-        {
-            Guard.WhenArgument(courseService, "courseService").IsNull().Throw();
             this.courseService = courseService;
         }
+
 
         public ActionResult AllUsers()
         {
@@ -47,8 +45,11 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadCourses(UploadJSONViewModel file)
+        public ActionResult UploadCourses(UploadJSONViewModel files)
         {
+            UploadJSONViewModel file = new UploadJSONViewModel();
+            file.Json = Request.Files["file"];
+
             if (ModelState.IsValid)
             {
                 Guard.WhenArgument(file, "file").IsNull().Throw();

@@ -8,7 +8,7 @@
         @using (Html.BeginForm("UploadCourses", "Admin", FormMethod.Post,
                                             new { id = "file-upload-form", @class = "uploader", enctype = "multipart/form-data" }))
         {
-            <h3> Upload Course JSON here </h3>
+            <h3> Upload Course .JSON here </h3>
             <div class="file-field input-field">
                 <div class="btn">
                     <span>File</span>
@@ -18,8 +18,11 @@
                     <input class="file-path validate" type="text">
                 </div>
             </div>
-            <div class="input-field col s6 offset-s3">
-                <button type="submit" name="action" value="Upload" class="waves-effect btn" />
+            <div class="input-field col s6">
+                <button type="submit" name="action" value="Upload" class="waves-effect btn">
+                    Upload
+                    <i class="material-icons right">send</i>
+                </button>
             </div>
         }
     </section>
