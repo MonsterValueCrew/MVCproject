@@ -18,11 +18,13 @@ namespace MonsterValueCrew.DataServices
 
         public CourseService(ApplicationUserManager userManager, ApplicationDbContext dbContext)
         {
+            Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
+            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+
             this.userManager = userManager;
             this.dbContext = dbContext;
 
-            Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
-            Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
+       
         }
 
         public async Task AddCourseObjectToDb(Course course)
