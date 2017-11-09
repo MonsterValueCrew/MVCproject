@@ -80,6 +80,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
+      <Project>{C9729FE9-C14B-4F7A-A43B-22F5E9BCA401}</Project>
+      <Name>MonsterValueCrew.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

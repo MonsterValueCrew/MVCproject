@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MonsterValueCrew.Areas.Admin.ViewModels.UploadJSONViewModel
+@{
     ViewBag.Title = "Courses";
 }
 
@@ -7,23 +8,18 @@
         @using (Html.BeginForm("UploadCourses", "Admin", FormMethod.Post,
                                             new { id = "file-upload-form", @class = "uploader", enctype = "multipart/form-data" }))
         {
-           
-
             <h3> Upload Course JSON here </h3>
             <div class="file-field input-field">
                 <div class="btn">
-                    <span>Browse</span>
-                    <input type="file" />
+                    <span>File</span>
+                    <input type="file" name="file">
                 </div>
-
                 <div class="file-path-wrapper">
-                    <input class="file-path validate"
-                           type="text"
-                           placeholder="Upload file" />
+                    <input class="file-path validate" type="text">
                 </div>
             </div>
             <div class="input-field col s6 offset-s3">
-                <input type="submit" value="Upload" class="waves-effect btn" />
+                <button type="submit" name="action" value="Upload" class="waves-effect btn" />
             </div>
         }
     </section>
