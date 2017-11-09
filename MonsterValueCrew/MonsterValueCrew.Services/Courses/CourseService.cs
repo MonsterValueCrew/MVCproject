@@ -76,6 +76,7 @@ namespace MonsterValueCrew.Services
                 var image = new Image(imageView.Name, imageView.ImageInBase64, imageView.Order);
 
                 image.CourseId = courseId;
+
                 this.context.Images.Add(image);
             }
             this.context.SaveChanges();
