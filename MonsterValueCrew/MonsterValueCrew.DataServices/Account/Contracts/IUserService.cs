@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public interface IUserService
 {
-    void UpdateUserInfoByUser(string id, string firstName, string lastName, string phone);
+    void UpdateUserInfoByUser(string id, string firstName, string lastName);
 
     ApplicationUser GetById(string id);
 
@@ -12,7 +12,7 @@ public interface IUserService
 
     IEnumerable<ApplicationUser> GetUsersByCourse(string query, int courseId);
 
-    void UpdateUserInfo(string id, string username, string email, string firstName, string lastName, string phone, bool isDeleted);
+    void UpdateUserInfo(string id, string username, string email, string firstName, string lastName, bool isDeleted);
 
     void DeactivateAccount(string userId);
 
