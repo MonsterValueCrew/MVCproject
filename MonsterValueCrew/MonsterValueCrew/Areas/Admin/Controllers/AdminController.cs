@@ -20,9 +20,9 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, ICourseService courseService)
         {
             Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
-
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
             Guard.WhenArgument(courseService, "courseService").IsNull().Throw();
+
             this.userManager = userManager;
             this.dbContext = dbContext;
             this.courseService = courseService;
@@ -63,6 +63,13 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             }
             return this.View(file);
         }
+
+        //[HttpPost]
+        //public ActionResult UploadPictures(UploadJSONViewModel files)
+        //{
+           
+        //}
+
         public async Task<ActionResult> EditUser(string username)
         {
             var user = await this.userManager.FindByNameAsync(username);

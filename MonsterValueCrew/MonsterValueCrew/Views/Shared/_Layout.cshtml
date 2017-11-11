@@ -17,7 +17,7 @@
             <ul class="left hide-on-med-and-down">
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
-                <li>@Html.ActionLink("Courses", "AssignedCourses", "User", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Courses", "Index", "Courses", new { area = "" }, null)</li>
             </ul>
                 @if (this.User.IsInRole("Admin"))
                 {

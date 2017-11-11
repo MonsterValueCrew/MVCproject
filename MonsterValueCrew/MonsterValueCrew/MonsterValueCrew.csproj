@@ -216,6 +216,7 @@
     <Compile Include="Areas\Admin\ViewModels\UserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImageViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -263,7 +264,7 @@
     <Content Include="Areas\Admin\Views\Shared\_EditUser.cshtml" />
     <Content Include="App_Data\FirstCourse.json" />
     <Content Include="Areas\Admin\Views\Admin\UploadCourses.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\UploadImages.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_UploadImages.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\dropzone.min.js" />
@@ -314,6 +315,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\Courses\AssignedCourses.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
