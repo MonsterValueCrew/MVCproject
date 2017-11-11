@@ -346,6 +346,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.DataServices\MonsterValueCrew.DataServices.csproj">
+      <Project>{52152330-dd5d-4ef0-9aec-02fd56ffa91a}</Project>
+      <Name>MonsterValueCrew.DataServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>
