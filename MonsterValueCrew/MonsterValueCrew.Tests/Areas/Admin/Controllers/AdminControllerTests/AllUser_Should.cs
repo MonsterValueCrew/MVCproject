@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonsterValueCrew.Areas.Admin.Controllers;
-using MonsterValueCrew.Areas.Admin.Models;
+using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Services.Contracts;
@@ -23,7 +23,7 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
             var userManagerMock = new Mock<ApplicationUserManager>(storeMock.Object);
             var dbContextMock = new Mock<ApplicationDbContext>();
-            var courseServiceMock = new Mock<ICourseService>();
+            var courseServiceMock = new Mock<IAdminService>();
 
             List<ApplicationUser> users = new List<ApplicationUser>()
             {

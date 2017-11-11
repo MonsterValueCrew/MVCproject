@@ -108,8 +108,6 @@ a.middle-indicator-text {
     visibility: hidden;
 }
 
-.contaner:not(.carousel) {
-}
 
     .side-nav .collapsible-body > ul:not(.collapsible) > li.active, .side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active {
         background-color: #ee6e73
