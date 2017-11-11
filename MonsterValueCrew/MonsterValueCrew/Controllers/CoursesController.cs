@@ -30,7 +30,7 @@ namespace MonsterValueCrew.Controllers
 
 
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult AllCourses()
         {
             return View();
         }

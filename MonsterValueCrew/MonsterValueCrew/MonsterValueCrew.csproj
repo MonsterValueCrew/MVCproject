@@ -212,6 +212,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Services\Contracts\ICourseService.cs" />
     <Compile Include="Areas\Admin\Services\CourseService.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CourseViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UploadJSONViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImageViewModel.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\Courses\AssignedCourses.cshtml" />
+    <Content Include="Views\User\AssignedCourses.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
