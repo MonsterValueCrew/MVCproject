@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<AllMyCoursesViewModel>
-<h3>My Courses</h3>
+    <div class="container">
+        <h3>My Courses</h3>
+    </div>
 
 <div class="container">
     @if (Model == null)
@@ -8,18 +10,28 @@
     }
     else
     {
-        
-        foreach (var course in Model)
-        {
-            <div class="ui-widget">
-                <div class="ui-widget">
-                    @course.Name
-                </div>
-                <div class="ui-widget">
-                    @course.DueDate
-                </div>
-            </div>
-            
-        }
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>
+                            @course.Name
+                        </td>
+                        <td>
+                            @course.DueDate.Date.ToString("dd MMM yyyy")
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
     }
 </div>
