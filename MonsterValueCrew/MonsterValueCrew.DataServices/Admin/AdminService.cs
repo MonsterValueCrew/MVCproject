@@ -1,5 +1,4 @@
 ﻿using Bytes2you.Validation;
-using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Services.Contracts;

@@ -210,8 +210,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Services\AdminService.cs" />
-    <Compile Include="Areas\Admin\Services\Contracts\IAdminService.cs" />
     <Compile Include="Areas\Admin\ViewModels\CourseViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UploadJSONViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserCourseAssignmentViewModel.cs" />

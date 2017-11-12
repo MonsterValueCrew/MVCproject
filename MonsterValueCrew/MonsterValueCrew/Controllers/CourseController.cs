@@ -3,7 +3,6 @@ using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Models;
-using MonsterValueCrew.Services.Contracts;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;

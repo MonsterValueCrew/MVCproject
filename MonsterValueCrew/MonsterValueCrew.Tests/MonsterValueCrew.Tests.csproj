@@ -156,7 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonsterValueCrew.DataServices\MonsterValueCrew.DataServices.csproj">
-      <Project>{52152330-dd5d-4ef0-9aec-02fd56ffa91a}</Project>
+      <Project>{52152330-DD5D-4EF0-9AEC-02FD56FFA91A}</Project>
       <Name>MonsterValueCrew.DataServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
