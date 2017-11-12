@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 {
     [TestClass]
@@ -27,14 +28,36 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 
 
         [TestMethod]
-        public void ThrowArgumentNullException_WhenDbcontextIsNull()
+        public void ThrowArgumentNullException_WhenNullDataIsPassed()
         {
             //Arrange
-            var dbContext = new Mock<ApplicationDbContext>();
+            //var dbContext = new Mock<ApplicationDbContext>();
 
-            // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new CourseService(dbContext.Object));
+            //Arrange Act & Assert
+            Assert.ThrowsException<ArgumentNullException>(() => new CourseCrudService(null));
         }
 
+        [TestMethod]
+        public void ShouldThrowArgumentNullExceptionWithCorrectMessage_WhenNullDataIsPassed()
+        {
+            // Arrange
+            var expectedExMessage = "course";
+
+            // Act and Assert
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+                new CourseCrudService(null));
+            StringAssert.Contains(expectedExMessage, exception.Message);
+        }
+
+        //[TestMethod]
+        //public void ShouldNotThrow_WhenValidDependenciesArePassed()
+        //{
+        //    // Arrange
+        //    var mockedData = new Mock<ApplicationDbContext>();
+
+        //    // Act and Assert
+        //    Assert.Fail(() =>
+        //        new CourseCrudService(mockedData.Object));
+        //}
     }
 }

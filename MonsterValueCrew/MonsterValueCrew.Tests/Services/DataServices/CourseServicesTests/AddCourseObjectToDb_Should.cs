@@ -31,6 +31,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             //Assert
             var courses = dbContextMock.Object.Courses.Single();
             Assert.AreEqual(course.Name,courses.Name);
+            dbContextMock.Verify(m => m.SaveChanges(), Times.Once());
         }
 
     }
