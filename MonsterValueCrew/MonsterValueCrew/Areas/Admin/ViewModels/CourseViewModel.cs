@@ -21,6 +21,8 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
 
         public bool IsDeleted { get; set; }
 
+        public bool IsChecked { get; set; }
+
         public static Expression<Func<Course, CourseViewModel>> Create
         {
             get

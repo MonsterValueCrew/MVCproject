@@ -7,8 +7,7 @@ namespace MonsterValueCrew.Services.Contracts
     public interface IAdminService
     {
         void SaveCourse(HttpPostedFileBase json);
-
-        void SaveImagesToCourse(int courseId, List<ImageViewModel> imagesView);
+        
     }
 
 }

@@ -1,10 +1,9 @@
 ﻿using Bytes2you.Validation;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Services.Contracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonsterValueCrew.Data.Models;
 
 namespace MonsterValueCrew.Services
 {

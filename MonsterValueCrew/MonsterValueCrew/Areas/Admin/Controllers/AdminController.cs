@@ -103,7 +103,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public ActionResult AssignCourse()
+        public ActionResult AssignCourses()
         {
 
             var users = this.userManager
@@ -135,14 +135,17 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
         public ActionResult Assignment(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {
-            return View(userCourseAssignmentViewModel);
+            return this.View(userCourseAssignmentViewModel);
         }
 
         [HttpPost]
         public ActionResult SubmitAssignments(UserCourseAssignmentViewModel assignCourseViewModel)
         {
-            var users = dbContext.Users.Where(x => assignCourseViewModel.Users.Select(y => y.Id).ToList().Contains(x.Id)).ToList();
-            var courses = dbContext.Courses.Where(c => assignCourseViewModel.Courses.Select(cr => cr.Id).ToList().Contains(c.Id)).ToList();
+            var userIds = assignCourseViewModel.Users.Select(y => y.Id).ToArray();
+            var courseIds = assignCourseViewModel.Courses.Select(cr => cr.Id).ToArray();
+
+            var users = dbContext.Users.Where(x => userIds.Contains(x.Id)).ToList();
+            var courses = dbContext.Courses.Where(c => courseIds.Contains(c.Id)).ToList();
 
 
             for (int i = 0; i < users.Count; i++)
@@ -152,11 +155,14 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
                     UserCourseAssignment userCourseAssignment = new UserCourseAssignment()
                     {
                         ApplicationUser = users[i],
-                        Course = courses[j]
+                        Course = courses[j],
+                        DueDate = assignCourseViewModel.DueDate,
+                        IsMandatory = assignCourseViewModel.IsMandatory
                     };
 
                     users[i].UserCourseAssignments.Add(userCourseAssignment);
                     courses[j].UserCourseAssignments.Add(userCourseAssignment);
+                    dbContext.UserCourseAssignments.Add(userCourseAssignment);
                 }
             }
 
