@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.DataServices;
+using MonsterValueCrew.Services;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,15 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
     [TestClass]
    public class Constructor_Should
     {
-        [TestMethod]
-        public void ThrowArgumentNullException_WhenUserManagerIsNull()
-        {
-            //Arrange
-            var userManager = new Mock<ApplicationUserManager>();
+   //     [TestMethod]
+   //     public void ThrowArgumentNullException_WhenUserManagerIsNull()
+   //     {
+   //         //Arrange
+   //         var userManager = new Mock<ApplicationUserManager>();
 
-            // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new CourseService(userManager.Object, null));
-        }
+   //         // Act & Assert
+   //         Assert.ThrowsException<ArgumentNullException>(() => new MonsterValueCrew.Services.CourseService(userManager.Object, null));
+   //     }
 
 
 
@@ -32,7 +33,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             var dbContext = new Mock<ApplicationDbContext>();
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new CourseService(null,dbContext.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new CourseService(dbContext.Object));
         }
 
     }

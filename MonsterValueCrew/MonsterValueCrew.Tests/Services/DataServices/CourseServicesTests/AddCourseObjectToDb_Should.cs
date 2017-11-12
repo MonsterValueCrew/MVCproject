@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.Services;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 {
@@ -19,11 +20,11 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         {
             //Arrange
             var dbContextMock = new Mock<ApplicationDbContext>();
-            var userManager = new Mock<ApplicationUserManager>();
+           
             Course course = new Course() ;
-          
 
-            CourseService service = new CourseService(userManager.Object,dbContextMock.Object);
+
+            CourseCrudService service = new CourseCrudService(dbContextMock.Object);
             //Act
            await service.AddCourseObjectToDb(course);
 
