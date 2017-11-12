@@ -71,6 +71,10 @@
     <Reference Include="Moq, Version=4.7.142.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.7.142\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="MSTestExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTestExtensions.4.0.0\lib\MSTestExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -138,6 +142,8 @@
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AllUser_Should.cs" />
     <Compile Include="Controllers\HomeControllerTests\Index_Should_Dummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataServices\CourseServicesTests\AddCourseObjectToDb_Should.cs" />
+    <Compile Include="Services\DataServices\CourseServicesTests\Constructor_Should.cs" />
     <Compile Include="Services\DateTimeServiceTests\GetCurrentDate_Should.cs" />
     <Compile Include="Services\ImageServiceTests\ByteArrayToImageURL_Should.cs" />
     <Compile Include="Services\ImageServiceTests\GetImage_Should.cs" />
@@ -149,6 +155,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.DataServices\MonsterValueCrew.DataServices.csproj">
+      <Project>{52152330-dd5d-4ef0-9aec-02fd56ffa91a}</Project>
+      <Name>MonsterValueCrew.DataServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>
@@ -162,9 +172,7 @@
       <Name>MonsterValueCrew</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\DataServices\CourseServicesTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

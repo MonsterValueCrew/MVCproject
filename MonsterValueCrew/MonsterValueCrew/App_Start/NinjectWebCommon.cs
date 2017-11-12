@@ -76,7 +76,7 @@ namespace MonsterValueCrew.App_Start
                 .GetUserManager<ApplicationDbContext>())
                 .InRequestScope();
 
-            kernel.Bind<ICourseService>().To<CourseService>();
+            kernel.Bind<ICourseService>().To<CourseService>().InRequestScope();
         }        
     }
 }
