@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "AssignedCourses";
+}
+
+<div class="container">
+    <h2>Assigned Courses</h2>
+
+    <div id="preselecting-tab" class="">
+        <h4 class="header">Showing All Courses</h4>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs tab-demo-active z-depth-1 teal" style="width: 100%;">
+                            <li class="tab col s4">
+                                <a class="white-text waves-effect waves-light active" href="#course1">Pending</a>
+                            </li>
+                            <li class="tab col s4">
+                                <a class="white-text waves-effect waves-light" href="#course2">Started</a>
+                            </li>
+                            <li class="tab col s4">
+                                <a class="white-text waves-effect waves-light" href="#course3">Completed</a>
+                            </li>
+                            <div class="indicator" style="right: -1px; left: 336px;"></div>
+                            <div class="indicator" style="right: -1px; left: 336px;"></div>
+                        </ul>
+                    </div>
+                    @*<div class="col s12">
+                        <div id="course1" class="col s12" style="display: none;">
+                            <div class="col s12">
+                                <table id="tblCourses" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>DateAdded</th>
+                                            <th>PassScore</th>
+                                            <th>IsDeleted</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+                        </div>*@
+                    <div id="course2" class="col s12" style="display: none;">
+                        <dl>
+                            <dt>Definition list</dt>
+                            <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+                            <dt>Lorem ipsum dolor sit amet</dt>
+                            <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+                        </dl>
+                    </div>
+                    <div id="course3" class="col s12" style="display: block;">
+                        <p>
+                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                            mi vitae est. Mauris placerat eleifend leo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jquery.dataTables")
+    @*<script>
+            $(document).ready(function () {
+                $('#tblCourses').DataTable({
+                    "searching": true,
+                    "ordering": true,
+                    "pageLength": 5,
+                    "pagingType": "full_numbers",
+                    "ajax": "http://localhost:52690/User/GetCourses",
+                    "columns": [
+                        { "data": "Id" },
+                        { "data": "Name" },
+                        { "data": "Description" },
+                        { "data": "DateAdded" },
+                        { "data": "PassScore" },
+                        { "data": "IsDeleted" }
+                    ]
+                });
+            });
+        </script>*@
+    
+}

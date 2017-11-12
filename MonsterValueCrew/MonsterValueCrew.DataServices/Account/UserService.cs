@@ -51,7 +51,7 @@ namespace MonsterValueCrew.Services
             return user;
         }
 
-        public void UpdateUserInfo(string id, string username, string email, string firstName, string lastName, string phone, bool isDeleted)
+        public void UpdateUserInfo(string id, string username, string email, string firstName, string lastName, bool isDeleted)
         {
             Guard.WhenArgument(id, "id").IsNullOrEmpty().Throw();
 
@@ -65,13 +65,12 @@ namespace MonsterValueCrew.Services
             user.Email = email;
             user.FirstName = firstName;
             user.LastName = lastName;
-            user.PhoneNumber = phone;
             user.IsDeleted = isDeleted;
 
             this.context.SaveChanges();
         }
 
-        public void UpdateUserInfoByUser(string id, string firstName, string lastName, string phone)
+        public void UpdateUserInfoByUser(string id, string firstName, string lastName)
         {
             Guard.WhenArgument(id, "id").IsNullOrEmpty().Throw();
 
@@ -81,7 +80,6 @@ namespace MonsterValueCrew.Services
 
             user.FirstName = firstName;
             user.LastName = lastName;
-            user.PhoneNumber = phone;
 
             this.context.SaveChanges();
         }

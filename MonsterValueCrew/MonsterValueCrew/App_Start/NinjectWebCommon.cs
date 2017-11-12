@@ -1,7 +1,10 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.DataServices;
+using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services;
+
 using MonsterValueCrew.Services.Contracts;
 using Ninject;
 using Ninject.Web.Common;
@@ -76,7 +79,11 @@ namespace MonsterValueCrew.App_Start
                 .GetUserManager<ApplicationDbContext>())
                 .InRequestScope();
 
-            kernel.Bind<ICourseService>().To<CourseService>().InRequestScope();
+            kernel.Bind<IAdminService>().To<AdminService>();
+
+            kernel.Bind<ICourseService>().To<CourseService>();
+
+            kernel.Bind<ICourseCrudService>().To<CourseCrudService>().InRequestScope();
         }        
     }
 }

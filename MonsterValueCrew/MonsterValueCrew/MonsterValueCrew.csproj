@@ -210,20 +210,27 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Services\Contracts\ICourseService.cs" />
-    <Compile Include="Areas\Admin\Services\CourseService.cs" />
+    <Compile Include="Areas\Admin\Services\AdminService.cs" />
+    <Compile Include="Areas\Admin\Services\Contracts\IAdminService.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CourseViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UploadJSONViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserCourseAssignmentViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImageViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TakeACourseViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Contracts\ICourseService.cs" />
+    <Compile Include="Services\CourseService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -263,7 +270,9 @@
     <Content Include="Areas\Admin\Views\Shared\_EditUser.cshtml" />
     <Content Include="App_Data\FirstCourse.json" />
     <Content Include="Areas\Admin\Views\Admin\UploadCourses.cshtml" />
-    <Content Include="Areas\Admin\Views\Admin\UploadImages.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_UploadImages.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AssignCourses.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Assignment.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\dropzone.min.js" />
@@ -314,6 +323,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\Courses\AssignedCourses.cshtml" />
+    <Content Include="Views\User\AssignedCourses.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -335,6 +346,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\MonsterValueCrew.DataServices\MonsterValueCrew.DataServices.csproj">
+      <Project>{52152330-dd5d-4ef0-9aec-02fd56ffa91a}</Project>
+      <Name>MonsterValueCrew.DataServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>

@@ -4,7 +4,7 @@ using System.Web;
 
 namespace MonsterValueCrew.Services.Contracts
 {
-    public interface ICourseService
+    public interface IAdminService
     {
         void SaveCourse(HttpPostedFileBase json);
 

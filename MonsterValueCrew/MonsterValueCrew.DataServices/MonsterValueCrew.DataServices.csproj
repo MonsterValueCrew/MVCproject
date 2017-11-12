@@ -61,8 +61,8 @@
   <ItemGroup>
     <Compile Include="Account\Contracts\IUserService.cs" />
     <Compile Include="Account\UserService.cs" />
-    <Compile Include="Course\CourseService.cs" />
-    <Compile Include="Course\Contracts\ICourseService.cs" />
+    <Compile Include="Course\CourseCrudService.cs" />
+    <Compile Include="Course\Contracts\ICourseCrudService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,14 +73,6 @@
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonsterValueCrew.Models\MonsterValueCrew.Models.csproj">
-      <Project>{98533d98-2b73-4aa1-9f9d-c7c5052bda7b}</Project>
-      <Name>MonsterValueCrew.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonsterValueCrew\MonsterValueCrew.csproj">
-      <Project>{096810d4-713c-4e40-a2c0-f9080fe3b75d}</Project>
-      <Name>MonsterValueCrew</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

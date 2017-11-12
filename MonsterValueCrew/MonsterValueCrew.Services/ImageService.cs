@@ -11,9 +11,13 @@ namespace MonsterValueCrew.Services
         public byte[] ImageToByteArray(Image imageIn)
         {
             Guard.WhenArgument(imageIn, "imageIn").IsNull().Throw();
-            MemoryStream memoryStream = new MemoryStream();
-            imageIn.Save(memoryStream, ImageFormat.Jpeg);
-            return memoryStream.ToArray();
+            //MemoryStream memoryStream = new MemoryStream();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                imageIn.Save(memoryStream, ImageFormat.Jpeg);
+                return memoryStream.ToArray();
+            }
+            
         }
 
         public string ByteArrayToImageUrl(byte[] byteArrayIn)
@@ -33,10 +37,13 @@ namespace MonsterValueCrew.Services
         public byte[] GetByteArrayFromStream(Stream inputStream)
         {
             Guard.WhenArgument(inputStream, "inputStream").IsNull().Throw();
-            MemoryStream target = new MemoryStream();
-            inputStream.CopyTo(target);
-            byte[] data = target.ToArray();
-            return data;
+            //MemoryStream target = new MemoryStream();
+            using (MemoryStream target = new MemoryStream())
+            {
+                inputStream.CopyTo(target);
+                byte[] data = target.ToArray();
+                return data;
+            }
         }
     }
 }

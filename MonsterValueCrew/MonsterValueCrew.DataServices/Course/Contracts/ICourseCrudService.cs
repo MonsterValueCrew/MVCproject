@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MonsterValueCrew.DataServices.Interfaces
 {
-    public interface ICourseService
+    public interface ICourseCrudService
     {
         IEnumerable<Course> GetAllCourses();
 

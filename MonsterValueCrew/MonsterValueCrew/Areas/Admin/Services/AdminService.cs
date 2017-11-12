@@ -11,11 +11,11 @@ using System.Web;
 
 namespace MonsterValueCrew.Services
 {
-    public class CourseService : ICourseService
+    public class AdminService : IAdminService
     {
         private readonly ApplicationDbContext context;
 
-        public CourseService(ApplicationDbContext context)
+        public AdminService(ApplicationDbContext context)
         {
             Guard.WhenArgument(context, "context").IsNull().Throw();
 
@@ -34,11 +34,12 @@ namespace MonsterValueCrew.Services
                 using (BinaryReader biteReader = new BinaryReader(json.InputStream))
                 {
                     byte[] biteArray = biteReader.ReadBytes(json.ContentLength);
+                    Guard.WhenArgument(biteArray, "No Json Data").IsNullOrEmpty().Throw();
                     jsonString = Encoding.UTF8.GetString(biteArray);
                 }
 
                 Course course = JsonConvert.DeserializeObject<Course>(jsonString);
-                
+                Guard.WhenArgument(course, "Course is Null").IsNull().Throw();
                 this.context.Courses.Add(course);
 
                 foreach (var question in course.Questions)
@@ -55,10 +56,12 @@ namespace MonsterValueCrew.Services
             foreach (var imageView in imagesView)
             {
                 var image = new Image(imageView.Name, imageView.ImageInBase64, imageView.Order);
+                Guard.WhenArgument(image, "Image is Null").IsNull().Throw();
                 image.CourseId = courseId;
                 this.context.Images.Add(image);
             }
             this.context.SaveChanges();
         }
+
     }
 }

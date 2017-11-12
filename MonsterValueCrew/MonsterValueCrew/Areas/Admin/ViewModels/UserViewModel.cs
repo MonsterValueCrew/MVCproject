@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 
-namespace MonsterValueCrew.Areas.Admin.Models
+namespace MonsterValueCrew.Areas.Admin.ViewModels
 {
     public class UserViewModel
     {
@@ -18,6 +18,8 @@ namespace MonsterValueCrew.Areas.Admin.Models
         public string LastName { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public bool Checked { get; set; }
 
         public static Expression<Func<ApplicationUser, UserViewModel>> Create
         {

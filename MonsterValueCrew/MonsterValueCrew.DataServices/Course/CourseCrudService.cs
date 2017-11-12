@@ -11,20 +11,15 @@ using Bytes2you.Validation;
 
 namespace MonsterValueCrew.DataServices
 {
-    public class CourseService : ICourseService
+    public class CourseCrudService : ICourseCrudService
     {
-        private readonly ApplicationUserManager userManager;
         private readonly ApplicationDbContext dbContext;
 
-        public CourseService(ApplicationUserManager userManager, ApplicationDbContext dbContext)
+        public CourseCrudService( ApplicationDbContext dbContext)
         {
-            Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
 
-            this.userManager = userManager;
             this.dbContext = dbContext;
-
-       
         }
 
         public async Task AddCourseObjectToDb(Course course)
