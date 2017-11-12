@@ -81,7 +81,7 @@ namespace MonsterValueCrew.App_Start
 
             kernel.Bind<IAdminService>().To<AdminService>();
 
-            kernel.Bind<ICourseService>().To<CourseService>();
+            //kernel.Bind<ICourseService>().To<CourseService>();
 
             kernel.Bind<ICourseCrudService>().To<CourseCrudService>().InRequestScope();
         }        
