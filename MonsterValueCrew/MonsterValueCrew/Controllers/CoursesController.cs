@@ -10,12 +10,12 @@ using System.Web.Mvc;
 
 namespace MonsterValueCrew.Controllers
 {
-    public class CourseController : Controller
+    public class CoursesController : Controller
     {
         private readonly ICourseCrudService services;
         private readonly ApplicationDbContext context;
 
-        public CourseController(ICourseCrudService services, ApplicationDbContext context)
+        public CoursesController(ICourseCrudService services, ApplicationDbContext context)
         {
             Guard.WhenArgument(services, "services").IsNull().Throw();
             Guard.WhenArgument(context, "context").IsNull().Throw();
@@ -46,5 +46,21 @@ namespace MonsterValueCrew.Controllers
 
             return File(currentImage, "image/png");
         }
+
+        public ActionResult AllCourses()
+        {
+
+            var viewModel = services.GetCoursesByUserName(this.User.Identity.Name)
+                .Select(v => new AllMyCoursesViewModel()
+                {
+                    Name = v.Name,
+                    DueDate = v.DateAdded
+                });
+
+
+            return this.View(viewModel);
+        }
+
+
     }
 }

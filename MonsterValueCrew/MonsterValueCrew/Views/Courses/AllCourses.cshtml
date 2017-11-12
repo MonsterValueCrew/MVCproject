@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AllMyCoursesViewModel>
+<h3>My Courses</h3>
+
+<div class="container">
+    @if (Model == null)
+    {
+        <h4>No courses are assigned to you at this point.</h4>
+    }
+    else
+    {
+        
+        foreach (var course in Model)
+        {
+            <div class="ui-widget">
+                <div class="ui-widget">
+                    @course.Name
+                </div>
+                <div class="ui-widget">
+                    @course.DueDate
+                </div>
+            </div>
+            
+        }
+    }
+</div>

@@ -130,13 +130,18 @@ namespace MonsterValueCrew.DataServices
         public IEnumerable<Course> GetCoursesByUserName(string username)
         {
             var user = GetUserByUserName(username);
-            var courses = user.UserCourseAssignments.Select(a => a.Course).ToList();
+            var courses = user.UserCourseAssignments
+                .Select(a => a.Course)
+                .Where(c => c.IsDeleted == false)
+                .ToList();
+
             //IEnumerable<Course> courses = this.dbContext
             //    .UserCourseAssignments
             //    .Where(a => a.ApplicationUserId == user.Id)
             //    .Select(a => a.Course);
             Guard.WhenArgument(user, "user").IsNull().Throw();
-            Guard.WhenArgument(courses, "courses").IsNullOrEmpty().Throw();
+            Guard.WhenArgument(courses, "courses").IsNull().Throw();
+
             return courses;
         }
 
