@@ -111,6 +111,22 @@ namespace MonsterValueCrew.DataServices
 
         }
 
+        public string GetCourseName(int courseId)
+        {
+            // Get the assigned from admin course to user
+            var assignedCourse = this.dbContext.Courses.First(c => c.Id == courseId);
+            var courseName = assignedCourse.Name;
+
+            return courseName;
+        }
+
+        public IList<Image> GetImages(int courseId)
+        {
+            var images = this.dbContext.Courses.First(c => c.Id == courseId).Images;
+
+            return images.ToList();
+        }
+
         public IEnumerable<Course> GetCoursesByUserName(string username)
         {
             var user = GetUserByUserName(username);
@@ -163,8 +179,6 @@ namespace MonsterValueCrew.DataServices
 
             return course;
         }
-
-
 
     }
 }

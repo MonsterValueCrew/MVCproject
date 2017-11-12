@@ -16,6 +16,10 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         Course GetCourseById(int courseId);
 
+        string GetCourseName(int courseId);
+
+        IList<Image> GetImages(int courseId);
+
         Task AddCourseObjectToDb(Course course);
 
         //Do we need to add CourseId here or not?

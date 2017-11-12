@@ -51,17 +51,6 @@ namespace MonsterValueCrew.Services
                 this.context.SaveChanges();
             }
         }
-        public void SaveImagesToCourse(int courseId, List<ImageViewModel> imagesView)
-        {
-            foreach (var imageView in imagesView)
-            {
-                var image = new Image(imageView.Name, imageView.ImageInBase64, imageView.Order);
-                Guard.WhenArgument(image, "Image is Null").IsNull().Throw();
-                image.CourseId = courseId;
-                this.context.Images.Add(image);
-            }
-            this.context.SaveChanges();
-        }
 
     }
 }

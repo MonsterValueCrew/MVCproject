@@ -13,5 +13,6 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
         
         public DateTime DueDate { get; set; }
 
+
     }
 }

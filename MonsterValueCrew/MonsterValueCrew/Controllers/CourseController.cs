@@ -1,6 +1,7 @@
 ﻿using Bytes2you.Validation;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
+using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Models;
 using MonsterValueCrew.Services.Contracts;
 using System.Data.Entity;
@@ -12,10 +13,10 @@ namespace MonsterValueCrew.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly ICourseService services;
+        private readonly ICourseCrudService services;
         private readonly ApplicationDbContext context;
 
-        public CourseController(ICourseService services, ApplicationDbContext context)
+        public CourseController(ICourseCrudService services, ApplicationDbContext context)
         {
             Guard.WhenArgument(services, "services").IsNull().Throw();
             Guard.WhenArgument(context, "context").IsNull().Throw();

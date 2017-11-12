@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Assignment";
 }
-}
 <h2>You Have Selected</h2>
 @using (Html.BeginForm("Assignment", "Admin", FormMethod.Post))
 {
@@ -13,7 +12,9 @@
 
                 if (Model.Users[i].Checked == true)
                 {
-                    <p> @Model.Users[i].UserName</p>
+                    <div>
+                        @Model.Users[i].UserName
+                    </div>
                 }
 
             }
@@ -24,7 +25,9 @@
 
                 if (Model.Users[i].Checked == true)
                 {
-                    <p> @Model.Courses[i].Name</p>
+                    <div>
+                        @Model.Courses[i].Name
+                    </div>
                 }
 
             }
@@ -35,3 +38,4 @@
         <div class="btn">@Html.ActionLink("Choose New Assignmet", "AssignCourse", "Admin", new { area = "Admin" }, null)</div>
     </div>
 }
+
