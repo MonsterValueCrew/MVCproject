@@ -1,6 +1,8 @@
 ﻿using MonsterValueCrew.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -10,7 +12,7 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
     public class CourseViewModel
     {
         public int Id { get; set; }
-
+        
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -21,7 +23,7 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
 
         public bool IsDeleted { get; set; }
 
-        public bool IsChecked { get; set; }
+        public bool IsSelected { get; set; }
 
         public static Expression<Func<Course, CourseViewModel>> Create
         {

@@ -3,10 +3,11 @@ using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Services.Contracts;
+using MonsterValueCrew.DataServices;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-
+using MonsterValueCrew.DataServices.Interfaces;
 
 namespace MonsterValueCrew.Areas.Admin.Controllers
 {
@@ -16,16 +17,19 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         private readonly ApplicationUserManager userManager;
         private readonly ApplicationDbContext dbContext;
         private readonly IAdminService adminService;
+        private readonly ICourseCrudService courseCrudService;
 
-        public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, IAdminService adminService)
+        public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, IAdminService adminService, ICourseCrudService courseCrudService)
         {
             Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
 
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
-            Guard.WhenArgument(adminService, "courseService").IsNull().Throw();
+            Guard.WhenArgument(adminService, "adminService").IsNull().Throw();
+            Guard.WhenArgument(courseCrudService, "courseCrudService").IsNull().Throw();
             this.userManager = userManager;
             this.dbContext = dbContext;
             this.adminService = adminService;
+            this.courseCrudService = courseCrudService;
         }
 
 
@@ -83,6 +87,8 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditUser(UserViewModel userViewModel)
         {
+            Guard.WhenArgument(userViewModel, "userViewModel").IsNull().Throw();
+
             if (userViewModel.IsAdmin)
             {
                 await this.userManager.AddToRoleAsync(userViewModel.Id, "Admin");
@@ -105,7 +111,6 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult AssignCourses()
         {
-
             var users = this.userManager
                 .Users
                 .Select(u => new UserViewModel()
@@ -123,26 +128,30 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
                 })
                 .ToList();
 
-            var assignCourseViewModel = new UserCourseAssignmentViewModel()
+            var userCourseAssignmentViewModel = new UserCourseAssignmentViewModel()
             {
                 Courses = courses,
                 Users = users
             };
 
-            return this.View(assignCourseViewModel);
+            return this.View(userCourseAssignmentViewModel);
         }
 
-
+        [HttpGet]
         public ActionResult Assignment(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {
+            Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
+
             return this.View(userCourseAssignmentViewModel);
         }
 
         [HttpPost]
-        public ActionResult SubmitAssignments(UserCourseAssignmentViewModel assignCourseViewModel)
+        public ActionResult SubmitAssignments(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {
-            var userIds = assignCourseViewModel.Users.Select(y => y.Id).ToArray();
-            var courseIds = assignCourseViewModel.Courses.Select(cr => cr.Id).ToArray();
+            Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
+
+            var userIds = userCourseAssignmentViewModel.Users.Select(y => y.Id).ToArray();
+            var courseIds = userCourseAssignmentViewModel.Courses.Select(cr => cr.Id).ToArray();
 
             var users = dbContext.Users.Where(x => userIds.Contains(x.Id)).ToList();
             var courses = dbContext.Courses.Where(c => courseIds.Contains(c.Id)).ToList();
@@ -151,24 +160,17 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             for (int i = 0; i < users.Count; i++)
             {
                 for (int j = 0; j < courses.Count; j++)
-                {
-                    UserCourseAssignment userCourseAssignment = new UserCourseAssignment()
-                    {
-                        ApplicationUser = users[i],
-                        Course = courses[j],
-                        DueDate = assignCourseViewModel.DueDate,
-                        IsMandatory = assignCourseViewModel.IsMandatory
-                    };
-
-                    users[i].UserCourseAssignments.Add(userCourseAssignment);
-                    courses[j].UserCourseAssignments.Add(userCourseAssignment);
-                    dbContext.UserCourseAssignments.Add(userCourseAssignment);
+                { 
+                    this.courseCrudService
+                        .AssignCourseToUser(users[i].UserName,
+                                            courses[j].Id,
+                                            true,
+                                            userCourseAssignmentViewModel.IsMandatory,
+                                            userCourseAssignmentViewModel.DueDate);
                 }
             }
 
-            dbContext.SaveChanges();
-
-            return RedirectToAction("AssignCourse");
+            return RedirectToAction("AssignCourses");
         }
     }
 }

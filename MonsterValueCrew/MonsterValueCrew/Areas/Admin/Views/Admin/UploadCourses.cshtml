@@ -5,8 +5,9 @@
 <section class="container">
     <section class="row z-depth-3 shadow-container">
         @using (Html.BeginForm("UploadCourses", "Admin", FormMethod.Post,
-                                                new { id = "file-upload-form", @class = "uploader", enctype = "multipart/form-data" }))
+                                                    new { id = "file-upload-form", @class = "uploader", enctype = "multipart/form-data" }))
         {
+            @Html.AntiForgeryToken()
             <h3> Upload Course .JSON here </h3>
             <div class="file-field input-field">
                 <div class="btn waves-effect waves-light">
