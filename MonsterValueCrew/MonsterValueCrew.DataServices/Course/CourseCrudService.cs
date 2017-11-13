@@ -103,7 +103,7 @@ namespace MonsterValueCrew.DataServices
         public IEnumerable<Course> GetAllCourses()
         {
             IEnumerable<Course> courses = this.dbContext.Courses.ToList();
-            Guard.WhenArgument(courses, "courses").IsNullOrEmpty().Throw();
+            Guard.WhenArgument(courses, "courses").IsNull().Throw();
             return courses;
         }
 
