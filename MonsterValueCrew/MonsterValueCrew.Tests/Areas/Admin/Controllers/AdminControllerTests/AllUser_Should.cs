@@ -4,6 +4,7 @@ using MonsterValueCrew.Areas.Admin.Controllers;
 using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
+using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
 using Moq;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
             var userManagerMock = new Mock<ApplicationUserManager>(storeMock.Object);
             var dbContextMock = new Mock<ApplicationDbContext>();
-            var courseServiceMock = new Mock<IAdminService>();
+            var adminServiceMock = new Mock<IAdminService>();
+            var courseCrudServiceMock = new Mock<ICourseCrudService>();
 
             List<ApplicationUser> users = new List<ApplicationUser>()
             {
@@ -36,7 +38,7 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
 
             dbContextMock.SetupGet(u => u.Users).Returns(usersSetMock.Object);
 
-            AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, courseServiceMock.Object);
+            AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
 
             //Act & Assert
             controller
