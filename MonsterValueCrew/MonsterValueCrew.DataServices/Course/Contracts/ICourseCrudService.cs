@@ -1,5 +1,4 @@
-﻿using MonsterValueCrew.Data.DataModels;
-using MonsterValueCrew.Data.Models;
+﻿using MonsterValueCrew.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +33,5 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         Task UnassignCourseFromUser(int courseId, string username);
 
-        //We need a model here
-        IEnumerable<UserCourseAssignmentModel> GetInfoCoursesForUser(string username);
     }
 }

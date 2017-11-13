@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MonsterValueCrew.Data.DataModels;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Data;
 using Bytes2you.Validation;
@@ -150,10 +149,6 @@ namespace MonsterValueCrew.DataServices
             return courses;
         }
 
-        public IEnumerable<UserCourseAssignmentModel> GetInfoCoursesForUser(string username)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task UnassignCourseFromUser(int courseId, string username)
         {

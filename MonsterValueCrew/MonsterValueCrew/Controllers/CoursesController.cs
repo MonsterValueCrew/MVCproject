@@ -42,6 +42,7 @@ namespace MonsterValueCrew.Controllers
 
         public ActionResult TakeCourse(TakeCourseVIewModel viewModel)
         {
+            //how to put the Id of the course here?
             int courseId = 1;
             var course = services.GetCourseById(courseId);
             var images = services.GetImages(courseId);

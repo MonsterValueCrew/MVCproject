@@ -74,10 +74,6 @@
     <Compile Include="Admin\Contracts\IAdminService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MonsterValueCrew.Common\MonsterValueCrew.Common.csproj">
-      <Project>{ed7a2b46-20b2-4590-ae51-e1023a157f2e}</Project>
-      <Name>MonsterValueCrew.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>

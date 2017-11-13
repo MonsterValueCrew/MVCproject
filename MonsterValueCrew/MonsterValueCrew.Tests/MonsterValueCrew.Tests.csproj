@@ -167,10 +167,6 @@
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MonsterValueCrew.Services\MonsterValueCrew.Services.csproj">
-      <Project>{234C5F8F-8204-49D3-A58B-54D173DE4E64}</Project>
-      <Name>MonsterValueCrew.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew\MonsterValueCrew.csproj">
       <Project>{096810D4-713C-4E40-A2C0-F9080FE3B75D}</Project>
       <Name>MonsterValueCrew</Name>
