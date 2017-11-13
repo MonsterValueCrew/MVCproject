@@ -9,7 +9,7 @@ namespace MonsterValueCrew.Data.Models
         public int Id { get; set; }
 
         [Required]
-        public StatusName Name { get; set; }
+        public StatusName Status { get; set; }
 
         [Required]
         public DateTime? DueDate { get; set; }

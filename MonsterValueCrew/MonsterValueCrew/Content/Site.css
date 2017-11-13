@@ -222,3 +222,7 @@ a.middle-indicator-text {
     margin: 0;
     border: none
 }
+
+.paddingAll {
+    padding: 10px 10px 10px 10px
+}
