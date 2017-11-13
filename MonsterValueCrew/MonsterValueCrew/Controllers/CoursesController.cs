@@ -24,18 +24,33 @@ namespace MonsterValueCrew.Controllers
             this.context = context;
         }
 
-        // GET: Course
-        public ActionResult TakeCourse(TakeACourseViewModel model)
+        public ActionResult AllCourses()
+        {
+
+            var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
+                .Select(v => new TakeCourseVIewModel()
+                {
+                    Id = v.Id,
+                    Name = v.Name,
+                    DateAdded = v.DateAdded,
+                    Description = v.Description
+
+                });
+
+
+            return this.View(viewModel);
+        }
+
+        public ActionResult TakeCourse(TakeCourseVIewModel viewModel)
         {
             int courseId = 1;
-            var course = this.context.Courses.First(c => c.Id == courseId);
-            var images = this.services.GetImages(courseId);
+            var course = services.GetCourseById(courseId);
+            var images = services.GetImages(courseId);
 
-            model.Name = course.Name;
+            viewModel.Name = course.Name;
+            viewModel.Images = course.Images;
 
-            model.Images = images;
-
-            return View(model);
+            return View(viewModel);
         }
 
         public async Task<ActionResult> RenderImage(int id)
@@ -47,20 +62,7 @@ namespace MonsterValueCrew.Controllers
             return File(currentImage, "image/png");
         }
 
-        public ActionResult AllCourses()
-        {
-
-            var viewModel = services.GetCoursesByUserName(this.User.Identity.Name)
-                .Select(v => new AllMyCoursesViewModel()
-                {
-                    Name = v.Name,
-                    DueDate = v.DateAdded
-                });
-
-
-            return this.View(viewModel);
-        }
-
+        
 
     }
 }
