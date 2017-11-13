@@ -20,6 +20,7 @@ namespace MonsterValueCrew.Data.Models
             [StringLength(50,
                 ErrorMessage = "Enter a course name with maximum 50 symbols.")]
             public string Name { get; set; }
+
             [Required]
             [StringLength(500,
                 ErrorMessage = "Enter a course description with maximum 500 symbols.")]

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AllMyCoursesViewModel>
+    <div class="container">
+        <h3>My Courses</h3>
+    </div>
+
+<div class="container">
+    @if (Model == null)
+    {
+        <h4>No courses are assigned to you at this point.</h4>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>
+                            @course.Name
+                        </td>
+                        <td>
+                            @course.DueDate.Date.ToString("dd MMM yyyy")
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+</div>
