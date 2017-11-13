@@ -26,8 +26,8 @@ namespace MonsterValueCrew.DataServices
         {
             Guard.WhenArgument(course, "course").IsNull().Throw();
             dbContext.Courses.Add(course);
-
             await Run();
+             
         }
 
         public async Task AddCourseToDb(string name, string description,
@@ -50,6 +50,11 @@ namespace MonsterValueCrew.DataServices
 
             await Run();
         }
+        public async Task AddCourseToDb(Course courseToAdd)
+        {
+            dbContext.Courses.Add(courseToAdd);
+            await Run();
+        }
 
         public async Task AssignCourseToDepartment(int departmentID, int courseId,
             bool isAssigned, bool isMandatory, DateTime dueDate)
@@ -58,7 +63,6 @@ namespace MonsterValueCrew.DataServices
             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             Guard.WhenArgument(isAssigned, "isAssignet").IsFalse().Throw();
             Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
-            Guard.WhenArgument(dueDate, "dueDate").IsLessThanOrEqual(DateTime.Now).Throw();
             var users = this.dbContext.Users.Where(u => u.DepartmentId == departmentID);
 
             foreach (var user in users)

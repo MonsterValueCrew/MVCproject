@@ -15,49 +15,47 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
     [TestClass]
    public class Constructor_Should
     {
-   //     [TestMethod]
-   //     public void ThrowArgumentNullException_WhenUserManagerIsNull()
-   //     {
-   //         //Arrange
-   //         var userManager = new Mock<ApplicationUserManager>();
-
-   //         // Act & Assert
-   //         Assert.ThrowsException<ArgumentNullException>(() => new MonsterValueCrew.Services.CourseService(userManager.Object, null));
-   //     }
-
-
-
+   
         [TestMethod]
-        public void ThrowArgumentNullException_WhenNullDataIsPassed()
+        public void ThrowArgumentNullException_WhenDbContextIsNull()
         {
-            //Arrange
-            //var dbContext = new Mock<ApplicationDbContext>();
-
-            //Arrange Act & Assert
+            //Arrange, Act & Assert
             Assert.ThrowsException<ArgumentNullException>(() => new CourseCrudService(null));
         }
-
+        
         [TestMethod]
-        public void ShouldThrowArgumentNullExceptionWithCorrectMessage_WhenNullDataIsPassed()
+        public void ReturnInstance_WhenParametersAreCorrect()
         {
             // Arrange
-            var expectedExMessage = "course";
+            var dbContextMock = new Mock<ApplicationDbContext>();
+
+            //Act
+            var courseCrudService = new CourseCrudService(dbContextMock.Object);
 
             // Act and Assert
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-                new CourseCrudService(null));
-            StringAssert.Contains(expectedExMessage, exception.Message);
+            Assert.IsNotNull(courseCrudService);
         }
 
+        //     [TestMethod]
+        //     public void ThrowArgumentNullException_WhenUserManagerIsNull()
+        //     {
+        //         //Arrange
+        //         var userManager = new Mock<ApplicationUserManager>();
+
+        //         // Act & Assert
+        //         Assert.ThrowsException<ArgumentNullException>(() => new MonsterValueCrew.Services.CourseService(userManager.Object, null));
+        //     }
+
         //[TestMethod]
-        //public void ShouldNotThrow_WhenValidDependenciesArePassed()
+        //public void ShouldThrowArgumentNullExceptionWithCorrectMessage_WhenNullDataIsPassed()
         //{
         //    // Arrange
-        //    var mockedData = new Mock<ApplicationDbContext>();
+        //    var expectedExMessage = "dbContext";
 
         //    // Act and Assert
-        //    Assert.Fail(() =>
-        //        new CourseCrudService(mockedData.Object));
+        //    var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+        //        new CourseCrudService(null));
+        //    StringAssert.Contains(expectedExMessage, exception.Message);
         //}
     }
 }

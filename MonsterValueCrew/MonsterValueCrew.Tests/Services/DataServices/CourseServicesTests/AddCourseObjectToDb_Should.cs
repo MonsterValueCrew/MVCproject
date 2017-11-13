@@ -9,30 +9,56 @@ using System.Text;
 using System.Threading.Tasks;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Services;
+using System.Data.Entity;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 {
     [TestClass]
-   public class AddCourseObjectToDb_Should
+    public class AddCourseObjectToDb_Should
     {
         [TestMethod]
-        public async void AddCourseObjectToDbWhenParametersAreCorrect()
+        public async  Task AddCourseObjectToDb_WhenParametersAreCorrect()
         {
             //Arrange
-            var dbContextMock = new Mock<ApplicationDbContext>();
-           
-            Course course = new Course() ;
+            string name = "course";
+            string description = "description";
+            DateTime dateTime = new DateTime(2017, 11, 10);
+            int passedScore = 10;
+            int id = 8;
 
+            List<Course> courses = new List<Course>();
+          
+            Course course = new Course()
+            {
+                Id=id,
+                Name = name,
+                Description = description,
+                PassScore = passedScore,
+                DateAdded = dateTime
+            };
+            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
+
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            dbContextMock.SetupGet(c => c.Courses).Returns(coursesSetMock.Object);
 
             CourseCrudService service = new CourseCrudService(dbContextMock.Object);
+
+
             //Act
-           await service.AddCourseObjectToDb(course);
+
+            await service.AddCourseObjectToDb(course);
 
             //Assert
-            var courses = dbContextMock.Object.Courses.Single();
-            Assert.AreEqual(course.Name,courses.Name);
-            dbContextMock.Verify(m => m.SaveChanges(), Times.Once());
-        }
+            var courseInDb = dbContextMock.Object.Courses.Single();
+            Assert.AreEqual(course, courseInDb);
+            dbContextMock.Verify(m => m.SaveChangesAsync(), Times.Once);
+            //Assert.AreEqual(name, courseInDb.Name);
+            //Assert.AreEqual(description, courseInDb.Description);
+            //Assert.AreEqual(passedScore, courseInDb.PassScore);
+            //Assert.AreEqual(dateTime, courseInDb.DateAdded);
 
+
+        }
+        
     }
 }
