@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.IO;
+using System.Drawing.Imaging;
 
 namespace MonsterValueCrew.Services
 {

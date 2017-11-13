@@ -26,7 +26,6 @@ namespace MonsterValueCrew.Controllers
 
         public ActionResult AllCourses()
         {
-
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
                 .Select(v => new TakeCourseVIewModel()
                 {
