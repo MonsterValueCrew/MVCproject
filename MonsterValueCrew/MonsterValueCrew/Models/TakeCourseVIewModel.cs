@@ -14,6 +14,8 @@ namespace MonsterValueCrew.Models
 
         public string Description { get; set; }
 
+        public DateTime DateAdded { get; set; }
+
         public virtual ICollection<Image> Images { get; set; }
 
     }
