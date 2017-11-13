@@ -24,7 +24,23 @@ namespace MonsterValueCrew.Controllers
             this.context = context;
         }
 
-        // GET: Course
+        public ActionResult AllCourses()
+        {
+
+            var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
+                .Select(v => new TakeCourseVIewModel()
+                {
+                    Id = v.Id,
+                    Name = v.Name,
+                    DateAdded = v.DateAdded,
+                    Description = v.Description
+
+                });
+
+
+            return this.View(viewModel);
+        }
+
         public ActionResult TakeCourse(TakeCourseVIewModel viewModel)
         {
             int courseId = 1;
@@ -46,23 +62,7 @@ namespace MonsterValueCrew.Controllers
             return File(currentImage, "image/png");
         }
 
-        public ActionResult AllCourses()
-        {
-
-            var viewModel = services.GetCoursesByUserName(this.User.Identity.Name)
-                .Select(v => new AllCoursesViewModel()
-                {
-                    Id = v.Id,
-                    Name = v.Name,
-                    DueDate = v.DateAdded,
-                    Description = v.Description
-                    
-                });
-
-
-            return this.View(viewModel);
-        }
-
+        
 
     }
 }

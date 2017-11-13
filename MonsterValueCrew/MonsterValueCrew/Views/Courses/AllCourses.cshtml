@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AllCoursesViewModel>
+﻿@model IEnumerable<TakeCourseVIewModel>
     <div class="container">
         <h3>My Courses</h3>
     </div>
@@ -35,7 +35,7 @@
                         </td>
 
                         <td>
-                            @course.DueDate.Date.ToString("dd MMM yyyy")
+                            @course.DateAdded.Date.ToString("dd MMM yyyy")
                         </td>
 
                         <td>
