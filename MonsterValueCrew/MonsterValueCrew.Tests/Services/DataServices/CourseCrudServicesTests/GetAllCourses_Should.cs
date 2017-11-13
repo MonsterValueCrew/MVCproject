@@ -16,7 +16,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
    public class GetAllCourses_Should
     {
         [TestMethod]
-        public async Task ReturnAllCourses_WhenTheyArePresent()
+        public void ReturnAllCourses_WhenTheyArePresent()
         {
             //Arrange
            // string username = "username";
@@ -25,7 +25,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
             //bool IsMandatory = true;
             DateTime date = DateTime.Now;
             var dbContextMock = new Mock<ApplicationDbContext>();
-            List<Course> courseList = new List<Course>();
+            
             
                var course = new Course()
            {
@@ -35,18 +35,36 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
                DateAdded = date,
                PassScore = 30
            };
+            List<Course> courseList = new List<Course>() { course };
             var coursesMock = new Mock<DbSet<Course>>().SetupData(courseList);
             dbContextMock.SetupGet(x => x.Courses).Returns(coursesMock.Object);
             //Act
             CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
             var valueToAssertAgainst = courseList.Single();
             var testedObject = courseService.GetAllCourses().Single();
+           
             //Assert
-           Assert.AreEqual(valueToAssertAgainst.DateAdded, testedObject.DateAdded);
+            Assert.AreEqual  (valueToAssertAgainst.DateAdded, testedObject.DateAdded);
             Assert.AreEqual(valueToAssertAgainst.Description,testedObject.Description);
             Assert.AreEqual(valueToAssertAgainst.Name, testedObject.Name);
             Assert.AreEqual(valueToAssertAgainst.PassScore, testedObject.PassScore);
         }
 
+        [TestMethod]
+        public void ReturnEmptyListCourse_WhenNoneArePresent()
+        {
+            //Arrange
+            var dateTime = DateTime.Now;
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            List<Course> courseList = new List<Course>()
+            {
+            };
+            var coursesMock = new Mock<DbSet<Course>>().SetupData(courseList);
+            dbContextMock.SetupGet(x => x.Courses).Returns(coursesMock.Object);
+            //Act
+            CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
+            //Assert
+            Assert.AreNotEqual(courseList, courseService.GetAllCourses());
+        }
     }
 }
