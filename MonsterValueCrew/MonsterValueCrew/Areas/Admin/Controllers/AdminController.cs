@@ -150,10 +150,10 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         {
             Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
-            var userIds = userCourseAssignmentViewModel.Users.Select(y => y.Id).ToArray();
-            var courseIds = userCourseAssignmentViewModel.Courses.Select(cr => cr.Id).ToArray();
+            var userIds = userCourseAssignmentViewModel.Users.Select(u => u.Id).ToArray();
+            var courseIds = userCourseAssignmentViewModel.Courses.Select(c => c.Id).ToArray();
 
-            var users = dbContext.Users.Where(x => userIds.Contains(x.Id)).ToList();
+            var users = dbContext.Users.Where(u => userIds.Contains(u.Id)).ToList();
             var courses = dbContext.Courses.Where(c => courseIds.Contains(c.Id)).ToList();
 
 

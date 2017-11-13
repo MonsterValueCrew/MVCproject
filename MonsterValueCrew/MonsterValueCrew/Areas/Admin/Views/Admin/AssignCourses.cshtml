@@ -5,7 +5,7 @@
 
 <div class="container">
     <h2>Assign Courses</h2>
-    @using (Html.BeginForm("Assignment", "Admin", FormMethod.Post))
+    @using (Html.BeginForm("Assignment", "Admin"))
     {
         @Html.AntiForgeryToken()
 
@@ -16,11 +16,9 @@
                 @for (int i = 0; i < Model.Users.Count; i++)
                 {
                     <div>
-                        @Html.HiddenFor(x => Model.Users[i].Id)
+                        @Html.HiddenFor(u => Model.Users[i].Id)
                     </div>
                     <div class="paddingAll"> 
-                      
-
                         @Html.HiddenFor(u => Model.Users[i].UserName)
                         @Html.CheckBoxFor(u => Model.Users[i].IsSelected)
                         @Html.LabelFor(u => Model.Users[i].IsSelected)
@@ -34,6 +32,7 @@
                     <div class="paddingAll">
                         @Html.LabelFor(u => Model.DueDate)
                         @Html.EditorFor(u => Model.DueDate)
+                        @Html.HiddenFor(u => Model.DueDate)
                     </div>
                 }
             </div>
@@ -42,9 +41,7 @@
                 <div>Courses</div>
                 @for (int i = 0; i < Model.Courses.Count; i++)
                 {
-                    <div class="paddingAll">
                         @Html.HiddenFor(c => Model.Courses[i].Id)
-                    </div>
                     
                     <div>
                         @Html.HiddenFor(c => Model.Courses[i].Name)
@@ -55,7 +52,7 @@
                 }
             </div>
             <div class="paddingAll">
-                <input type="submit" class="btn waves-effect" value="Assign Course To User">
+                <input type="submit" class="btn waves-effect" value="Assign Courses To Users">
             </div>
         </div>
     }
