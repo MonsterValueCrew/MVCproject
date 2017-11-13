@@ -79,8 +79,9 @@ namespace MonsterValueCrew.DataServices
         {
             Guard.WhenArgument(userName, "userName").IsNull().Throw();
             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(isAssigned, "isAssignet").IsFalse().Throw();
             Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
-            Guard.WhenArgument(dueDate, "dueDate").IsLessThanOrEqual(DateTime.Now).Throw();
+           
             var user = GetUserByUserName(userName);
             Course course = GetCourseByCourseID(courseId);
 
