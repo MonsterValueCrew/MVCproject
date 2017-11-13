@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AllCoursesViewModel>
+﻿@model IEnumerable<AllMyAssignmentsViewModel>
     <div class="container">
         <h3>My Courses</h3>
     </div>
@@ -13,12 +13,8 @@
         <table>
             <thead>
                 <tr>
-                    <th>Course Id</th>
                     <th>Course Name</th>
                     <th>Due Date</th>
-                    <th>Description</th>
-                    <th>Take That Course</th>
-
                 </tr>
             </thead>
 
@@ -27,25 +23,15 @@
                 {
                     <tr>
                         <td>
-                            @course.Id
-                        </td>
-
-                        <td>
                             @course.Name
                         </td>
-
                         <td>
                             @course.DueDate.Date.ToString("dd MMM yyyy")
                         </td>
 
-                        <td>
-                            @course.Description
-                        </td>
-
-                        <td>
-                            @*string linkText, string actionName, string controllerName*@
-                            @Html.ActionLink("Go", "TakeCourse", "User")
-                        </td>
+                        @*<td>
+                            @Url.Action(
+                        </td>*@
                     </tr>
                 }
 
