@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,15 +65,15 @@
     <Compile Include="Account\UserService.cs" />
     <Compile Include="Course\CourseCrudService.cs" />
     <Compile Include="Course\Contracts\ICourseCrudService.cs" />
+    <Compile Include="Date and Images\Contracts\IDateTimeService.cs" />
+    <Compile Include="Date and Images\Contracts\IImageService.cs" />
+    <Compile Include="Date and Images\DateTimeService.cs" />
+    <Compile Include="Date and Images\ImageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Admin\AdminService.cs" />
     <Compile Include="Admin\Contracts\IAdminService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MonsterValueCrew.Common\MonsterValueCrew.Common.csproj">
-      <Project>{ed7a2b46-20b2-4590-ae51-e1023a157f2e}</Project>
-      <Name>MonsterValueCrew.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MonsterValueCrew.Data\MonsterValueCrew.Data.csproj">
       <Project>{c9729fe9-c14b-4f7a-a43b-22f5e9bca401}</Project>
       <Name>MonsterValueCrew.Data</Name>

@@ -46,7 +46,11 @@ namespace MonsterValueCrew.Services
                     question.CourseId = course.Id;
                     this.context.Questions.Add(question);
                 }
-
+                foreach(var image in course.Images)
+                {
+                    image.CourseId = course.Id;
+                    this.context.Images.Add(image);
+                }
                 this.context.SaveChanges();
             }
         }

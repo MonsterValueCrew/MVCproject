@@ -1,6 +1,6 @@
 ﻿@model UserViewModel
 
-<h2>Edit user: @Model.UserName</h2>
+<h4>Edit user: @Model.UserName</h4>
 @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post, new { @class = "col s12", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -10,7 +10,7 @@
     @Html.HiddenFor(m => m.UserName)
 
     <div class="input-field col s6 offset-s3">
-        @Html.LabelFor(m => m.FirstName)
+        @Html.LabelFor(m => m.FirstName)    
         @Html.TextBoxFor(m => m.FirstName)
         @Html.ValidationMessageFor(m => m.FirstName)
     </div>
@@ -28,13 +28,11 @@
         @Html.CheckBoxFor(m => m.IsAdmin, new { @type = "checkbox" })
         @Html.LabelFor(m => m.IsAdmin, new { @for = "IsAdmin" })
     </div>
-    <p>
-        <input type="checkbox" id="test5" />
-
-    </p>
-    <div>
+    
+    <div class="">
         <input type="submit" value="Save" class="btn waves-effect" />
     </div>
+
 }
 
 <script>

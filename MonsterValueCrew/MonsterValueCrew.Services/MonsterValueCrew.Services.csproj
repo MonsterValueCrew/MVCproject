@@ -73,10 +73,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTimeService.cs" />
-    <Compile Include="Contracts\IImageService.cs" />
-    <Compile Include="Contracts\IDateTimeService.cs" />
-    <Compile Include="ImageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,10 +7,10 @@
         <div>
             @user.UserName
             @Ajax.ActionLink("Edit",
-       "EditUser",
-       new { username = user.UserName },
-       new AjaxOptions
-       {
+           "EditUser",
+           new { username = user.UserName },
+           new AjaxOptions
+           {
            InsertionMode = InsertionMode.Replace,
            UpdateTargetId = "editArea"
        })

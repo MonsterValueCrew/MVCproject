@@ -26,7 +26,6 @@ namespace MonsterValueCrew.Controllers
 
         public ActionResult AllCourses()
         {
-
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
                 .Select(v => new TakeCourseVIewModel()
                 {
@@ -43,7 +42,9 @@ namespace MonsterValueCrew.Controllers
 
         public ActionResult TakeCourse(TakeCourseVIewModel viewModel)
         {
-            int courseId = 1;
+            //how to put the Id of the course here? is it fine that way: int courseId = viewModel.Id?
+            //No! It says '0'!
+            int courseId = 6;
             var course = services.GetCourseById(courseId);
             var images = services.GetImages(courseId);
 
@@ -62,7 +63,7 @@ namespace MonsterValueCrew.Controllers
             return File(currentImage, "image/png");
         }
 
-        
+
 
     }
 }

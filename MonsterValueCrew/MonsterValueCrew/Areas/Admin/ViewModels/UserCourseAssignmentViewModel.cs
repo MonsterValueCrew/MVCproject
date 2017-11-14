@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MonsterValueCrew.Areas.Admin.ViewModels
 {
@@ -9,6 +10,7 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
 
         public List<CourseViewModel> Courses { get; set; }
         
+        [Display(Name = "Mandatory")]
         public bool IsMandatory { get; set; }
         
         public DateTime DueDate { get; set; }

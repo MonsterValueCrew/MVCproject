@@ -38,7 +38,7 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
 
             dbContextMock.SetupGet(u => u.Users).Returns(usersSetMock.Object);
 
-            AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object);
+            AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
 
             //Act & Assert
             controller

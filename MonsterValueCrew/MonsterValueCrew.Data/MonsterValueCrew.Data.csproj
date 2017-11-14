@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="CompositeModels\UserCourseAssignmentModel.cs" />
+    <Compile Include="Enums\StatusNameEnum.cs" />
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.cs" />
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.Designer.cs">
       <DependentUpon>201711081514476_ImageAndQuestion.cs</DependentUpon>
@@ -105,12 +105,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MonsterValueCrew.Common\MonsterValueCrew.Common.csproj">
-      <Project>{ed7a2b46-20b2-4590-ae51-e1023a157f2e}</Project>
-      <Name>MonsterValueCrew.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711061601145_First.resx">
