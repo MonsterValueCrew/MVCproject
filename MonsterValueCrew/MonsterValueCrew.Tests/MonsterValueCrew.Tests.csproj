@@ -140,6 +140,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AllUser_Should.cs" />
+    <Compile Include="Controllers\CoursesControllerTests\AllCourses_Should.cs" />
     <Compile Include="Controllers\CoursesControllerTests\Constructor_Should.cs" />
     <Compile Include="Controllers\HomeControllerTests\Index_Should_Dummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
