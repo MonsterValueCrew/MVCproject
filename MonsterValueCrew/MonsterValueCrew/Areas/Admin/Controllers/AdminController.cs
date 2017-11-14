@@ -1,13 +1,12 @@
 ﻿using Bytes2you.Validation;
 using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
-using MonsterValueCrew.Data.Models;
+using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
-using MonsterValueCrew.DataServices;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using MonsterValueCrew.DataServices.Interfaces;
 
 namespace MonsterValueCrew.Areas.Admin.Controllers
 {
@@ -37,7 +36,8 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         {
             var userViewModel = this.dbContext
                 .Users
-                .Select(UserViewModel.Create).ToList();
+                .Select(UserViewModel.Create)
+                .ToList();
 
             return this.View(userViewModel);
         }
@@ -137,17 +137,21 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             return this.View(userCourseAssignmentViewModel);
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Assignment(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {   
             Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
+
+            userCourseAssignmentViewModel.Users = userCourseAssignmentViewModel.Users.Where(u => u.IsSelected).ToList();
+            userCourseAssignmentViewModel.Courses = userCourseAssignmentViewModel.Courses.Where(u => u.IsSelected).ToList();
 
             return this.View(userCourseAssignmentViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AssignCourses(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
+        public async Task<ActionResult> AssignCourses(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {
             Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
@@ -162,7 +166,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             {
                 for (int j = 0; j < courses.Count; j++)
                 { 
-                    this.courseCrudService
+                    await this.courseCrudService
                         .AssignCourseToUser(users[i].UserName,
                                             courses[j].Id,
                                             true,
@@ -173,28 +177,60 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return RedirectToAction("AssignCourses");
         }
+
         public ActionResult DisplayCourses(string username)
         {
             var user = this.courseCrudService.GetUserByUserName(username);
             var userViewModel = UserViewModel.Create.Compile()(user);
 
-            ViewBag.PendingCourses = this.courseCrudService
-                .GetUserCourseAssignmentByStatusName(
+            ViewBag.PendingCourses = GetUserCourseAssignmentByStatusName(
                 user.UserName,
                 StatusName.Pending);
 
-            ViewBag.StartedCourses = this.courseCrudService
-                 .GetUserCourseAssignmentByStatusName(
+            ViewBag.StartedCourses = GetUserCourseAssignmentByStatusName(
                  user.UserName,
                  StatusName.Started);
 
-            ViewBag.CompletedCourses = this.courseCrudService
-                .GetUserCourseAssignmentByStatusName(
+            ViewBag.CompletedCourses = GetUserCourseAssignmentByStatusName(
                 user.UserName,
                 StatusName.Completed);
 
 
-            return this.View("DisplayCourses", userViewModel);
+            return this.PartialView("_DisplayCourses", userViewModel);
+        }
+        public IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
+        {
+            var user = this.courseCrudService.GetUserByUserName(username);
+
+            var resultList = dbContext.UserCourseAssignments
+                .Where(u => u.ApplicationUserId == user.Id)
+                .Select(x => new UserCourseAssignmentViewModel()
+                {
+                    Name = x.Course.Name,
+                    Status = x.Status,
+                    AssignmentDate = x.AssignmentDate,
+                    DueDate = x.DueDate,
+                    IsMandatory = x.IsMandatory,
+                    CompletionDate = x.CompletionDate
+                })
+                .ToList();
+
+            return resultList;
+        }
+        public IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status)
+        {
+            var completedCourses = this.GetUsersCourseAssignment(username)
+                .Where(c => c.Status == status)
+                .ToList();
+
+            if (completedCourses.Count() <= 0)
+            {
+                return null;
+            }
+            else
+            {
+                return completedCourses;
+            }
         }
     }
 }

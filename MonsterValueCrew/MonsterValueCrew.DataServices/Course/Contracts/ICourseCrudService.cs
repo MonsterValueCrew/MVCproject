@@ -35,8 +35,6 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         ApplicationUser GetUserByUserName(string username);
 
-        IEnumerable<UserCourseAssignment> GetUsersCourseAssignment(string username);
-
-        IEnumerable<UserCourseAssignment> GetUserCourseAssignmentByStatusName(string username, StatusName status);
+       
     }
 }

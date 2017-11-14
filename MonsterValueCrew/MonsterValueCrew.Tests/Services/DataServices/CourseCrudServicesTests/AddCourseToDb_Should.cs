@@ -51,7 +51,6 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             //Arrange
             Course course = new Course()
             {
-               
                 Name = "kakwotoidae",
                 Description = "azsym",
                 PassScore = 5,

@@ -82,15 +82,16 @@ namespace MonsterValueCrew.DataServices
             Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
            
             var user = GetUserByUserName(userName);
-            Course course = GetCourseByCourseID(courseId);
 
             UserCourseAssignment assignment = new UserCourseAssignment
             {
-                Course = course,
+                CourseId = courseId,
                 ApplicationUser = user,
                 IsAssigned = true,
                 IsMandatory = isMandatory,
-                DueDate = dueDate
+                DueDate = dueDate,
+                AssignmentDate = DateTime.Now,
+                CompletionDate = DateTime.Now
             };
 
             this.dbContext.UserCourseAssignments.Add(assignment);
@@ -177,46 +178,13 @@ namespace MonsterValueCrew.DataServices
             return user;
         }
 
-        private Course GetCourseByCourseID(int courseId)
+        public Course GetCourseByCourseID(int courseId)
         {
             var course = this.dbContext.Courses.First(c => c.Id == courseId);
             Guard.WhenArgument(course, "this course doesn't exist").IsNull().Throw();
 
             return course;
         }
-        public IEnumerable<UserCourseAssignment> GetUsersCourseAssignment(string username)
-        {
-            var user = GetUserByUserName(username);
-
-            var resultList = dbContext.UserCourseAssignments
-                .Where(u => u.ApplicationUserId == user.Id)
-                .Select(x => new UserCourseAssignment()
-                {
-                    Id = x.Id,
-                    Status = x.Status,
-                    AssignmentDate = x.AssignmentDate,
-                    DueDate = x.DueDate,
-                    IsMandatory = x.IsMandatory,
-                    CompletionDate = x.CompletionDate
-                })
-                .ToList();
-
-            return resultList;
-        }
-        public IEnumerable<UserCourseAssignment> GetUserCourseAssignmentByStatusName(string username, StatusName status)
-        {
-            var completedCourses = this.GetUsersCourseAssignment(username)
-                .Where(c => c.Status == status)
-                .ToList();
-
-            if (completedCourses.Count() <= 0)
-            {
-                return null;
-            }
-            else
-            {
-                return completedCourses;
-            }
-        }
+       
     }
 }

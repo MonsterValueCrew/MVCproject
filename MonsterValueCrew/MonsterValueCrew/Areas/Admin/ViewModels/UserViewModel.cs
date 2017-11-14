@@ -1,10 +1,6 @@
 ﻿using MonsterValueCrew.Data.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 
 namespace MonsterValueCrew.Areas.Admin.ViewModels
 {

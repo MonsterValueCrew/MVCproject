@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201711141249485_AddedCompletionAndAssignmentDates.Designer.cs">
       <DependentUpon>201711141249485_AddedCompletionAndAssignmentDates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711141629574_DateTimeFix.cs" />
+    <Compile Include="Migrations\201711141629574_DateTimeFix.Designer.cs">
+      <DependentUpon>201711141629574_DateTimeFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Image.cs" />
     <Compile Include="Migrations\201711061601145_First.cs" />
     <Compile Include="Migrations\201711061601145_First.Designer.cs">
@@ -128,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711141249485_AddedCompletionAndAssignmentDates.resx">
       <DependentUpon>201711141249485_AddedCompletionAndAssignmentDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141629574_DateTimeFix.resx">
+      <DependentUpon>201711141629574_DateTimeFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
