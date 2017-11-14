@@ -4,7 +4,7 @@
     <h2>AllUsers</h2>
     @foreach (var user in Model)
     {
-        <div>
+        <div class="paddingAll">
             @user.UserName
             @Ajax.ActionLink("Edit",
            "EditUser",
@@ -13,10 +13,19 @@
            {
            InsertionMode = InsertionMode.Replace,
            UpdateTargetId = "editArea"
-       })
+           }, new { @class = "btn waves-effect teal text-lighten-2"})
+            @Ajax.ActionLink("Diplay Courses",
+           "DisplayCourses",
+           new { username = user.UserName },
+           new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "displayCourses"
+           }, new { @class = "btn waves-effect teal text-lighten-2" })
         </div>
     }
     <div id="editArea"></div>
+    <div id="displayCourses"> </div>
 </div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryajax")

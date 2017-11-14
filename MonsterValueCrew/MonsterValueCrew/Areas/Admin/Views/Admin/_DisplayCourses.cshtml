@@ -1,0 +1,158 @@
+﻿@model UserViewModel
+@{
+    ViewBag.Title = "DisplayCourses";
+}
+
+<h4>Display Courses For</h4>
+
+<div>
+    @Model.UserName
+</div>
+
+<hr>
+<div>
+    <h5>Started Courses</h5>
+    @if (ViewBag.StartedCourses == null)
+    {
+        <h6>No Courses here</h6>
+    }
+    else
+    {
+        <table class="responsive-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Is Mandatory
+                </th>
+                <th>
+                    Asignment Date
+                </th>
+                <th>
+                    Completion Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var course in ViewBag.CompletedCourses)
+            {
+                UserCourseAssignmentViewModel userCourseAssignment = new UserCourseAssignmentViewModel
+                {
+                    Name = course.Name,
+                    AssignmentDate = course.AssignmentDate,
+                    Status = course.Status,
+                    CompletionDate = course.CompletionDate,
+                    IsMandatory = course.IsMandatory,
+                    DueDate = course.DueDate
+                };
+                Html.RenderPartial("_CourseTable", userCourseAssignment);
+            }
+        </table>
+    }
+
+</div>
+
+<hr>
+<div>
+    <h5>Pending Courses</h5>
+    @if (ViewBag.PendingCourses == null)
+    {
+        <h6>No Courses here</h6>
+    }
+    else
+    {
+        <table class="responsive-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Is Mandatory
+                </th>
+                <th>
+                    Asignment Date
+                </th>
+                <th>
+                    Completion Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var course in ViewBag.PendingCourses)
+            {
+                UserCourseAssignmentViewModel userCourseAssignment = new UserCourseAssignmentViewModel
+                {
+                    Name = course.Name,
+                    AssignmentDate = course.AssignmentDate,
+                    Status = course.Status,
+                    CompletionDate = course.CompletionDate,
+                    IsMandatory = course.IsMandatory,
+                    DueDate = course.DueDate
+                };
+                Html.RenderPartial("_CourseTable", userCourseAssignment);
+            }
+        </table>
+    }
+
+</div>
+
+<hr>
+<div>
+    <h5>Completed Courses</h5>
+    @if (ViewBag.CompletedCourses == null)
+    {
+        <h6>No Courses here</h6>
+    }
+    else
+    {
+        <table class="responsive-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Is Mandatory
+                </th>
+                <th>
+                    Asignment Date
+                </th>
+                <th>
+                    Completion Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+            @foreach (var course in ViewBag.CompletedCourses)
+            {
+                UserCourseAssignmentViewModel userCourseAssignment = new UserCourseAssignmentViewModel
+                {
+                    Name = course.Name,
+                    AssignmentDate = course.AssignmentDate,
+                    Status = course.Status,
+                    CompletionDate = course.CompletionDate,
+                    IsMandatory = course.IsMandatory,
+                    DueDate = course.DueDate
+                };
+                Html.RenderPartial("_CourseTable", userCourseAssignment);
+            }
+        </table>
+    }
+
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

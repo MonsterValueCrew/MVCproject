@@ -5,7 +5,7 @@
 
 <div class="container">
     <h2>Assign Courses</h2>
-    @using (Html.BeginForm("Assignment", "Admin"))
+    @using (Html.BeginForm("Assignment", "Admin", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
@@ -18,36 +18,37 @@
                     <div>
                         @Html.HiddenFor(u => Model.Users[i].Id)
                     </div>
-                    <div class="paddingAll"> 
-                        @Html.HiddenFor(u => Model.Users[i].UserName)
+                    <div class="paddingAll">
                         @Html.CheckBoxFor(u => Model.Users[i].IsSelected)
-                        @Html.LabelFor(u => Model.Users[i].IsSelected)
-                        @Html.DisplayFor(u => Model.Users[i].UserName)
+                        @Html.LabelFor(u => Model.Users[i].IsSelected, Model.Users[i].UserName)
+                        @Html.HiddenFor(u => Model.Users[i].UserName)
                     </div>
-                    <h5>Choose Assignment Type of Course</h5>
-                    <div class="paddingAll">
-                        @Html.CheckBoxFor(u => Model.IsMandatory, new { @type = "checkbox" })
-                        @Html.LabelFor(u => Model.IsMandatory, new { @for = "IsMandatory", @value ="Mandatory" })
-                    </div>
-                    <div class="paddingAll">
-                        @Html.LabelFor(u => Model.DueDate)
-                        @Html.EditorFor(u => Model.DueDate)
-                        @Html.HiddenFor(u => Model.DueDate)
-                    </div>
+
                 }
+            </div>
+            <h5>Choose Assignment Type of Course</h5>
+            <div class="paddingAll">
+                @Html.CheckBoxFor(u => Model.IsMandatory)
+                @Html.LabelFor(u => Model.IsMandatory)
+                @Html.HiddenFor(u => Model.IsMandatory)
+            </div>
+
+            <div class="paddingAll">
+                @Html.LabelFor(u => Model.DueDate)
+                @Html.EditorFor(u => Model.DueDate)
+                @Html.HiddenFor(u => Model.DueDate)
             </div>
             @*Listing Corses*@
             <div>
                 <div>Courses</div>
                 @for (int i = 0; i < Model.Courses.Count; i++)
                 {
-                        @Html.HiddenFor(c => Model.Courses[i].Id)
-                    
+                    @Html.HiddenFor(c => Model.Courses[i].Id)
+
                     <div>
-                        @Html.HiddenFor(c => Model.Courses[i].Name)
                         @Html.CheckBoxFor(c => Model.Courses[i].IsSelected)
                         @Html.LabelFor(c => Model.Courses[i].IsSelected, Model.Courses[i].Name)
-                        
+                        @Html.HiddenFor(c => Model.Courses[i].Name)
                     </div>
                 }
             </div>
@@ -58,7 +59,7 @@
     }
 </div>
 @section Scripts{
-<script>
+    <script>
         $(document).ready(function () {
             Materialize.updateTextFields();
         });
@@ -66,5 +67,5 @@
         $("input[type='hidden']").each(function (index, element) {
             $(this).appendTo($(element).parent());
         });
-</script>
-    }
+    </script>
+}

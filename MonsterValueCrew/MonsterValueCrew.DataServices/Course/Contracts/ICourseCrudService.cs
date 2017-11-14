@@ -33,5 +33,8 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         Task UnassignCourseFromUser(int courseId, string username);
 
+        ApplicationUser GetUserByUserName(string username);
+
+       
     }
 }

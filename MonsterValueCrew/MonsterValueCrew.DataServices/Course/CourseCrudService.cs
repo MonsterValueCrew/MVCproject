@@ -82,15 +82,16 @@ namespace MonsterValueCrew.DataServices
             Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
            
             var user = GetUserByUserName(userName);
-            Course course = GetCourseByCourseID(courseId);
 
             UserCourseAssignment assignment = new UserCourseAssignment
             {
-                Course = course,
+                CourseId = courseId,
                 ApplicationUser = user,
                 IsAssigned = true,
                 IsMandatory = isMandatory,
-                DueDate = dueDate
+                DueDate = dueDate,
+                AssignmentDate = DateTime.Now,
+                CompletionDate = DateTime.Now
             };
 
             this.dbContext.UserCourseAssignments.Add(assignment);
@@ -131,7 +132,7 @@ namespace MonsterValueCrew.DataServices
 
             return images.ToList();
         }
-
+        
         public IEnumerable<Course> GetCoursesByUserName(string username)
         {
             var user = GetUserByUserName(username);
@@ -170,7 +171,7 @@ namespace MonsterValueCrew.DataServices
             await dbContext.SaveChangesAsync();
         }
 
-        private ApplicationUser GetUserByUserName(string username)
+        public ApplicationUser GetUserByUserName(string username)
         {
             var user = this.dbContext.Users.FirstOrDefault(u => u.UserName == username);
             Guard.WhenArgument(user, "this user doesn't exist").IsNull().Throw();
@@ -178,13 +179,13 @@ namespace MonsterValueCrew.DataServices
             return user;
         }
 
-        private Course GetCourseByCourseID(int courseId)
+        public Course GetCourseByCourseID(int courseId)
         {
             var course = this.dbContext.Courses.First(c => c.Id == courseId);
             Guard.WhenArgument(course, "this course doesn't exist").IsNull().Throw();
 
             return course;
         }
-
+       
     }
 }

@@ -1,10 +1,6 @@
 ﻿using MonsterValueCrew.Data.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 
 namespace MonsterValueCrew.Areas.Admin.ViewModels
 {
@@ -19,8 +15,7 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
         public string LastName { get; set; }
 
         public bool IsAdmin { get; set; }
-
-        [Display(Name = " ")]
+        
         public bool IsSelected { get; set; }
 
         public static Expression<Func<ApplicationUser, UserViewModel>> Create
