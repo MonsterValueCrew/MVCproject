@@ -139,14 +139,15 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
         [HttpGet]
         public ActionResult Assignment(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
-        {
+        {   
             Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
             return this.View(userCourseAssignmentViewModel);
         }
 
         [HttpPost]
-        public ActionResult SubmitAssignments(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignCourses(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {
             Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
@@ -156,7 +157,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             var users = dbContext.Users.Where(u => userIds.Contains(u.Id)).ToList();
             var courses = dbContext.Courses.Where(c => courseIds.Contains(c.Id)).ToList();
 
-
+            
             for (int i = 0; i < users.Count; i++)
             {
                 for (int j = 0; j < courses.Count; j++)
@@ -172,5 +173,29 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return RedirectToAction("AssignCourses");
         }
+        public ActionResult DisplayCourses(string username)
+        {
+            var user = this.courseCrudService.GetUserByUserName(username);
+            var userViewModel = UserViewModel.Create.Compile()(user);
+
+            ViewBag.PendingCourses = this.courseCrudService
+                .GetUserCourseAssignmentByStatusName(
+                user.UserName,
+                StatusName.Pending);
+
+            ViewBag.StartedCourses = this.courseCrudService
+                 .GetUserCourseAssignmentByStatusName(
+                 user.UserName,
+                 StatusName.Started);
+
+            ViewBag.CompletedCourses = this.courseCrudService
+                .GetUserCourseAssignmentByStatusName(
+                user.UserName,
+                StatusName.Completed);
+
+
+            return this.View("DisplayCourses", userViewModel);
+        }
     }
 }
+

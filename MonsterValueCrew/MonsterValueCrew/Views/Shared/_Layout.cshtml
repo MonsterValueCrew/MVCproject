@@ -28,7 +28,7 @@
                         <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Assign Courses", "AssignCourses", "Admin", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Courses", "AssignCourses", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Monitor Progress", "DisplayCourses", "Admin", new { area = "Admin" }, null)</li>
                     </ul>
                 }
             
@@ -39,10 +39,13 @@
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("Courses", "AssignedCourses", "User", new { area = "" }, null)</li>
+
                 @if (this.User.IsInRole("Admin"))
                 {
-                    <li>@Html.ActionLink("AdminUsers", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("AdminCourses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Assign Courses", "AssignCourses", "Admin", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Monitor Progress", "DisplayCourses", "Admin", new { area = "Admin" }, null)</li>
                 }
                
             </ul>

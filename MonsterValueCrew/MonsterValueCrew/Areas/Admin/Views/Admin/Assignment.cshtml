@@ -1,10 +1,10 @@
 ﻿@model  MonsterValueCrew.Areas.Admin.ViewModels.UserCourseAssignmentViewModel
-    @{
-        ViewBag.Title = "Assignment";
-    }
+@{
+    ViewBag.Title = "Assignment";
+}
 <div class="container">
     <h2>You Have Selected</h2>
-    @using (Html.BeginForm("SubmitAssignment", "Admin"))
+    @using (Html.BeginForm("AssignCourses", "Admin", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <h5>Assigning current users</h5>
@@ -15,6 +15,8 @@
 
                     if (Model.Users[i].IsSelected == true)
                     {
+                        @Html.HiddenFor(u => Model.Users[i].Id)
+                        @Html.HiddenFor(u => Model.Users[i].UserName)
                         <div>
                             @Model.Users[i].UserName
                         </div>
@@ -28,6 +30,8 @@
                 {
                     if (Model.Courses[i].IsSelected == true)
                     {
+                        @Html.HiddenFor(c => Model.Courses[i].Id)
+                        @Html.HiddenFor(c => Model.Courses[i].Name)
                         <div>
                             @Model.Courses[i].Name
                         </div>
@@ -35,10 +39,26 @@
                 }
             </div>
         </div>
+        <h5>Assignment Type</h5>
         <div>
-            <div class="btn">@Html.ActionLink("Confirm Assignment", "AssignCourses", "Admin", new { area = "Admin" }, null)</div>
-            <div class="btn">@Html.ActionLink("New Assignmet", "AssignCourses", "Admin", new { area = "Admin" }, null)</div>
+            @Html.HiddenFor(a => Model.IsMandatory)
         </div>
+        <div>
+                @if (Model.IsMandatory)
+                 {
+                  <div>Course is Mandatory</div>
+                 }
+                 else
+                 {
+                  <div>Course is Optional</div>
+                 }
+        </div>
+    <h5>With Due Date</h5>
+        @Html.HiddenFor(d => Model.DueDate)
+        <div>@Model.DueDate</div>
+            <div>
+                <input type="submit" class="btn" value="Confirm">
+            </div>
     }
 
 </div>

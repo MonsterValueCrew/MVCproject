@@ -19,8 +19,7 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
         public string LastName { get; set; }
 
         public bool IsAdmin { get; set; }
-
-        [Display(Name = " ")]
+        
         public bool IsSelected { get; set; }
 
         public static Expression<Func<ApplicationUser, UserViewModel>> Create

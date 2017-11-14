@@ -130,7 +130,7 @@ namespace MonsterValueCrew.DataServices
 
             return images.ToList();
         }
-
+        
         public IEnumerable<Course> GetCoursesByUserName(string username)
         {
             var user = GetUserByUserName(username);
@@ -169,7 +169,7 @@ namespace MonsterValueCrew.DataServices
             await dbContext.SaveChangesAsync();
         }
 
-        private ApplicationUser GetUserByUserName(string username)
+        public ApplicationUser GetUserByUserName(string username)
         {
             var user = this.dbContext.Users.FirstOrDefault(u => u.UserName == username);
             Guard.WhenArgument(user, "this user doesn't exist").IsNull().Throw();
@@ -184,6 +184,39 @@ namespace MonsterValueCrew.DataServices
 
             return course;
         }
+        public IEnumerable<UserCourseAssignment> GetUsersCourseAssignment(string username)
+        {
+            var user = GetUserByUserName(username);
 
+            var resultList = dbContext.UserCourseAssignments
+                .Where(u => u.ApplicationUserId == user.Id)
+                .Select(x => new UserCourseAssignment()
+                {
+                    Id = x.Id,
+                    Status = x.Status,
+                    AssignmentDate = x.AssignmentDate,
+                    DueDate = x.DueDate,
+                    IsMandatory = x.IsMandatory,
+                    CompletionDate = x.CompletionDate
+                })
+                .ToList();
+
+            return resultList;
+        }
+        public IEnumerable<UserCourseAssignment> GetUserCourseAssignmentByStatusName(string username, StatusName status)
+        {
+            var completedCourses = this.GetUsersCourseAssignment(username)
+                .Where(c => c.Status == status)
+                .ToList();
+
+            if (completedCourses.Count() <= 0)
+            {
+                return null;
+            }
+            else
+            {
+                return completedCourses;
+            }
+        }
     }
 }

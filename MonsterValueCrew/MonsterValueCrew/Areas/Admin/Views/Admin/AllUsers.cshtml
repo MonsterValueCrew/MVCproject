@@ -13,10 +13,19 @@
            {
            InsertionMode = InsertionMode.Replace,
            UpdateTargetId = "editArea"
-       })
+           })
+            @Ajax.ActionLink("Diplay Courses",
+           "DisplayCourses",
+           new { username = user.UserName },
+           new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "displayCourses"
+           })
         </div>
     }
     <div id="editArea"></div>
+    <div id="displayCourses"> </div>
 </div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryajax")

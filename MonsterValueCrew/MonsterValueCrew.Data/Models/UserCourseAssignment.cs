@@ -14,6 +14,10 @@ namespace MonsterValueCrew.Data.Models
         [Required]
         public DateTime? DueDate { get; set; }
 
+        public DateTime AssignmentDate { get; set; }
+
+        public DateTime CompletionDate { get; set; }
+
         [Required]
         public bool IsMandatory { get; set; }
 
