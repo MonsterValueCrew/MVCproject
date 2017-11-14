@@ -119,6 +119,7 @@ namespace MonsterValueCrew.DataServices
         public string GetCourseName(int courseId)
         {
             // Get the assigned from admin course to user
+             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             var assignedCourse = this.dbContext.Courses.First(c => c.Id == courseId);
             var courseName = assignedCourse.Name;
 
