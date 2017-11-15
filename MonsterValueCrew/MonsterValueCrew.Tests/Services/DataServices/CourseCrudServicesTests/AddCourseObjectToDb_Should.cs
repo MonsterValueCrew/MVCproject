@@ -26,7 +26,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             int passedScore = 10;
             int id = 8;
 
-            List<Course> courses = new List<Course>();
+            var courses = new List<Course>();
           
             Course course = new Course()
             {
@@ -47,9 +47,9 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             //Act
 
             await service.AddCourseObjectToDb(course);
+            var courseInDb = dbContextMock.Object.Courses.Single();
 
             //Assert
-            var courseInDb = dbContextMock.Object.Courses.Single();
             Assert.AreEqual(course, courseInDb);
             dbContextMock.Verify(m => m.SaveChangesAsync(), Times.Once);
             //Assert.AreEqual(name, courseInDb.Name);

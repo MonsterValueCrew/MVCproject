@@ -49,7 +49,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadCourses(UploadJSONViewModel files)
+        public async Task<ActionResult> UploadCourses(UploadJSONViewModel files)
         {
             UploadJSONViewModel file = new UploadJSONViewModel();
             file.Json = Request.Files["file"];
@@ -61,7 +61,9 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
                 Guard.WhenArgument(file.Json.ContentLength, "Lenght")
                     .IsLessThanOrEqual(0).Throw();
 
-                this.adminService.SaveCourse(file.Json);
+                var jsonString = this.adminService.ReadJsonFile(file.Json);
+                var course = this.adminService.DeserializeJsonString(jsonString);
+                await this.adminService.SaveCourse(course);
 
                 return this.View();
             }
@@ -102,7 +104,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             user.FirstName = userViewModel.FirstName;
             user.LastName = userViewModel.LastName;
 
-            dbContext.SaveChanges();
+            await this.dbContext.SaveChangesAsync();
 
             return RedirectToAction("AllUsers");
         }
@@ -198,7 +200,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return this.PartialView("_DisplayCourses", userViewModel);
         }
-        public IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
+        private IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
         {
             var user = this.courseCrudService.GetUserByUserName(username);
 
@@ -217,20 +219,14 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return resultList;
         }
-        public IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status)
+        private IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status)
         {
             var completedCourses = this.GetUsersCourseAssignment(username)
                 .Where(c => c.Status == status)
                 .ToList();
-
-            if (completedCourses.Count() <= 0)
-            {
-                return null;
-            }
-            else
-            {
-                return completedCourses;
-            }
+            Guard.WhenArgument(completedCourses.Count, "Number Of Completed Courses").IsLessThanOrEqual(0).Throw();
+          
+            return completedCourses;
         }
     }
 }

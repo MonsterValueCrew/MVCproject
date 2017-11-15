@@ -32,7 +32,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             //Act
             var courseCrudService = new CourseCrudService(dbContextMock.Object);
 
-            // Act and Assert
+            //Assert
             Assert.IsNotNull(courseCrudService);
         }
 
