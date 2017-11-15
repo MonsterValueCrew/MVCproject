@@ -27,11 +27,10 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
             {
                 new Course()
                 {
-
-                        Name = "kakwotoidae",
-                        Description = "azsym",
-                        PassScore = 5,
-                        IsDeleted = false,
+                    Name = "kakwotoidae",
+                    Description = "azsym",
+                    PassScore = 5,
+                    IsDeleted = false
                 }
 
             };

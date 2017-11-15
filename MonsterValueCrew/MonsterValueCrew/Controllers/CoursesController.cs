@@ -73,45 +73,45 @@ namespace MonsterValueCrew.Controllers
             return this.PartialView("_Questions", questions);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SendAnswers(IEnumerable<QuestionDisplayInfo> questionsEnum)
-        {
-            List<QuestionDisplayInfo> questionsAnswers =
-                services.GetAllCourseQuestions((int)Session["currentCourseId"])
-                .Select(q => new QuestionDisplayInfo()
-                {
-                    QuestionName = q.QuestionName,
-                    A = q.A,
-                    B = q.B,
-                    C = q.C,
-                    D = q.D,
-                    CorrectAnswer = q.CorrectAnswer
-                }).ToList();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SendAnswers(IEnumerable<QuestionDisplayInfo> questionsEnum)
+        //{
+        //    List<QuestionDisplayInfo> questionsAnswers =
+        //        services.GetAllCourseQuestions((int)Session["currentCourseId"])
+        //        .Select(q => new QuestionDisplayInfo()
+        //        {
+        //            QuestionName = q.QuestionName,
+        //            A = q.A,
+        //            B = q.B,
+        //            C = q.C,
+        //            D = q.D,
+        //            CorrectAnswer = q.CorrectAnswer
+        //        }).ToList();
 
-            var passScore = services.GetCoursePassScoreByCourseId((int)Session["currentCourseId"]);
-            int pointsPerQuestion = (passScore.PassScore / questionsAnswers.Count);
+        //    var passScore = services.GetCoursePassScoreByCourseId((int)Session["currentCourseId"]);
+        //    int pointsPerQuestion = (passScore.PassScore / questionsAnswers.Count);
 
-            ExamResults result = new ExamResults()
-            {
-                ScoreToPass = passScore.PassScore
-            };
+        //    ExamResults result = new ExamResults()
+        //    {
+        //        ScoreToPass = passScore.PassScore
+        //    };
 
-            foreach (var qn in questionsAnswers)
-            {
-                if (questionsAnswers.
-                    Where(x => x.QuestionName == qn.QuestionName).
-                    Select(x => x.CorrectAnswer).
-                    Contains(qn.SelectedAnswer))
-                {
-                    result.Score += pointsPerQuestion;
-                }
-            }
+        //    foreach (var qn in questionsAnswers)
+        //    {
+        //        if (questionsAnswers.
+        //            Where(x => x.QuestionName == qn.QuestionName).
+        //            Select(x => x.CorrectAnswer).
+        //            Contains(qn.SelectedAnswer))
+        //        {
+        //            result.Score += pointsPerQuestion;
+        //        }
+        //    }
 
-            if (result.Score >= result.ScoreToPass)
-            {
-                result.Pass = true;
-            }
-        }
+        //    if (result.Score >= result.ScoreToPass)
+        //    {
+        //        result.Pass = true;
+        //    }
+        //}
     }
 }
