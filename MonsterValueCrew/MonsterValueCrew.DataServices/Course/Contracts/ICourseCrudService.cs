@@ -42,6 +42,8 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         ApplicationUser GetUserByUserName(string username);
 
-       
+         CoursePassScore GetCoursePassScoreByCourseId(int courseId);
+
+         Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId);
     }
 }

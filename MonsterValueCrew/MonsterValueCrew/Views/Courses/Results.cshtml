@@ -1,0 +1,28 @@
+﻿@model ExamResults
+@{
+    <div class="container">
+        ViewBag.Title = "Results";
+    </div>
+}
+
+<h2>Results From Quizz</h2>
+
+<div class="container">
+    @if (Model.Pass)
+    {
+        <h3>
+            Passed:@Model.Score
+            <text>/</text>
+            @Model.ScoreToPass
+        </h3>
+    }
+    else
+    {
+        <h3>
+            Fail:@Model.Score
+            <text>/</text>
+            @Model.ScoreToPass
+        </h3>
+    }
+</div>
+

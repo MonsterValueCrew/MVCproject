@@ -224,6 +224,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AllCoursesViewModel.cs" />
+    <Compile Include="Models\ExamResults.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\QuestionDisplayInfo.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Views\User\AssignedCourses.cshtml" />
     <Content Include="Views\Courses\TakeCourse.cshtml" />
     <Content Include="Views\Shared\_Questions.cshtml" />
+    <Content Include="Views\Courses\Results.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
