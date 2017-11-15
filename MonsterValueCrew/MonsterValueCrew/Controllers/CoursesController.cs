@@ -112,11 +112,6 @@ namespace MonsterValueCrew.Controllers
             {
                 result.Pass = true;
             }
-
-
-
         }
-
-
     }
 }

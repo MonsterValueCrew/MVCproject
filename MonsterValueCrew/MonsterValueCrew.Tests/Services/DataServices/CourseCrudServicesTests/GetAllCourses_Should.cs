@@ -7,22 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
 {
-    [TestClass]
+   [TestClass]
    public class GetAllCourses_Should
     {
         [TestMethod]
         public void ReturnAllCourses_WhenTheyArePresent()
         {
             //Arrange
-           // string username = "username";
             int courseId = 4;
-           // bool isAssigned = true;
-            //bool IsMandatory = true;
             DateTime date = DateTime.Now;
             var dbContextMock = new Mock<ApplicationDbContext>();
             

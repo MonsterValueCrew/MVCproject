@@ -17,6 +17,15 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         [TestMethod]
         public async Task AddCourseToUser_WhenParametersAreCorrect()
         {
+            //Arrange
+            var dbContextMock = new Mock<ApplicationDbContext>();
+
+
+            var usersCoursesList = new List<UserCourseAssignment>();
+            var usersCoursesDbSetMock = new Mock<DbSet<UserCourseAssignment>>().SetupData(usersCoursesList);
+
+            dbContextMock.SetupGet(x => x.UserCourseAssignments).Returns(usersCoursesDbSetMock.Object);
+
             string username = "username";
             int courseId = 4;
             bool isAssigned = true;
@@ -36,11 +45,6 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
                 DateAdded = date,
                 PassScore = 30
             };
-
-            var dbContextMock = new Mock<ApplicationDbContext>();
-            List<UserCourseAssignment> usersCoursesList = new List<UserCourseAssignment>();
-            var usersCoursesDbSetMock = new Mock<DbSet<UserCourseAssignment>>().SetupData(usersCoursesList);
-            dbContextMock.SetupGet(x => x.UserCourseAssignments).Returns(usersCoursesDbSetMock.Object);
 
             var usersList = new List<ApplicationUser>() { user };
             var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(usersList);
@@ -64,6 +68,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         [TestMethod]
         public async Task ThrowException_WhenCourseIdIsInvalid()
         {
+            //Arrange
             var dbContextMock = new Mock<ApplicationDbContext>();
             int courseId = -1;
             

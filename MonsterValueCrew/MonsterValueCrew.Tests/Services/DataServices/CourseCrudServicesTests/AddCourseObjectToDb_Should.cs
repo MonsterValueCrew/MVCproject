@@ -1,15 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonsterValueCrew.DataServices;
+using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
+using MonsterValueCrew.DataServices;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MonsterValueCrew.Data;
-using MonsterValueCrew.Services;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 {
@@ -17,7 +15,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
     public class AddCourseObjectToDb_Should
     {
         [TestMethod]
-        public async  Task AddCourseObjectToDb_WhenParametersAreCorrect()
+        public async Task AddCourseObjectToDb_WhenParametersAreCorrect()
         {
             //Arrange
             string name = "course";

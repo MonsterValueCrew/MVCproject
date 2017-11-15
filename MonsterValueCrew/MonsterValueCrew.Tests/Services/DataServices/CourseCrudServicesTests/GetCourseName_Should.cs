@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
 {
@@ -34,11 +32,13 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
                 DateAdded = date,
                 PassScore = 30
             };
-            List<Course> courseList = new List<Course>() { course };
+            var courseList = new List<Course>() { course };
             var coursesMock = new Mock<DbSet<Course>>().SetupData(courseList);
             dbContextMock.SetupGet(x => x.Courses).Returns(coursesMock.Object);
+
             //Act
-            CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
+
+            var courseService = new CourseCrudService(dbContextMock.Object);
             var valueToAssertAgainst = courseList.Single();
             var testedObject = courseService.GetAllCourses().Single();
 

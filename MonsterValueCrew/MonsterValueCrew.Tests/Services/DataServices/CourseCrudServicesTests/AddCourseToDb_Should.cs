@@ -3,11 +3,9 @@ using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
@@ -19,18 +17,18 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         public async Task AddCourseToDb_WhenParametersAreCorect()
         {
             //Arrange
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            var courses = new List<Course>();
+            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
+            
+            dbContextMock.SetupGet(c => c.Courses).Returns(coursesSetMock.Object);
+
+            var service = new CourseCrudService(dbContextMock.Object);
+            
             string name = "name";
             string description = "description";
             int passcore = 6;
             bool isDeleted = false;
-
-            List<Course> courses = new List<Course>();
-
-            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
-            var dbContextMock = new Mock<ApplicationDbContext>();
-            dbContextMock.SetupGet(c => c.Courses).Returns(coursesSetMock.Object);
-
-            CourseCrudService service = new CourseCrudService(dbContextMock.Object);
 
             //Act
             await service.AddCourseToDb(name, description, passcore, isDeleted);
@@ -49,21 +47,22 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         public async Task AddCourseToDb_WhenCourseIsCorrect()
         {
             //Arrange
-            Course course = new Course()
+
+            var dbContextMock = new Mock<ApplicationDbContext>();
+            var courses = new List<Course>();
+            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
+           
+            var course = new Course()
             {
                 Name = "kakwotoidae",
                 Description = "azsym",
                 PassScore = 5,
                 IsDeleted = false,
             };
-
-
-            List<Course> courses = new List<Course>();
-            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
-            var dbContextMock = new Mock<ApplicationDbContext>();
+            
             dbContextMock.SetupGet(c => c.Courses).Returns(coursesSetMock.Object);
 
-            CourseCrudService service = new CourseCrudService(dbContextMock.Object);
+            var service = new CourseCrudService(dbContextMock.Object);
 
             //Act
             await service.AddCourseToDb(course);

@@ -156,13 +156,11 @@
     <Compile Include="Services\AdminServices\SaveCourse_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\AddCourseObjectToDb_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\AddCourseToDb_Should.cs" />
-    <Compile Include="Services\DataServices\CourseCrudServicesTests\AssignCourseToDepartment_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\AssignCourseToUser_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\Constructor_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetAllCourses_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetCourseById_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetCourseName_Should.cs" />
-    <Compile Include="Services\DataServices\CourseCrudServicesTests\UnassignCourseFromUser_Should.cs" />
     <Compile Include="Services\DateTimeServiceTests\GetCurrentDate_Should.cs" />
     <Compile Include="Services\ImageServiceTests\ByteArrayToImageURL_Should.cs" />
     <Compile Include="Services\ImageServiceTests\GetImage_Should.cs" />
