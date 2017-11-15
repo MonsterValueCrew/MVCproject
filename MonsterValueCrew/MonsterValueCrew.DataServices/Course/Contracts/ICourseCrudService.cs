@@ -22,6 +22,8 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         IList<Image> GetImages(int courseId);
 
+        IEnumerable<CourseQuestions> GetAllCourseQuestions(int courseId);
+
         Task AddCourseObjectToDb(Course course);
 
         //Do we need to add CourseId here or not?

@@ -3,33 +3,39 @@
     ViewBag.Title = "Learn from the slides";
 }
 
+<div class="container">
+    <div> Current Course</div>
+    <div class="carousel carousel-slider center " data-indicators="true">
+        <div class="carousel-fixed-item center middle-indicator">
+            <div class="left">
+                <a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+            </div>
 
-<div> Current Course</div>
-<div class="carousel carousel-slider center " data-indicators="true">
-    <div class="carousel-fixed-item center middle-indicator">
-        <div class="left">
-            <a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+            <div class="right">
+                <a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+            </div>
         </div>
-
-        <div class="right">
-            <a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+        <div class="carousel-item red white-text" href="#one!">
+            @if (Model == null)
+            {
+                <div>no images for this course</div>
+            }
+            else
+            {
+                foreach (var slide in Model)
+                {
+                    <div class="item">
+                        <img alt="Embedded Image" src="data:image/png;base64,@(slide.ImageUrl)" />
+                    </div>
+                }
+            }
         </div>
     </div>
-    <div class="carousel-item red white-text" href="#one!">
-        @if (Model == null)
-        {
-            <div>no images for this course</div>
-        }
-        else
-        {
-            foreach (var slide in Model)
-            {
-                <div class="item">
-                    <img alt="Embedded Image" src="data:image/png;base64,@(slide.ImageUrl)" />
-                </div>
-            }
-        }
+
+    <div>
+        
     </div>
 </div>
+
 
 

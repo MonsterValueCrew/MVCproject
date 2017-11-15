@@ -187,6 +187,32 @@ namespace MonsterValueCrew.DataServices
             return listOfSlides;
         }
 
+        public IEnumerable<CourseQuestions> GetAllCourseQuestions(int courseId)
+        {
+            var collectionOfQuestions = this.dbContext.Courses
+                .Where(c => c.Id == courseId)
+                .Select(c => c.Questions)
+                .First();
+
+            var listOfQuestions = new List<CourseQuestions>();
+
+            foreach (var item in collectionOfQuestions)
+            {
+                listOfQuestions.Add(new CourseQuestions()
+                {
+                    QuestionName = item.QuestionName,
+                    A = item.A,
+                    B = item.B,
+                    C = item.C,
+                    D = item.D,
+                    CorrectAnswer = item.CorrectAnswer
+
+                });
+            }
+
+            return listOfQuestions;
+        }
+
         public async Task UnassignCourseFromUser(int courseId, string username)
         {
            
@@ -200,7 +226,6 @@ namespace MonsterValueCrew.DataServices
 
             await dbContext.SaveChangesAsync();
         }
-
 
         
     }
