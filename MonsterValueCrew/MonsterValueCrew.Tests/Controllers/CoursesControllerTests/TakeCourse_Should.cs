@@ -19,7 +19,7 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
 
             var controller = new CoursesController(servisesMock.Object, dbContextMock.Object);
 
-            int courseId = 4;
+            //int courseId = 4;
             //Act & Assert
             //controller
             //   .WithCallTo(c => c.TakeCourse(courseId))

@@ -23,7 +23,7 @@ namespace MonsterValueCrew.Controllers
             this.services = services;
             this.context = context;
         }
-
+        [Authorize]
         public ActionResult AllCourses()
         {
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
@@ -38,7 +38,7 @@ namespace MonsterValueCrew.Controllers
 
             return this.View(viewModel);
         }
-
+        [Authorize]
         public ActionResult TakeCourse(int courseId)
         {
             var slides = services.GetAllSlidesForCourse(courseId)
@@ -51,7 +51,7 @@ namespace MonsterValueCrew.Controllers
 
             return this.View(slides);
         }
-
+        [Authorize]
         public ActionResult GetQuestions(int courseId)
         {
             var questions =
@@ -70,53 +70,61 @@ namespace MonsterValueCrew.Controllers
             return this.PartialView("_Questions", questions);
         }
 
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult SendAnswers(IEnumerable<CourseQuestions> questionsEnum)
         {
-            var questionsAnswers =
-                services.GetAllCourseQuestions((int)Session["currentCourseId"])
-                .Select(q => new Data.DataModels.CourseQuestions()
-                {
-                    QuestionName = q.QuestionName,
-                    A = q.A,
-                    B = q.B,
-                    C = q.C,
-                    D = q.D,
-                    CorrectAnswer = q.CorrectAnswer
-                }).ToList();
-
-            var passScore = services.GetCoursePassScoreByCourseId((int)Session["currentCourseId"]);
-            int pointsPerQuestion = (passScore.PassScore / questionsAnswers.Count);
-
-            ExamResults result = new ExamResults()
+            if (ModelState.IsValid)
             {
-                ScoreToPass = passScore.PassScore
-            };
 
-            foreach (var qn in questionsAnswers)
-            {
-                if (questionsAnswers.
-                    Where(x => x.QuestionName == qn.QuestionName).
-                    Select(x => x.CorrectAnswer).
-                    Contains(qn.SelectedAnswer))
+                var questionsAnswers =
+                    services.GetAllCourseQuestions((int)Session["currentCourseId"])
+                    .Select(q => new Data.DataModels.CourseQuestions()
+                    {
+                        QuestionName = q.QuestionName,
+                        A = q.A,
+                        B = q.B,
+                        C = q.C,
+                        D = q.D,
+                        CorrectAnswer = q.CorrectAnswer
+                    }).ToList();
+
+                var passScore = services.GetCoursePassScoreByCourseId((int)Session["currentCourseId"]);
+                int pointsPerQuestion = (passScore.PassScore / questionsAnswers.Count);
+
+                ExamResults result = new ExamResults()
                 {
-                    result.Score += pointsPerQuestion;
+                    ScoreToPass = passScore.PassScore
+                };
+
+                foreach (var qn in questionsAnswers)
+                {
+                    if (questionsAnswers.
+                        Where(x => x.QuestionName == qn.QuestionName).
+                        Select(x => x.CorrectAnswer).
+                        Contains(qn.SelectedAnswer))
+                    {
+                        result.Score += pointsPerQuestion;
+                    }
                 }
+
+                if (result.Score >= result.ScoreToPass)
+                {
+                    result.Pass = true;
+                }
+
+                var currentUser = services.GetUserByUserName(this.User.Identity.Name);
+
+                services.SetAssignmentCompletionStatus((int)Session["currentCourseId"], result.Pass, currentUser.Id);
+
+                return this.View("Results", result);
+
+
             }
-
-            if (result.Score >= result.ScoreToPass)
-            {
-                result.Pass = true;
-            }
-
-            var currentUser = services.GetUserByUserName(this.User.Identity.Name);
-
-            services.SetAssignmentCompletionStatus((int)Session["currentCourseId"], result.Pass, currentUser.Id);
-
-            return this.View("Results", result);
+            return this.View(questionsEnum);
 
         }
     }

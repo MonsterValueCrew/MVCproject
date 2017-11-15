@@ -14,7 +14,7 @@
             <div class="row center">
                 @if (this.User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink("Courses", "Courses", "Home", null, new { @class = "btn waves-effect teal text-lighten-2" })
+                    @Html.ActionLink("Courses", "AllCourses", "Courses", null, new { @class = "btn waves-effect teal text-lighten-2" })
                 }
                 else
                 {
