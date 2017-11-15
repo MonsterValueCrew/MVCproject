@@ -45,7 +45,7 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
         };
             var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
 
-            var resultViewModel = courses.AsQueryable().Select(CourseViewModel.Create).ToList();
+            var resultViewModel = courses.AsQueryable().Select(MonsterValueCrew.Areas.Admin.ViewModels.CourseViewModel.Create).ToList();
 
             dbContextMock.SetupGet(m => m.Courses).Returns(coursesSetMock.Object);
 
@@ -55,7 +55,7 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
             controller
                 .WithCallTo(c => c.AllCourses())
                 .ShouldRenderDefaultView()
-                .WithModel<List<CourseViewModel>>(viewModel =>
+                .WithModel<List<MonsterValueCrew.Areas.Admin.ViewModels.CourseViewModel>>(viewModel =>
                 {
                     for (int i = 0; i < viewModel.Count; i++)
                     {

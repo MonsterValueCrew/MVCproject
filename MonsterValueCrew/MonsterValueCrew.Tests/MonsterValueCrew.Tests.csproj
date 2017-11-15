@@ -145,6 +145,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AssignCoursesGet_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\EditUser_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\UploadCourseGet_Should.cs" />
+    <Compile Include="Controllers\CoursesControllerTests\TakeCourse_Should.cs" />
     <Compile Include="Controllers\HomeControllerTests\Index_Should_Dummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminServices\AdminService_Should.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetAllCourses_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetCourseById_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetCourseName_Should.cs" />
+    <Compile Include="Services\DataServices\CourseCrudServicesTests\UnassignCourseFromUser_Should.cs" />
     <Compile Include="Services\DateTimeServiceTests\GetCurrentDate_Should.cs" />
     <Compile Include="Services\ImageServiceTests\ByteArrayToImageURL_Should.cs" />
     <Compile Include="Services\ImageServiceTests\GetImage_Should.cs" />
