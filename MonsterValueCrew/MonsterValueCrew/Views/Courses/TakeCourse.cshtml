@@ -1,26 +1,51 @@
-﻿@model  TakeCourseVIewModel
+﻿@model  IEnumerable<ImageViewModel>
 @{
-    ViewBag.Title = "TakeCourse";
+    ViewBag.Title = "Learn from the slides";
 }
 
-<h2>Take Course</h2>
+<div class="container">
+    <div> Current Course</div>
+    <div class="carousel carousel-slider center " data-indicators="true">
+        <div class="carousel-fixed-item center middle-indicator">
+            <div class="left">
+                <a href="Previo" class="movePrevCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+            </div>
 
-@if (Model.Images == null)
-{
-    <div>no images for this course</div>
-}
-else
-{
-    foreach (var image in Model.Images)
-    {
-
-        <div class="item">
-            <img src="@Url.Action("RenderImage", new {id = image.Id})" />
+            <div class="right">
+                <a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+            </div>
         </div>
-    }
+        <div class="carousel-item red white-text" href="#one!">
+            @if (Model == null)
+            {
+                <div>no images for this course</div>
+            }
+            else
+            {
+                foreach (var slide in Model)
+                {
+                    <div class="item">
+                        <img alt="Embedded Image" src="data:image/png;base64,@(slide.ImageUrl)" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <br />
 
-}
+    <div>
+        @Ajax.ActionLink("Take quizz",
+           "GetQuestions",
+           new { courseId = ViewBag.courseId},
+           new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "questionsArea"
+           }, new { @class = "btn waves-effect teal text-lighten-2" })
+    </div>
 
+    <div id="questionsArea"></div>
+</div>
 
 
 

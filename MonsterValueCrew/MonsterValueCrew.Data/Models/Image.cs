@@ -4,13 +4,17 @@ namespace MonsterValueCrew.Data.Models
 {
     public class Image
     {
-        public Image(string name, byte[] imageInBase64, int order)
-        {
-            Name = name;
-            ImageInBase64 = imageInBase64;
-            Order = order;
-        }
+        //public Image(string name, byte[] imageInBase64, int order)
+        //{
+        //    Name = name;
+        //    ImageInBase64 = imageInBase64;
+        //    Order = order;
+        //}
 
+        public Image()
+        {
+
+        }
         public int Id { get; set; }
 
         [Required]

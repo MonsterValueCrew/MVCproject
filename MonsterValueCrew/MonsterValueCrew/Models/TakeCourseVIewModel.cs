@@ -6,7 +6,7 @@ using MonsterValueCrew.Data.Models;
 
 namespace MonsterValueCrew.Models
 {
-    public class TakeCourseVIewModel
+    public class CourseViewModel
     {
         public int Id { get; set; }
 

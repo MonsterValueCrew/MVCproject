@@ -1,0 +1,55 @@
+﻿@model List<QuestionDisplayInfo>
+<h2>Questions:</h2>
+
+@using (Html.BeginForm("SendAnswers", "Courses", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div>
+                <h3>@Model[i].QuestionName</h3>
+                @Html.HiddenFor(q => Model[i].QuestionName)
+                
+                <label>
+                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].A)
+                    @Model[i].A
+                </label>
+
+                <label>
+                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].B)
+                    @Model[i].B
+                </label>
+
+                <label>
+                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].C)
+                    @Model[i].C
+                </label>
+
+                <label>
+                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].D)
+                    @Model[i].D
+                </label>
+
+                <br/>
+            </div>
+        }
+
+    </div>
+
+}
+
+<script>
+    $(document).ready(function () {
+        Materialize.updateTextFields();
+    });
+
+    $("input[type='hidden']").each(function (index, element) {
+        $(this).appendTo($(element).parent());
+    });
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Data;
 using Bytes2you.Validation;
+using MonsterValueCrew.Data.DataModels;
 
 namespace MonsterValueCrew.DataServices
 {
@@ -25,8 +26,8 @@ namespace MonsterValueCrew.DataServices
         {
             Guard.WhenArgument(course, "course").IsNull().Throw();
             dbContext.Courses.Add(course);
-            await Run();
-             
+            await dbContext.SaveChangesAsync();
+
         }
 
         public async Task AddCourseToDb(string name, string description,
@@ -47,12 +48,12 @@ namespace MonsterValueCrew.DataServices
 
             this.dbContext.Courses.Add(course);
 
-            await Run();
+            await dbContext.SaveChangesAsync();
         }
         public async Task AddCourseToDb(Course courseToAdd)
         {
             dbContext.Courses.Add(courseToAdd);
-            await Run();
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task AssignCourseToDepartment(int departmentID, int courseId,
@@ -70,7 +71,7 @@ namespace MonsterValueCrew.DataServices
 
             }
 
-            await Run();
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task AssignCourseToUser(string userName, int courseId,
@@ -96,7 +97,7 @@ namespace MonsterValueCrew.DataServices
 
             this.dbContext.UserCourseAssignments.Add(assignment);
 
-            await Run();
+            await dbContext.SaveChangesAsync();
 
         }
 
@@ -151,26 +152,6 @@ namespace MonsterValueCrew.DataServices
             return courses;
         }
 
-
-        public async Task UnassignCourseFromUser(int courseId, string username)
-        {
-           
-            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
-            Guard.WhenArgument(username, "userName").IsNull().Throw();
-            var assignment = this.dbContext.
-                UserCourseAssignments.
-                First(a => a.ApplicationUser.UserName == username && a.CourseId == courseId);
-
-            assignment.IsAssigned = false;
-
-            await Run();
-        }
-
-        private async Task Run()
-        {
-            await dbContext.SaveChangesAsync();
-        }
-
         public ApplicationUser GetUserByUserName(string username)
         {
             var user = this.dbContext.Users.FirstOrDefault(u => u.UserName == username);
@@ -186,6 +167,67 @@ namespace MonsterValueCrew.DataServices
 
             return course;
         }
-       
+
+        public ICollection<CourseImageBin> GetAllSlidesForCourse(int courseId)
+        {
+            var collectionOfSlides = this.dbContext.Courses
+                .Where(c => c.Id == courseId)
+                .Select(c => c.Images).
+                First();
+
+            var listOfSlides = new List<CourseImageBin>();
+
+            foreach (var item in collectionOfSlides)
+            {
+                listOfSlides.Add(new CourseImageBin()
+                {
+                    ImageBinary = item.ImageInBase64
+                });
+            }
+
+            return listOfSlides;
+        }
+
+        public IEnumerable<CourseQuestions> GetAllCourseQuestions(int courseId)
+        {
+            var collectionOfQuestions = this.dbContext.Courses
+                .Where(c => c.Id == courseId)
+                .Select(c => c.Questions)
+                .First();
+
+            var listOfQuestions = new List<CourseQuestions>();
+
+            foreach (var item in collectionOfQuestions)
+            {
+                listOfQuestions.Add(new CourseQuestions()
+                {
+                    QuestionName = item.QuestionName,
+                    A = item.A,
+                    B = item.B,
+                    C = item.C,
+                    D = item.D,
+                    CorrectAnswer = item.CorrectAnswer
+
+                });
+            }
+
+            return listOfQuestions;
+        }
+
+        public async Task UnassignCourseFromUser(int courseId, string username)
+        {
+           
+            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(username, "userName").IsNull().Throw();
+            var assignment = this.dbContext.
+                UserCourseAssignments.
+                First(a => a.ApplicationUser.UserName == username && a.CourseId == courseId);
+
+            assignment.IsAssigned = false;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        
     }
 }

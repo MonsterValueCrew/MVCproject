@@ -1,4 +1,5 @@
-﻿using MonsterValueCrew.Data.Models;
+﻿using MonsterValueCrew.Data.DataModels;
+using MonsterValueCrew.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,11 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         string GetCourseName(int courseId);
 
+        ICollection<CourseImageBin> GetAllSlidesForCourse(int courseId);
+
         IList<Image> GetImages(int courseId);
+
+        IEnumerable<CourseQuestions> GetAllCourseQuestions(int courseId);
 
         Task AddCourseObjectToDb(Course course);
 
