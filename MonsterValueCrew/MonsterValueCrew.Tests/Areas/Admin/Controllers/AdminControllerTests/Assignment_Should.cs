@@ -7,18 +7,20 @@ using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using TestStack.FluentMVCTesting;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
 {
     [TestClass]
-    public class AllUser_Should
+    public class Assignment_Should
     {
         [TestMethod]
-        public void ReturnDefaultViewWithCorrectViewModel()
+        public void ReturnCorrectView_WhenParametersAreCorrect()
         {
             //Arrange
             var storeMock = new Mock<IUserStore<ApplicationUser>>();
@@ -27,20 +29,31 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             var adminServiceMock = new Mock<IAdminService>();
             var courseCrudServiceMock = new Mock<ICourseCrudService>();
             
-            var resultViewModel = new UploadJSONViewModel();
+            var resultViewModel = new UserCourseAssignmentViewModel()
+            {
+                Users =
+                {
+                    new UserViewModel() { UserName = "Programming",  Id = "Pesho" },
+                    new UserViewModel() { UserName = "Programming",  Id = "Gosho" }
+                },
+                Courses = {
+                    new CourseViewModel() { Name = "Programming", Id = 0 },
+                    new CourseViewModel() { Name = "Programming", Id = 1 }
+                }
+            };
+
+
+
             
             AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
 
-            //Act & Assert
-            controller
-                .WithCallTo(c => c.UploadCourses())
-                .ShouldRenderDefaultView()
-                .WithModel<UploadJSONViewModel>(u =>
-                {
-                    Assert.AreEqual(resultViewModel, u);
-                });
 
 
+            //Act
+
+
+
+            //Assert
         }
     }
 }

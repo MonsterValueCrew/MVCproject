@@ -12,7 +12,6 @@ namespace MonsterValueCrew.Areas.Admin.ViewModels
         [FileSize(10000000)]
         public HttpPostedFileBase Json { get; set; }
     }
-
     public class FileTypeAttribute : ValidationAttribute
     {
         private readonly List<string> allowedTypes;

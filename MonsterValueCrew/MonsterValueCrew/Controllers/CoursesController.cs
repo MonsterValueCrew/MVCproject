@@ -26,7 +26,7 @@ namespace MonsterValueCrew.Controllers
             this.context = context;
         }
 
-        public ActionResult AllCourses()
+        public ActionResult DisplayAllCourses()
         {
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
                 .Select(v => new CourseViewModel()
@@ -44,7 +44,7 @@ namespace MonsterValueCrew.Controllers
 
         public ActionResult TakeCourse(int courseId)
         {
-            IEnumerable<ImageViewModel> slides = services.GetAllSlidesForCourse(courseId)
+            var slides = services.GetAllSlidesForCourse(courseId)
                 .Select(s => new ImageViewModel()
                 {
                     ImageUrl = Convert.ToBase64String(s.ImageBinary)
@@ -58,7 +58,7 @@ namespace MonsterValueCrew.Controllers
         //[ChildActionOnly]
         public ActionResult GetQuestions(int courseId)
         {
-            IEnumerable<QuestionDisplayInfo> questions =
+            var questions =
                 services.GetAllCourseQuestions(courseId).
                 Select(q => new QuestionDisplayInfo()
                 {

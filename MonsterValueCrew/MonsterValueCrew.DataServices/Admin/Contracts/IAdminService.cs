@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using MonsterValueCrew.Data.Models;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace MonsterValueCrew.Services.Contracts
 {
     public interface IAdminService
     {
-        void SaveCourse(HttpPostedFileBase json);
-        
+        string ReadJsonFile(HttpPostedFileBase json);
+
+        Course DeserializeJsonString(string jsonString);
+
+        Task SaveCourse(Course course);
     }
 
 }

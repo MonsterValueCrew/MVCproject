@@ -53,7 +53,7 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
 
             // Act & Assert
             controller
-                .WithCallTo(c => c.AllCourses())
+                .WithCallTo(c => c.DisplayAllCourses())
                 .ShouldRenderDefaultView()
                 .WithModel<List<MonsterValueCrew.Areas.Admin.ViewModels.CourseViewModel>>(viewModel =>
                 {

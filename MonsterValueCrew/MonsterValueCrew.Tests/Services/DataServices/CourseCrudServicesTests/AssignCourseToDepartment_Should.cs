@@ -77,49 +77,52 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         public async Task AddCourseToDepartment_WhenParametersAreCorrect()
         {
             //Arrange
-            int departmentId = 1;
-            int courseId = 1;
-            bool isAssigned = true;
-            bool isMandatory = true;
-            DateTime dateTime = new DateTime();
+            
             var dbContextMock = new Mock<ApplicationDbContext>();
-            List<UserCourseAssignment> usersCoursesList = new List<UserCourseAssignment>();
+            var usersCoursesList = new List<UserCourseAssignment>();
+
             var usersCoursesDbSetMock = new Mock<DbSet<UserCourseAssignment>>().SetupData(usersCoursesList);
             dbContextMock.SetupGet(x => x.UserCourseAssignments).Returns(usersCoursesDbSetMock.Object);
 
-            List<ApplicationUser> usersList = new List<ApplicationUser>()
-        {
-            new ApplicationUser()
+            var usersList = new List<ApplicationUser>()
+            {
+                new ApplicationUser()
                 {
                     UserName = "name",
                     FirstName = "uniqueGuidOne",
                     LastName = "first",
                     DepartmentId = 1,
-                    
                 },
-            new ApplicationUser()
+                new ApplicationUser()
                 {
                     UserName = "name",
                     FirstName = "uniqueGuidTwo",
                     LastName = "second",
                     DepartmentId = 1,
-                   
                 },
-            new ApplicationUser()
+                new ApplicationUser()
                 {
                     UserName = "name",
                     FirstName = "uniqueGuidThree",
                     LastName = "third",
                     DepartmentId = 1,
-                   
                 }
-        };
+            };
+
             var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(usersList);
             dbContextMock.SetupGet(x => x.Users).Returns(usersDbSetMock.Object);
 
-            CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
+            var courseService = new CourseCrudService(dbContextMock.Object);
+
+            int departmentId = 1;
+            int courseId = 1;
+            bool isAssigned = true;
+            bool isMandatory = true;
+            DateTime dateTime = new DateTime();
             //Act
+
             await courseService.AssignCourseToDepartment(departmentId, courseId, isAssigned, isMandatory, dateTime);
+
             //Assert
             Assert.AreEqual(3, dbContextMock.Object.Users.Count());
             dbContextMock.Verify(x => x.SaveChangesAsync(), Times.Once);
