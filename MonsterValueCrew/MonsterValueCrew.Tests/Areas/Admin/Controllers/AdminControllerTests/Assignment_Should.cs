@@ -36,9 +36,6 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
                 }
             };
 
-
-
-            
             AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
 
 

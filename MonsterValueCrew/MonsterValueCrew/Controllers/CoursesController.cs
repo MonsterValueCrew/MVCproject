@@ -26,7 +26,7 @@ namespace MonsterValueCrew.Controllers
             this.context = context;
         }
 
-        public ActionResult DisplayAllCourses()
+        public ActionResult AllCourses()
         {
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
                 .Select(v => new CourseViewModel()
@@ -35,7 +35,6 @@ namespace MonsterValueCrew.Controllers
                     Name = v.Name,
                     DateAdded = v.DateAdded,
                     Description = v.Description
-
                 });
 
 

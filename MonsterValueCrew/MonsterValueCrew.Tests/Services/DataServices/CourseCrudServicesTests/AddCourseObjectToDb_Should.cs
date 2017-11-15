@@ -26,7 +26,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 
             var courses = new List<Course>();
           
-            Course course = new Course()
+            var course = new Course()
             {
                 Id=id,
                 Name = name,

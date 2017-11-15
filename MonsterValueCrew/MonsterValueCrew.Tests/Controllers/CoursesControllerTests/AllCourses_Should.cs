@@ -3,7 +3,8 @@ using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Controllers;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
-using MonsterValueCrew.DataServices;
+using MonsterValueCrew.DataServices.Interfaces;
+using MonsterValueCrew.Services;
 using Moq;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -21,16 +22,24 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
             // Arrange
             var dbContextMock = new Mock<ApplicationDbContext>();
 
-            var servisesMock = new Mock<CourseCrudService>(dbContextMock.Object);
+            var servisesMock = new Mock<ICourseCrudService>(dbContextMock.Object);
+            var dateTimeService = new DateTimeService();
 
-            List<Course> courses = new List<Course>()
+            var courses = new List<Course>()
             {
                 new Course()
                 {
-                    Name = "kakwotoidae",
-                    Description = "azsym",
-                    PassScore = 5,
-                    IsDeleted = false
+                    Id = 0,
+                    Name = "Programming",
+                    DateAdded = dateTimeService.GetCurrentDate(),
+                    Description = "Best Course Ever"
+                },
+                new Course()
+                {
+                    Id = 1,
+                    Name = "Programmingsadf",
+                    DateAdded = dateTimeService.GetCurrentDate(),
+                    Description = "Best Course Everer"
                 }
 
             };
@@ -44,13 +53,13 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
 
             // Act & Assert
             controller
-                .WithCallTo(c => c.DisplayAllCourses())
+                .WithCallTo(c => c.AllCourses())
                 .ShouldRenderDefaultView()
-                .WithModel<List<CourseViewModel>>(viewModel =>
+                .WithModel<List<CourseViewModel>>(v =>
                 {
-                    for (int i = 0; i < viewModel.Count; i++)
+                    for (int i = 0; i < v.Count; i++)
                     {
-                        Assert.AreEqual(resultViewModel[i].Id, viewModel[i].Id);
+                        Assert.AreEqual(resultViewModel[i].Id, v[i].Id);
                     }
                 });
         }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MonsterValueCrew.Models
+﻿namespace MonsterValueCrew.Models
 {
     public class ImageViewModel
     {
         public string ImageUrl { get; set; }
+
+        public int Order { get; set; }
+
+        public int Id { get; set; }
+        
     }
 }

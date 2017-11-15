@@ -51,23 +51,27 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadCourses(UploadJSONViewModel files)
         {
-            UploadJSONViewModel file = new UploadJSONViewModel();
-            file.Json = Request.Files["file"];
-
             if (ModelState.IsValid)
             {
-                Guard.WhenArgument(file, "file").IsNull().Throw();
-                Guard.WhenArgument(file.Json, "Json File").IsNull().Throw();
-                Guard.WhenArgument(file.Json.ContentLength, "Lenght")
-                    .IsLessThanOrEqual(0).Throw();
+                UploadJSONViewModel file = new UploadJSONViewModel();
+                file.Json = Request.Files["file"];
 
-                var jsonString = this.adminService.ReadJsonFile(file.Json);
-                var course = this.adminService.DeserializeJsonString(jsonString);
-                await this.adminService.SaveCourse(course);
+                if (ModelState.IsValid)
+                {
+                    Guard.WhenArgument(file, "file").IsNull().Throw();
+                    Guard.WhenArgument(file.Json, "Json File").IsNull().Throw();
+                    Guard.WhenArgument(file.Json.ContentLength, "Lenght")
+                        .IsLessThanOrEqual(0).Throw();
 
-                return this.View();
+                    var jsonString = this.adminService.ReadJsonFile(file.Json);
+                    var course = this.adminService.DeserializeJsonString(jsonString);
+                    await this.adminService.SaveCourse(course);
+
+                    return this.View();
+                }
+                return this.View(file);
             }
-            return this.View(file);
+            return this.View();
         }
 
         public async Task<ActionResult> EditUser(string username)
@@ -89,31 +93,37 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditUser(UserViewModel userViewModel)
         {
-            Guard.WhenArgument(userViewModel, "userViewModel").IsNull().Throw();
-
-            if (userViewModel.IsAdmin)
+            if (ModelState.IsValid)
             {
-                await this.userManager.AddToRoleAsync(userViewModel.Id, "Admin");
+
+                Guard.WhenArgument(userViewModel, "userViewModel").IsNull().Throw();
+
+                if (userViewModel.IsAdmin)
+                {
+                    await this.userManager.AddToRoleAsync(userViewModel.Id, "Admin");
+                }
+                else
+                {
+                    await this.userManager.RemoveFromRoleAsync(userViewModel.Id, "Admin");
+                }
+
+                var user = await this.userManager.FindByNameAsync(userViewModel.UserName);
+                user.FirstName = userViewModel.FirstName;
+                user.LastName = userViewModel.LastName;
+
+                await this.dbContext.SaveChangesAsync();
+
+                return RedirectToAction("AllUsers");
+
             }
-            else
-            {
-                await this.userManager.RemoveFromRoleAsync(userViewModel.Id, "Admin");
-            }
-
-            var user = await this.userManager.FindByNameAsync(userViewModel.UserName);
-            user.FirstName = userViewModel.FirstName;
-            user.LastName = userViewModel.LastName;
-
-            await this.dbContext.SaveChangesAsync();
-
-            return RedirectToAction("AllUsers");
+            return this.View(userViewModel);
         }
 
 
         [HttpGet]
         public ActionResult AssignCourses()
         {
-            var users = this.userManager
+            var users = this.dbContext
                 .Users
                 .Select(u => new UserViewModel()
                 {
@@ -142,12 +152,18 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Assignment(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
-        {   
-            Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
+        {
+            if (ModelState.IsValid)
+            {
 
-            userCourseAssignmentViewModel.Users = userCourseAssignmentViewModel.Users.Where(u => u.IsSelected).ToList();
-            userCourseAssignmentViewModel.Courses = userCourseAssignmentViewModel.Courses.Where(u => u.IsSelected).ToList();
+                Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
+                userCourseAssignmentViewModel.Users = userCourseAssignmentViewModel.Users.Where(u => u.IsSelected).ToList();
+                userCourseAssignmentViewModel.Courses = userCourseAssignmentViewModel.Courses.Where(u => u.IsSelected).ToList();
+
+                return this.View(userCourseAssignmentViewModel);
+
+            }
             return this.View(userCourseAssignmentViewModel);
         }
 
@@ -155,29 +171,35 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AssignCourses(UserCourseAssignmentViewModel userCourseAssignmentViewModel)
         {
-            Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
-
-            var userIds = userCourseAssignmentViewModel.Users.Select(u => u.Id).ToArray();
-            var courseIds = userCourseAssignmentViewModel.Courses.Select(c => c.Id).ToArray();
-
-            var users = dbContext.Users.Where(u => userIds.Contains(u.Id)).ToList();
-            var courses = dbContext.Courses.Where(c => courseIds.Contains(c.Id)).ToList();
-
-            
-            for (int i = 0; i < users.Count; i++)
+            if (ModelState.IsValid)
             {
-                for (int j = 0; j < courses.Count; j++)
-                { 
-                    await this.courseCrudService
-                        .AssignCourseToUser(users[i].UserName,
-                                            courses[j].Id,
-                                            true,
-                                            userCourseAssignmentViewModel.IsMandatory,
-                                            userCourseAssignmentViewModel.DueDate);
-                }
-            }
 
-            return RedirectToAction("AssignCourses");
+                Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
+
+                var userIds = userCourseAssignmentViewModel.Users.Select(u => u.Id).ToArray();
+                var courseIds = userCourseAssignmentViewModel.Courses.Select(c => c.Id).ToArray();
+
+                var users = dbContext.Users.Where(u => userIds.Contains(u.Id)).ToList();
+                var courses = dbContext.Courses.Where(c => courseIds.Contains(c.Id)).ToList();
+
+
+                for (int i = 0; i < users.Count; i++)
+                {
+                    for (int j = 0; j < courses.Count; j++)
+                    {
+                        await this.courseCrudService
+                            .AssignCourseToUser(users[i].UserName,
+                                                courses[j].Id,
+                                                true,
+                                                userCourseAssignmentViewModel.IsMandatory,
+                                                userCourseAssignmentViewModel.DueDate);
+                    }
+                }
+
+                return RedirectToAction("AssignCourses");
+
+            }
+            return this.View(userCourseAssignmentViewModel);
         }
 
         public ActionResult DisplayCourses(string username)
@@ -200,6 +222,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return this.PartialView("_DisplayCourses", userViewModel);
         }
+
         private IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
         {
             var user = this.courseCrudService.GetUserByUserName(username);
@@ -225,7 +248,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
                 .Where(c => c.Status == status)
                 .ToList();
             Guard.WhenArgument(completedCourses.Count, "Number Of Completed Courses").IsLessThanOrEqual(0).Throw();
-          
+
             return completedCourses;
         }
     }
