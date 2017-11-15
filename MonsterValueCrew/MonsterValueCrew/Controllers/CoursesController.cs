@@ -53,14 +53,24 @@ namespace MonsterValueCrew.Controllers
             return this.View(slides);
         }
 
-        //public async Task<ActionResult> RenderImage(int id)
-        //{
-        //    Image image = await context.Images.FirstAsync(x => x.Id == id);
+        [ChildActionOnly]
+        public ActionResult GetQuestions(int courseId)
+        {
+            IEnumerable<QuestionDisplayInfo> questions =
+                services.GetAllCourseQuestions(courseId).
+                Select(q => new QuestionDisplayInfo()
+                {
+                    QuestionName = q.QuestionName,
+                    A = q.A,
+                    B = q.B,
+                    C = q.C,
+                    D = q.D,
+                    CorrectAnswer = q.CorrectAnswer
+                });
 
-        //    byte[] currentImage = image.ImageInBase64;
 
-        //    return File(currentImage, "image/png");
-        //}
+            return this.PartialView("_Questions", questions);
+        }
 
 
 
