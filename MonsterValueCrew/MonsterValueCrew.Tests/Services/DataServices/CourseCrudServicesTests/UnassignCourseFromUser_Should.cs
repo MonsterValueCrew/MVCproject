@@ -18,6 +18,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
         [TestMethod]
         public async Task UnasaCourseToUser_WhenParametersAreCorrect()
         {
+            //Arrange
             string username = "username";
             int courseId = 4;
             bool isAssigned = true;

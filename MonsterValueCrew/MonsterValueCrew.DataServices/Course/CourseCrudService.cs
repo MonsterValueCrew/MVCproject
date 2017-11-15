@@ -15,7 +15,7 @@ namespace MonsterValueCrew.DataServices
     {
         private readonly ApplicationDbContext dbContext;
 
-        public CourseCrudService( ApplicationDbContext dbContext)
+        public CourseCrudService(ApplicationDbContext dbContext)
         {
             Guard.WhenArgument(dbContext, "dbContext").IsNull().Throw();
 
@@ -67,8 +67,7 @@ namespace MonsterValueCrew.DataServices
 
             foreach (var user in users)
             {
-                await AssignCourseToUser(user.UserName, courseId, true, isMandatory, dueDate);
-
+                this.AssignCourseToUserInternal(user.UserName, courseId, true, isMandatory, dueDate);
             }
 
             await dbContext.SaveChangesAsync();
@@ -77,11 +76,18 @@ namespace MonsterValueCrew.DataServices
         public async Task AssignCourseToUser(string userName, int courseId,
             bool isAssigned, bool isMandatory, DateTime dueDate)
         {
+            this.AssignCourseToUserInternal(userName, courseId, isAssigned, isMandatory, dueDate);
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        private void AssignCourseToUserInternal(string userName, int courseId, bool isAssigned, bool isMandatory, DateTime dueDate)
+        {
             Guard.WhenArgument(userName, "userName").IsNull().Throw();
             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             Guard.WhenArgument(isAssigned, "isAssignet").IsFalse().Throw();
             Guard.WhenArgument(isMandatory, "isMandatory").IsFalse().Throw();
-           
+
             var user = GetUserByUserName(userName);
 
             UserCourseAssignment assignment = new UserCourseAssignment
@@ -96,9 +102,6 @@ namespace MonsterValueCrew.DataServices
             };
 
             this.dbContext.UserCourseAssignments.Add(assignment);
-
-            await dbContext.SaveChangesAsync();
-
         }
 
         public IEnumerable<Course> GetAllCourses()

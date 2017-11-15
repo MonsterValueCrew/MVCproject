@@ -13,7 +13,7 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
         [TestMethod]
         public void ThrowArgumentNullException_WhenServicesisNull()
         {
-            //Arrangew
+            //Arrange
             var context = new Mock<ApplicationDbContext>();
 
 
