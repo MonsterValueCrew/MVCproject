@@ -16,6 +16,8 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         Course GetCourseById(int courseId);
 
+        CoursePassScore GetCoursePassScoreByCourseId(int courseId);
+
         string GetCourseName(int courseId);
 
         ICollection<CourseImageBin> GetAllSlidesForCourse(int courseId);

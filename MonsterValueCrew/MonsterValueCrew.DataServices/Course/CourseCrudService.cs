@@ -227,6 +227,15 @@ namespace MonsterValueCrew.DataServices
             await dbContext.SaveChangesAsync();
         }
 
-        
+        public CoursePassScore GetCoursePassScoreByCourseId(int courseId)
+        {
+            return this.dbContext.Courses.
+                Where(c => c.Id == courseId).
+                Select(c => new CoursePassScore()
+                {
+                    PassScore = c.PassScore
+                }).
+                First();
+        }
     }
 }
