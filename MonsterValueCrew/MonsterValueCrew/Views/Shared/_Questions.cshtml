@@ -8,48 +8,57 @@
     <div class="container">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div>
-                <h3>@Model[i].QuestionName</h3>
-                @Html.HiddenFor(q => Model[i].QuestionName)
-                
-                <label>
-                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].A)
-                    @Model[i].A
-                </label>
+            <form action="#">
 
-                <label>
-                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].B)
-                    @Model[i].B
-                </label>
+                <div id="@i">
+                    <h3>@Model[i].QuestionName</h3>
+                    @Html.HiddenFor(q => Model[i].QuestionName)
 
-                <label>
-                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].C)
-                    @Model[i].C
-                </label>
+                    <input type="radio" name="q1" value="1" id="q @i 1" />
+                    <label for="q @i 1">
+                        @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].A)
+                        @Model[i].A
+                    </label>
 
-                <label>
-                    @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].D)
-                    @Model[i].D
-                </label>
+                    <input type="radio" name="q1" value="1" id="q @i 2" />
+                    <label for="q @i 2">
+                        @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].B)
+                        @Model[i].B
+                    </label>
 
-                <br/>
-            </div>
+                    <input type="radio" name="q1" value="1" id="q @i 3" />
+                    <label for="q @i 3">
+                        @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].C)
+                        @Model[i].C
+                    </label>
+
+                    <input type="radio" name="q1" value="1" id="q @i 4" />
+                    <label for="q @i 4">
+                        @Html.RadioButtonFor(a => Model[i].SelectedAnswer, Model[i].D)
+                        @Model[i].D
+                    </label>
+
+                    <br />
+                </div>
+
+            </form>
+
         }
-
     </div>
 
 }
 
-<script>
-    $(document).ready(function () {
-        Materialize.updateTextFields();
-    });
+        <script>
+            $(document).ready(function () {
+                Materialize.updateTextFields();
+            });
 
-    $("input[type='hidden']").each(function (index, element) {
-        $(this).appendTo($(element).parent());
-    });
-</script>
 
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryajax")
-}
+            $("input[type='hidden']").each(function (index, element) {
+                $(this).appendTo($(element).parent());
+            });
+        </script>
+
+        @section scripts {
+            @Scripts.Render("~/bundles/jqueryajax")
+        }
