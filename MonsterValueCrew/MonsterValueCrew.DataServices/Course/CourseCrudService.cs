@@ -1,13 +1,12 @@
-﻿using MonsterValueCrew.DataServices.Interfaces;
+﻿using Bytes2you.Validation;
+using MonsterValueCrew.Data;
+using MonsterValueCrew.Data.DataModels;
+using MonsterValueCrew.Data.Models;
+using MonsterValueCrew.DataServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using MonsterValueCrew.Data.Models;
-using MonsterValueCrew.Data;
-using Bytes2you.Validation;
-using MonsterValueCrew.Data.DataModels;
 
 namespace MonsterValueCrew.DataServices
 {
@@ -123,7 +122,7 @@ namespace MonsterValueCrew.DataServices
         public string GetCourseName(int courseId)
         {
             // Get the assigned from admin course to user
-             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
+            Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             var assignedCourse = this.dbContext.Courses.First(c => c.Id == courseId);
             var courseName = assignedCourse.Name;
 
@@ -136,7 +135,7 @@ namespace MonsterValueCrew.DataServices
 
             return images.ToList();
         }
-        
+
         public IEnumerable<Course> GetCoursesByUserName(string username)
         {
             var user = GetUserByUserName(username);
@@ -171,20 +170,20 @@ namespace MonsterValueCrew.DataServices
             return course;
         }
 
-        public ICollection<CourseImageBin> GetAllSlidesForCourse(int courseId)
+        public ICollection<ImageViewModel> GetAllSlidesForCourse(int courseId)
         {
             var collectionOfSlides = this.dbContext.Courses
                 .Where(c => c.Id == courseId)
                 .Select(c => c.Images).
                 First();
 
-            var listOfSlides = new List<CourseImageBin>();
+            var listOfSlides = new List<ImageViewModel>();
 
             foreach (var item in collectionOfSlides)
             {
-                listOfSlides.Add(new CourseImageBin()
+                listOfSlides.Add(new ImageViewModel()
                 {
-                    ImageBinary = item.ImageInBase64
+                    ImageInBase64 = item.ImageInBase64
                 });
             }
 
@@ -219,7 +218,7 @@ namespace MonsterValueCrew.DataServices
 
         public async Task UnassignCourseFromUser(int courseId, string username)
         {
-           
+
             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             Guard.WhenArgument(username, "userName").IsNull().Throw();
             var assignment = this.dbContext.
@@ -257,6 +256,32 @@ namespace MonsterValueCrew.DataServices
             }
 
             await dbContext.SaveChangesAsync();
+        }
+        public IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
+        {
+            var user = GetUserByUserName(username);
+
+            var resultList = dbContext.UserCourseAssignments
+                .Where(u => u.ApplicationUserId == user.Id)
+                .Select(x => new UserCourseAssignmentViewModel()
+                {
+                    Name = x.Course.Name,
+                    Status = x.Status,
+                    AssignmentDate = x.AssignmentDate,
+                    DueDate = x.DueDate,
+                    IsMandatory = x.IsMandatory,
+                    CompletionDate = x.CompletionDate
+                })
+                .ToList();
+
+            return resultList;
+        }
+        public IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status)
+        {
+            var completedCourses = this.GetUsersCourseAssignment(username)
+                .Where(c => c.Status == status)
+                .ToList();
+            return completedCourses;
         }
     }
 }

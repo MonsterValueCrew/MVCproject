@@ -2,8 +2,6 @@
 using MonsterValueCrew.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MonsterValueCrew.DataServices.Interfaces
@@ -20,7 +18,7 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         string GetCourseName(int courseId);
 
-        ICollection<CourseImageBin> GetAllSlidesForCourse(int courseId);
+        ICollection<ImageViewModel> GetAllSlidesForCourse(int courseId);
 
         IList<Image> GetImages(int courseId);
 
@@ -42,8 +40,12 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         ApplicationUser GetUserByUserName(string username);
 
-         CoursePassScore GetCoursePassScoreByCourseId(int courseId);
+        CoursePassScore GetCoursePassScoreByCourseId(int courseId);
 
-         Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId);
+        Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId);
+
+        IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username);
+
+        IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status);
     }
 }

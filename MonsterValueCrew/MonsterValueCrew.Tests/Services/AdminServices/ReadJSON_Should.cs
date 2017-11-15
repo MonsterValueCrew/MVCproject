@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.Data.DataModels;
 using MonsterValueCrew.Services;
 using Moq;
 using System;

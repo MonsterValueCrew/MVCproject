@@ -14,5 +14,7 @@
 
         public string CorrectAnswer { get; set; }
 
+        public string SelectedAnswer { get; set; }
+
     }
 }

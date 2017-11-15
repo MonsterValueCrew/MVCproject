@@ -1,17 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonsterValueCrew.Areas.Admin.ViewModels;
-using MonsterValueCrew.Data;
-using MonsterValueCrew.Data.Models;
-using MonsterValueCrew.Services;
-using Moq;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace MonsterValueCrew.Tests.Services.AdminServices
 {

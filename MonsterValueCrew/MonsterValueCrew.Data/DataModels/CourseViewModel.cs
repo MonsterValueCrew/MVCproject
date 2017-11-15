@@ -2,7 +2,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace MonsterValueCrew.Areas.Admin.ViewModels
+namespace MonsterValueCrew.Data.DataModels
 {
     public class CourseViewModel
     {

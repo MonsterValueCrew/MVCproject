@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
 {
-    [TestClass]
-    public class EditUser_Should
-    {
-        [TestMethod]
-        public async Task ReturnPartialView_WhenParametersAreCorrect()
-        {
-            //Arrange
-            var userMock = new Mock<ApplicationUser>();
-            var userManagerMock = new Mock<ApplicationUserManager>(userMock.Object);
+    //[TestClass]
+    //public class EditUser_Should
+    //{
+    //    [TestMethod]
+    //    public async Task ReturnPartialView_WhenParametersAreCorrect()
+    //    {
+    //        //Arrange
+    //        var userMock = new Mock<ApplicationUser>();
+    //        var userManagerMock = new Mock<ApplicationUserManager>(userMock.Object);
 
-            //Act
-            //userManagerMock.Setup(u => u.FindByNameAsync(userMock.Object))
-            //Assert
+    //        //Act
+    //        //userManagerMock.Setup(u => u.FindByNameAsync(userMock.Object))
+    //        //Assert
 
-        }
+    //    }
         
-    }
+    //}
 }

@@ -19,35 +19,33 @@
             <ul class="left hide-on-med-and-down">
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
-                <li>@Html.ActionLink("AllCourses", "AllCourses", "Courses", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("AllCourses","AllCourses", "Courses", new { area = "" }, null)</li>
             </ul>
-                @if (this.User.IsInRole("Admin"))
-                {
-                    <a class='hide-on-med-and-down dropdown-button btn' data-activates='dropdown1'>Admin</a>
+            @if (this.User.IsInRole("Admin"))
+            {
+                <a class='hide-on-med-and-down dropdown-button btn' data-activates='dropdown1'>Admin</a>
                     <ul id='dropdown1' class='left hide-on-med-and-down dropdown-content'>
                         <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
                         <li>@Html.ActionLink("Assign Courses", "AssignCourses", "Admin", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Monitor Progress", "_DisplayCourses", "Admin", new { area = "Admin" }, null)</li>
                     </ul>
-                }
-            
+            }
+
             <div class="right">
                 @Html.Partial("_LoginPartial")
             </div>
             <ul id="nav-mobile" class="side-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
-                <li>@Html.ActionLink("Courses", "AssignedCourses", "User", new { area = "" }, null)</li>
+                <li>@Html.ActionLink("Courses", "AllCourses", "User", new { area = "" }, null)</li>
 
                 @if (this.User.IsInRole("Admin"))
                 {
-                        <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Assign Courses", "AssignCourses", "Admin", new { area = "Admin" }, null)</li>
-                        <li>@Html.ActionLink("Monitor Progress", "_DisplayCourses", "Admin", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Users", "AllUsers", "Admin", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Courses", "UploadCourses", "Admin", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Assign Courses", "AssignCourses", "Admin", new { area = "Admin" }, null)</li>
                 }
-               
+
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>

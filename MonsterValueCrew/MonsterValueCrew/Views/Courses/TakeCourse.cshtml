@@ -1,4 +1,4 @@
-﻿@model  IEnumerable<ImageViewModel>
+﻿@model  IEnumerable<MonsterValueCrew.Data.DataModels.ImageViewModel>
 @{
     ViewBag.Title = "Learn from the slides";
 }
@@ -15,38 +15,44 @@
                 <a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
             </div>
         </div>
-
-            @if (Model == null)
+        @if (Model == null)
+        {
+            <div>no images for this course</div>
+        }
+        else
+        {
+            foreach (var slide in Model)
             {
-                <div>no images for this course</div>
+                <div class="carousel-item red white-text" href="#one!">
+                    <img alt="Embedded Image" src="data:image/png;base64,@(slide.ImageUrl)" />
+                </div>
             }
-            else
-            {
-                foreach (var slide in Model)
-                {
-                    <div class="carousel-item red white-text" href="#one!">
-                        <img alt="Embedded Image" src="data:image/png;base64,@(slide.ImageUrl)" />
-                    </div>
-                }
-            }
-        </div>
+        }
     </div>
-    <br />
 
+    <br />
+    <br />
+    <br />
     <div>
         @Ajax.ActionLink("Take quizz",
-           "GetQuestions",
-           new { courseId = ViewBag.courseId},
-           new AjaxOptions
-           {
-               InsertionMode = InsertionMode.Replace,
-               UpdateTargetId = "questionsArea"
-           }, new { @class = "btn waves-effect teal text-lighten-2" })
+               "GetQuestions",
+               new { courseId = ViewBag.courseId },
+               new AjaxOptions
+               {
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "questionsArea"
+               }, new { @class = "btn waves-effect teal text-lighten-2" })
     </div>
 
-    <div id="questionsArea"></div>
-</div>
+    <br />
+    <br />
 
+    <div id="questionsArea"></div>
+
+
+    <br />
+    <br />
+</div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryajax")
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MonsterValueCrew.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace MonsterValueCrew.Areas.Admin.ViewModels
+namespace MonsterValueCrew.Data.DataModels
 {
     public class UserCourseAssignmentViewModel
     {

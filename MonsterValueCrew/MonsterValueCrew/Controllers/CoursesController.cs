@@ -1,14 +1,12 @@
 ﻿using Bytes2you.Validation;
 using MonsterValueCrew.Data;
-using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
-using MonsterValueCrew.Models;
+using MonsterValueCrew.Data.DataModels;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
+using MonsterValueCrew.Models;
 
 namespace MonsterValueCrew.Controllers
 {
@@ -29,13 +27,13 @@ namespace MonsterValueCrew.Controllers
         public ActionResult AllCourses()
         {
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
-                .Select(v => new CourseViewModel()
+                .Select(v => new Data.DataModels.CourseViewModel()
                 {
                     Id = v.Id,
                     Name = v.Name,
                     DateAdded = v.DateAdded,
                     Description = v.Description
-                });
+                }).ToList();
 
 
             return this.View(viewModel);
@@ -44,9 +42,9 @@ namespace MonsterValueCrew.Controllers
         public ActionResult TakeCourse(int courseId)
         {
             var slides = services.GetAllSlidesForCourse(courseId)
-                .Select(s => new ImageViewModel()
+                .Select(s => new Data.DataModels.ImageViewModel()
                 {
-                    ImageUrl = Convert.ToBase64String(s.ImageBinary)
+                    ImageUrl = Convert.ToBase64String(s.ImageInBase64)
                 });
 
             ViewBag.courseId = courseId;
@@ -58,7 +56,7 @@ namespace MonsterValueCrew.Controllers
         {
             var questions =
                 services.GetAllCourseQuestions(courseId).
-                Select(q => new QuestionDisplayInfo()
+                Select(q => new Data.DataModels.CourseQuestions()
                 {
                     QuestionName = q.QuestionName,
                     A = q.A,
@@ -76,11 +74,11 @@ namespace MonsterValueCrew.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SendAnswers(IEnumerable<QuestionDisplayInfo> questionsEnum)
+        public ActionResult SendAnswers(IEnumerable<CourseQuestions> questionsEnum)
         {
-            List<QuestionDisplayInfo> questionsAnswers =
+            var questionsAnswers =
                 services.GetAllCourseQuestions((int)Session["currentCourseId"])
-                .Select(q => new QuestionDisplayInfo()
+                .Select(q => new Data.DataModels.CourseQuestions()
                 {
                     QuestionName = q.QuestionName,
                     A = q.A,

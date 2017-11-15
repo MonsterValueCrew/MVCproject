@@ -97,7 +97,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
 
             dbContextMock.SetupGet(x => x.Users).Returns(usersDbSetMock.Object);
 
-            CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
+            var courseService = new CourseCrudService(dbContextMock.Object);
 
             //Act && Assert
 

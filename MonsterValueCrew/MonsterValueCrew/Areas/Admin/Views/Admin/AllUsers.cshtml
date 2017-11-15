@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UserViewModel>
+﻿@model IEnumerable<MonsterValueCrew.Data.DataModels.UserViewModel>
 
 <div class="container">
     <h2>AllUsers</h2>
@@ -14,6 +14,7 @@
            InsertionMode = InsertionMode.Replace,
            UpdateTargetId = "editArea"
            }, new { @class = "btn waves-effect teal text-lighten-2"})
+
             @Ajax.ActionLink("Diplay Courses",
            "DisplayCourses",
            new { username = user.UserName },

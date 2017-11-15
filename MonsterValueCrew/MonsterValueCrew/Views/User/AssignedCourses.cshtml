@@ -65,26 +65,7 @@
 </div>
 
 
-    @Scripts.Render("~/bundles/jqueryajax")
-    @Scripts.Render("~/bundles/jquery.dataTables")
-    @*<script>
-            $(document).ready(function () {
-                $('#tblCourses').DataTable({
-                    "searching": true,
-                    "ordering": true,
-                    "pageLength": 5,
-                    "pagingType": "full_numbers",
-                    "ajax": "http://localhost:52690/User/GetCourses",
-                    "columns": [
-                        { "data": "Id" },
-                        { "data": "Name" },
-                        { "data": "Description" },
-                        { "data": "DateAdded" },
-                        { "data": "PassScore" },
-                        { "data": "IsDeleted" }
-                    ]
-                });
-            });
-        </script>*@
-    
+@Scripts.Render("~/bundles/jqueryajax")
+@Scripts.Render("~/bundles/jquery.dataTables")
+
 }

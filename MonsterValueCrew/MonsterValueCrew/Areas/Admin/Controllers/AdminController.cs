@@ -1,9 +1,8 @@
 ﻿using Bytes2you.Validation;
-using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.Data.DataModels;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -51,28 +50,25 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadCourses(UploadJSONViewModel files)
         {
+            UploadJSONViewModel file = new UploadJSONViewModel();
+            file.Json = Request.Files["file"];
+
             if (ModelState.IsValid)
             {
-                UploadJSONViewModel file = new UploadJSONViewModel();
-                file.Json = Request.Files["file"];
+                Guard.WhenArgument(file, "file").IsNull().Throw();
+                Guard.WhenArgument(file.Json, "Json File").IsNull().Throw();
+                Guard.WhenArgument(file.Json.ContentLength, "Lenght")
+                    .IsLessThanOrEqual(0).Throw();
 
-                if (ModelState.IsValid)
-                {
-                    Guard.WhenArgument(file, "file").IsNull().Throw();
-                    Guard.WhenArgument(file.Json, "Json File").IsNull().Throw();
-                    Guard.WhenArgument(file.Json.ContentLength, "Lenght")
-                        .IsLessThanOrEqual(0).Throw();
+                var jsonString = this.adminService.ReadJsonFile(file.Json);
+                var course = this.adminService.DeserializeJsonString(jsonString);
+                await this.adminService.SaveCourse(course);
 
-                    var jsonString = this.adminService.ReadJsonFile(file.Json);
-                    var course = this.adminService.DeserializeJsonString(jsonString);
-                    await this.adminService.SaveCourse(course);
-
-                    return this.View();
-                }
-                return this.View(file);
+                return this.View();
             }
-            return this.View();
+            return this.View(file);
         }
+
 
         public async Task<ActionResult> EditUser(string username)
         {
@@ -207,15 +203,15 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             var user = this.courseCrudService.GetUserByUserName(username);
             var userViewModel = UserViewModel.Create.Compile()(user);
 
-            ViewBag.PendingCourses = GetUserCourseAssignmentByStatusName(
+            ViewBag.PendingCourses = this.courseCrudService.GetUserCourseAssignmentByStatusName(
                 user.UserName,
                 StatusName.Pending);
 
-            ViewBag.StartedCourses = GetUserCourseAssignmentByStatusName(
+            ViewBag.StartedCourses = this.courseCrudService.GetUserCourseAssignmentByStatusName(
                  user.UserName,
                  StatusName.Started);
 
-            ViewBag.CompletedCourses = GetUserCourseAssignmentByStatusName(
+            ViewBag.CompletedCourses = this.courseCrudService.GetUserCourseAssignmentByStatusName(
                 user.UserName,
                 StatusName.Completed);
 
@@ -223,34 +219,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
             return this.PartialView("_DisplayCourses", userViewModel);
         }
 
-        private IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
-        {
-            var user = this.courseCrudService.GetUserByUserName(username);
-
-            var resultList = dbContext.UserCourseAssignments
-                .Where(u => u.ApplicationUserId == user.Id)
-                .Select(x => new UserCourseAssignmentViewModel()
-                {
-                    Name = x.Course.Name,
-                    Status = x.Status,
-                    AssignmentDate = x.AssignmentDate,
-                    DueDate = x.DueDate,
-                    IsMandatory = x.IsMandatory,
-                    CompletionDate = x.CompletionDate
-                })
-                .ToList();
-
-            return resultList;
-        }
-        private IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status)
-        {
-            var completedCourses = this.GetUsersCourseAssignment(username)
-                .Where(c => c.Status == status)
-                .ToList();
-            Guard.WhenArgument(completedCourses.Count, "Number Of Completed Courses").IsLessThanOrEqual(0).Throw();
-
-            return completedCourses;
-        }
+       
     }
 }
 

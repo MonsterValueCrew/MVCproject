@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonsterValueCrew.Areas.Admin.Controllers;
-using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.Data.DataModels;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
