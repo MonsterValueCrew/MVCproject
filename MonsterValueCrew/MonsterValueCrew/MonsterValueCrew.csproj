@@ -327,7 +327,7 @@
     <Content Include="Views\Courses\AllCourses.cshtml" />
     <Content Include="Views\User\AssignedCourses.cshtml" />
     <Content Include="Views\Courses\TakeCourse.cshtml" />
-    <Content Include="Views\Shared\_Question.cshtml" />
+    <Content Include="Views\Shared\_Questions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

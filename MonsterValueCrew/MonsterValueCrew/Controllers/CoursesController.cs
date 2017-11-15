@@ -50,10 +50,12 @@ namespace MonsterValueCrew.Controllers
                     ImageUrl = Convert.ToBase64String(s.ImageBinary)
                 });
 
+            ViewBag.courseId = courseId;
+
             return this.View(slides);
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         public ActionResult GetQuestions(int courseId)
         {
             IEnumerable<QuestionDisplayInfo> questions =
@@ -66,7 +68,7 @@ namespace MonsterValueCrew.Controllers
                     C = q.C,
                     D = q.D,
                     CorrectAnswer = q.CorrectAnswer
-                });
+                }).ToList();
 
 
             return this.PartialView("_Questions", questions);

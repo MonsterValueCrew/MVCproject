@@ -31,10 +31,20 @@
             }
         </div>
     </div>
+    <br />
 
     <div>
-        
+        @Ajax.ActionLink("Take quizz",
+           "GetQuestions",
+           new { courseId = ViewBag.courseId},
+           new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "questionsArea"
+           }, new { @class = "btn waves-effect teal text-lighten-2" })
     </div>
+
+    <div id="questionsArea"></div>
 </div>
 
 
