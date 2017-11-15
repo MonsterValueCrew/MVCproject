@@ -225,6 +225,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AllCoursesViewModel.cs" />
+    <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TakeCourseVIewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,6 +3,8 @@ using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Models;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +29,7 @@ namespace MonsterValueCrew.Controllers
         public ActionResult AllCourses()
         {
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
-                .Select(v => new TakeCourseVIewModel()
+                .Select(v => new CourseViewModel()
                 {
                     Id = v.Id,
                     Name = v.Name,
@@ -40,28 +42,25 @@ namespace MonsterValueCrew.Controllers
             return this.View(viewModel);
         }
 
-        public ActionResult TakeCourse(TakeCourseVIewModel viewModel)
+        public ActionResult TakeCourse(int courseId)
         {
-            //how to put the Id of the course here? is it fine that way: int courseId = viewModel.Id?
-            //No! It says '0'!
-            int courseId = 6;
-            var course = services.GetCourseById(courseId);
-            var images = services.GetImages(courseId);
+            IEnumerable<ImageViewModel> slides = services.GetAllSlidesForCourse(courseId)
+                .Select(s => new ImageViewModel()
+                {
+                    ImageUrl = Convert.ToBase64String(s.ImageBinary)
+                });
 
-            viewModel.Name = course.Name;
-            viewModel.Images = course.Images;
-
-            return View(viewModel);
+            return this.View(slides);
         }
 
-        public async Task<ActionResult> RenderImage(int id)
-        {
-            Image image = await context.Images.FirstAsync(x => x.Id == id);
+        //public async Task<ActionResult> RenderImage(int id)
+        //{
+        //    Image image = await context.Images.FirstAsync(x => x.Id == id);
 
-            byte[] currentImage = image.ImageInBase64;
+        //    byte[] currentImage = image.ImageInBase64;
 
-            return File(currentImage, "image/png");
-        }
+        //    return File(currentImage, "image/png");
+        //}
 
 
 

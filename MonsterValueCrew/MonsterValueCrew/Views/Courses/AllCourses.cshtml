@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TakeCourseVIewModel>
+﻿@model IEnumerable<CourseViewModel>
     <div class="container">
         <h3>My Courses</h3>
     </div>
@@ -28,6 +28,7 @@
                     <tr>
                         <td>
                             @course.Id
+                            @Html.HiddenFor(c => course.Id)
                         </td>
 
                         <td>
@@ -43,8 +44,7 @@
                         </td>
 
                         <td>
-                            @*string linkText, string actionName, string controllerName*@
-                            @Html.ActionLink("Go", "TakeCourse", "Courses")
+                            @Html.ActionLink("Go", "TakeCourse", "Courses", new { courseId = course.Id}, null)
                         </td>
                     </tr>
                 }
