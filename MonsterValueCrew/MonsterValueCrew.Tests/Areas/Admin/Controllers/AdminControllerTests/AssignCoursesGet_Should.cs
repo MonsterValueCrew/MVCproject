@@ -34,34 +34,18 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
                 new ApplicationUser() {UserName = "firstUser", Id = "Pesho"  },
                 new ApplicationUser() {UserName = "secondUser", Id = "Gosho"}
             };
-            var usersSetMock = new List<UserViewModel>().Select(u => new UserViewModel()
-            {
-                UserName = u.UserName,
-                Id = u.Id
-            }).ToList();
 
             var courses = new List<Course>()
             {
                 new Course() { Name = "Programming", Id = 0 },
                 new Course() { Name = "Programming", Id = 1 }
             };
+
             var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
             dbContextMock.SetupGet(c => c.Courses).Returns(coursesSetMock.Object);
 
-            var coursesViewMock = new List<CourseViewModel>().Select(u => new CourseViewModel()
-            {
-                Name = u.Name,
-                Id = u.Id
-            }).ToList();
-
-            
-            var resultViewModel = new UserCourseAssignmentViewModel()
-            {
-                Users = usersSetMock,
-                Courses = coursesViewMock
-            };
-            
-            
+            var usersSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(users);
+            dbContextMock.SetupGet(c => c.Users).Returns(usersSetMock.Object);
 
             AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
 
@@ -71,10 +55,18 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
                 .ShouldRenderDefaultView()
                 .WithModel<UserCourseAssignmentViewModel>(v =>
                 {
-                        Assert.AreEqual(resultViewModel, v);
+                    for (int i = 0; i < v.Users.Count; i++)
+                    {
+                        Assert.AreEqual(users[i].Id, v.Users[i].Id);
+                        Assert.AreEqual(users[i].UserName, v.Users[i].UserName);
+                    }
+
+                    for (int i = 0; i < v.Courses.Count; i++)
+                    {
+                        Assert.AreEqual(courses[i].Id, v.Courses[i].Id);
+                        Assert.AreEqual(courses[i].Name, v.Courses[i].Name);
+                    }
                 });
-
-
         }
     }
 }

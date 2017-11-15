@@ -35,10 +35,7 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             controller
                 .WithCallTo(c => c.UploadCourses())
                 .ShouldRenderDefaultView()
-                .WithModel<UploadJSONViewModel>(u =>
-                {
-                    Assert.AreEqual(resultViewModel, u);
-                });
+                .WithModel<UploadJSONViewModel>();
 
 
         }

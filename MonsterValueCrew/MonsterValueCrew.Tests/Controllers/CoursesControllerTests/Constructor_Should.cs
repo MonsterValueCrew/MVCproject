@@ -16,9 +16,8 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
             //Arrange
             var context = new Mock<ApplicationDbContext>();
 
-
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() => new CoursesController(null,context.Object));
+            Assert.ThrowsException<ArgumentNullException>(() => new CoursesController(null, context.Object));
         }
 
         [TestMethod]
@@ -26,10 +25,9 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
         {
             //Arrangew
             var services = new Mock<ICourseCrudService>();
-            
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentNullException>(() =>new CoursesController(services.Object,null));
+            Assert.ThrowsException<ArgumentNullException>(() => new CoursesController(services.Object, null));
         }
         [TestMethod]
         public void ReturnInstance_WhenParametersAreCorrect()
@@ -39,11 +37,11 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
             var services = new Mock<ICourseCrudService>();
 
             //Act
-            var courseCrudService = new CoursesController(services.Object,context.Object);
+            var courseCrudService = new CoursesController(services.Object, context.Object);
 
             //Assert
             Assert.IsNotNull(courseCrudService);
         }
     }
-   
+
 }

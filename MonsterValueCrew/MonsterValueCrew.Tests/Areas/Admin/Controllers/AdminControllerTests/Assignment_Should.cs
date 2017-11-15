@@ -7,12 +7,6 @@ using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
 {
@@ -42,9 +36,6 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
                 }
             };
 
-
-
-            
             AdminController controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
 
 

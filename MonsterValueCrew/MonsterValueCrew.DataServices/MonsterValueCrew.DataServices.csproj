@@ -61,8 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\Contracts\IUserService.cs" />
-    <Compile Include="Account\UserService.cs" />
     <Compile Include="Course\CourseCrudService.cs" />
     <Compile Include="Course\Contracts\ICourseCrudService.cs" />
     <Compile Include="Date and Images\Contracts\IDateTimeService.cs" />

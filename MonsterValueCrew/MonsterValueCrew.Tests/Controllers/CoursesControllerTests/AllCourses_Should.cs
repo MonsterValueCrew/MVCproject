@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MonsterValueCrew.Areas.Admin.Controllers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MonsterValueCrew.Areas.Admin.ViewModels;
 using MonsterValueCrew.Controllers;
 using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
-using MonsterValueCrew.DataServices;
 using MonsterValueCrew.DataServices.Interfaces;
-using MonsterValueCrew.Models;
+using MonsterValueCrew.Services;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -54,13 +50,13 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
                         IsDeleted = false,
                }
 
-        };
+            };
             var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
             var usersList = new List<ApplicationUser>() { user };
             var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(usersList);
             dbContextMock.SetupGet(x => x.Users).Returns(usersDbSetMock.Object);
 
-            var resultViewModel = courses.AsQueryable().Select(MonsterValueCrew.Areas.Admin.ViewModels.CourseViewModel.Create).ToList();
+            var resultViewModel = courses.AsQueryable().Select(CourseViewModel.Create).ToList();
 
             dbContextMock.SetupGet(m => m.Courses).Returns(coursesSetMock.Object);
 
@@ -76,11 +72,11 @@ namespace MonsterValueCrew.Tests.Controllers.CoursesControllerTests
 
             // Act & Assert
             controller
-                .WithCallTo(c => c.DisplayAllCourses())
+                .WithCallTo(c => c.AllCourses())
                 .ShouldRenderDefaultView()
-                .WithModel<List<MonsterValueCrew.Areas.Admin.ViewModels.CourseViewModel>>(viewModel =>
+                .WithModel<List<CourseViewModel>>(v =>
                 {
-                    for (int i = 0; i < viewModel.Count; i++)
+                    for (int i = 0; i < v.Count; i++)
                     {
                         Assert.AreEqual(resultViewModel[i].Name, viewModel[i].Name);
                     }

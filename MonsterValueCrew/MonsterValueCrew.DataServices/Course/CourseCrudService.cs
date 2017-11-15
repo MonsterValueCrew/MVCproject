@@ -231,6 +231,32 @@ namespace MonsterValueCrew.DataServices
             await dbContext.SaveChangesAsync();
         }
 
-        
+        public CoursePassScore GetCoursePassScoreByCourseId(int courseId)
+        {
+            return this.dbContext.Courses.
+                Where(c => c.Id == courseId).
+                Select(c => new CoursePassScore()
+                {
+                    PassScore = c.PassScore
+                }).
+                First();
+        }
+
+        public async Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId)
+        {
+            UserCourseAssignment assignment = this.dbContext.UserCourseAssignments.
+                Where(c => (c.Id == courseId && c.ApplicationUserId == userId)).First();
+
+            if (completed)
+            {
+                assignment.Status = StatusName.Completed;
+            }
+            else
+            {
+                assignment.Status = StatusName.Started;
+            }
+
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

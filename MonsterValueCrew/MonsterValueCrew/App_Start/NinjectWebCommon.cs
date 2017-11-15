@@ -10,6 +10,7 @@ using MonsterValueCrew.Services.Contracts;
 using Ninject;
 using Ninject.Web.Common;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Web;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MonsterValueCrew.App_Start.NinjectWebCommon), "Start")]
@@ -18,7 +19,7 @@ using System.Web;
 namespace MonsterValueCrew.App_Start
 {
 
-
+    [ExcludeFromCodeCoverage]
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();

@@ -15,7 +15,7 @@
                 <a href="Siguiente" class=" moveNextCarousel middle-indicator-text waves-effect waves-light content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
             </div>
         </div>
-        <div class="carousel-item red white-text" href="#one!">
+
             @if (Model == null)
             {
                 <div>no images for this course</div>
@@ -24,7 +24,7 @@
             {
                 foreach (var slide in Model)
                 {
-                    <div class="item">
+                    <div class="carousel-item red white-text" href="#one!">
                         <img alt="Embedded Image" src="data:image/png;base64,@(slide.ImageUrl)" />
                     </div>
                 }
