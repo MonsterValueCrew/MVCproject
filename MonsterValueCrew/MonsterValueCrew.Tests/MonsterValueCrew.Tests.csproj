@@ -140,10 +140,8 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AllUser_Should.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\Assignment_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\Constructor_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\DisplayCourses_Should.cs" />
-    <Compile Include="Controllers\CoursesControllerTests\AllCourses_Should.cs" />
     <Compile Include="Controllers\CoursesControllerTests\Constructor_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AssignCoursesGet_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\EditUser_Should.cs" />
