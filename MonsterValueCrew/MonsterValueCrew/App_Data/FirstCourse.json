@@ -4,22 +4,22 @@
 	"DateCreated":"\/Date(1330848000000-0800)\/",
 	"PassScore" : "2",
 	"Questions": [
-		{
-			"QuestionName": "Which one is a Scripting Language?",
-			"A": "Vafla",
-			"B": "JavaScript",
-			"C": "Ebola",
-			"D": "Python",
-			"CorrectAnswer": "B"
-		},
-		{
-			"QuestionName": "Which one is a Object Orientated Language",
-			"A": "Selenium",
-			"B": "JavaScript",
-			"C": "Zamunda",
-			"D": "C#",
-			"CorrectAnswer": "D"
-		}
+    {
+      "QuestionName": "Which one is a Scripting Language?",
+      "A": "Vafla",
+      "B": "JavaScript",
+      "C": "Ebola",
+      "D": "Python",
+      "CorrectAnswer": "JavaScript"
+    },
+    {
+      "QuestionName": "Which one is a Object Orientated Language",
+      "A": "Selenium",
+      "B": "JavaScript",
+      "C": "Zamunda",
+      "D": "C#",
+      "CorrectAnswer": "C#"
+    }
 	],
 
 	 "Images": [

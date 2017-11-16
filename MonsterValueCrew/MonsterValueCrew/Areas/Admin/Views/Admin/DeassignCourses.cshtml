@@ -1,0 +1,53 @@
+﻿@model List<MonsterValueCrew.Data.DataModels.DeassignViewModel>
+@{
+    ViewBag.Title = "DeassignCourses";
+}
+<div class="container">
+    <h2>DeassignCourses</h2>
+
+    @using (Html.BeginForm("DeassignCourses", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <thead>
+                <tr>
+                    <th> Delete</th>
+                    <th> Username</th>
+                    <th> Coursename</th>
+                    <th> Duedate</th>
+                    <th> Assignement Date</th>
+                </tr>
+
+
+            <tbody>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        @Html.HiddenFor(x => x[i].userCourseAssignmentMiddleMan.Id)
+                        <td>
+                            @Html.CheckBoxFor(x => Model[i].IsSelected)
+                            @Html.LabelFor(x => Model[i].IsSelected, Model[i].IsSelected)
+                        </td>
+                        <td> @Html.DisplayFor(x => Model[i].userCourseAssignmentMiddleMan.ApplicationUser.UserName)</td>
+                        <td> @Html.DisplayFor(x => Model[i].userCourseAssignmentMiddleMan.Course.Name)</td>
+                        <td> @Html.DisplayFor(x => Model[i].userCourseAssignmentMiddleMan.DueDate)</td>
+                        <td> @Html.DisplayFor(x => Model[i].userCourseAssignmentMiddleMan.AssignmentDate)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input class="btn waves-effect teal text-lighten-2" type="submit" value="Delete Assignements">
+    }
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            Materialize.updateTextFields();
+        });
+
+        $("input[type='hidden']").each(function (index, element) {
+            $(this).appendTo($(element).parent());
+        });
+    </script>
+}

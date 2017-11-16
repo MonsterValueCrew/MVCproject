@@ -1,9 +1,12 @@
 ﻿using Bytes2you.Validation;
 using MonsterValueCrew.Data;
+using MonsterValueCrew.Data.DataModels;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Services.Contracts;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -63,7 +66,26 @@ namespace MonsterValueCrew.Services
             }
             await this.context.SaveChangesAsync();
         }
-        
+
+        //This is for DeassignCourses
+        public void DeleteCourseStates(List<DeassignViewModel> model)
+        {
+            for (int i = 0; i < model.Count; i++)
+            {
+                if (model[i].IsSelected)
+                {
+                    var currId = model[i].userCourseAssignmentMiddleMan.Id;
+                    var currState = this.context.UserCourseAssignments.First(x => x.Id == currId);
+                    this.context.UserCourseAssignments.Remove(currState);
+                }
+            }
+            this.context.SaveChanges();
+        }
+        //This is for DeassignCourses
+        public List<UserCourseAssignment> GetAllUserCourseAssignments()
+        {
+            return this.context.UserCourseAssignments.ToList();
+        }
     }
 
 }

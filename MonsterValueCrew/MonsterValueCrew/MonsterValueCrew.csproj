@@ -267,6 +267,7 @@
     <Content Include="Areas\Admin\Views\Admin\Assignment.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\_DisplayCourses.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_CourseTable.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\DeassignCourses.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone.js" />
     <Content Include="Scripts\dropzone.min.js" />

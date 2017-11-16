@@ -3,6 +3,7 @@ using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.DataModels;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -218,8 +219,32 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
             return this.PartialView("_DisplayCourses", userViewModel);
         }
+        //This is for DeassignCourses
+        [HttpGet]
+        public ActionResult DeassignCourses()
+        {
+            var model = new DeassignViewModel();
+            var courseStates = this.adminService.GetAllUserCourseAssignments();
+            var listViewModels = courseStates.Select(x => new DeassignViewModel()
+            {
+                userCourseAssignmentMiddleMan = x
+            }).ToList();
 
-       
+            return this.View(listViewModels);
+        }
+        //This is for DeassignCourses
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeassignCourses(List<DeassignViewModel> listViewModels)
+        {
+            if (ModelState.IsValid)
+            {
+                this.adminService.DeleteCourseStates(listViewModels);
+                return RedirectToAction("DeassignCourses");
+            }
+            return this.View(listViewModels);
+        }
+
     }
 }
 

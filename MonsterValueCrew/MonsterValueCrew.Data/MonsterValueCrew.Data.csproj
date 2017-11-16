@@ -75,6 +75,8 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="DataModels\CoursePassScore.cs" />
     <Compile Include="DataModels\CourseQuestions.cs" />
+    <Compile Include="DataModels\DeassignViewModel.cs" />
+    <Compile Include="DataModels\UserCourseAssignmentMiddleMan.cs" />
     <Compile Include="Enums\StatusNameEnum.cs" />
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.cs" />
     <Compile Include="Migrations\201711081514476_ImageAndQuestion.Designer.cs">
