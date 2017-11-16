@@ -3,9 +3,7 @@ using MonsterValueCrew.Data;
 using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.Services.Contracts;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -42,7 +40,7 @@ namespace MonsterValueCrew.Services
         }
         public Course DeserializeJsonString(string jsonString)
         {
-            Guard.WhenArgument(jsonString, "JSON string is null or empty").IsNotNullOrEmpty().Throw();
+            Guard.WhenArgument(jsonString, "JSON string is null or empty").IsNullOrEmpty().Throw();
             Course course = JsonConvert.DeserializeObject<Course>(jsonString);
 
             return course;

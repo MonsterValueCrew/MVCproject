@@ -1,12 +1,12 @@
 ﻿using Bytes2you.Validation;
 using MonsterValueCrew.Data;
-using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Data.DataModels;
+using MonsterValueCrew.DataServices.Interfaces;
+using MonsterValueCrew.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using MonsterValueCrew.Models;
 
 namespace MonsterValueCrew.Controllers
 {
@@ -27,7 +27,7 @@ namespace MonsterValueCrew.Controllers
         public ActionResult AllCourses()
         {
             var viewModel = this.services.GetCoursesByUserName(this.User.Identity.Name)
-                .Select(v => new Data.DataModels.CourseViewModel()
+                .Select(v => new CourseViewModel()
                 {
                     Id = v.Id,
                     Name = v.Name,
@@ -56,7 +56,7 @@ namespace MonsterValueCrew.Controllers
         {
             var questions =
                 services.GetAllCourseQuestions(courseId).
-                Select(q => new Data.DataModels.CourseQuestions()
+                Select(q => new CourseQuestions()
                 {
                     QuestionName = q.QuestionName,
                     A = q.A,
@@ -82,7 +82,7 @@ namespace MonsterValueCrew.Controllers
 
                 var questionsAnswers =
                     services.GetAllCourseQuestions((int)Session["currentCourseId"])
-                    .Select(q => new Data.DataModels.CourseQuestions()
+                    .Select(q => new CourseQuestions()
                     {
                         QuestionName = q.QuestionName,
                         A = q.A,
