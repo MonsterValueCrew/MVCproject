@@ -10,7 +10,7 @@ namespace MonsterValueCrew.Tests.Services.AdminServices
     public class DeserializeJSON_Should
     {
         [TestMethod]
-        public void ThrowExcetion_WhenParametersAreIncorrect()
+        public void ThrowExcetion_WhenParametersAreNotCorrect()
         {
             //Arrange
             var dbMock = new Mock<ApplicationDbContext>();

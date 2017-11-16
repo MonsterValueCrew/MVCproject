@@ -5,6 +5,7 @@ using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -170,7 +171,7 @@ namespace MonsterValueCrew.DataServices
             return course;
         }
 
-        public ICollection<ImageViewModel> GetAllSlidesForCourse(int courseId)
+        public IList<ImageViewModel> GetAllSlidesForCourse(int courseId)
         {
             var collectionOfSlides = this.dbContext.Courses
                 .Where(c => c.Id == courseId)
@@ -243,8 +244,8 @@ namespace MonsterValueCrew.DataServices
 
         public async Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId)
         {
-            UserCourseAssignment assignment = this.dbContext.UserCourseAssignments.
-                Where(c => (c.Id == courseId && c.ApplicationUserId == userId)).First();
+            var assignment = this.dbContext.UserCourseAssignments.
+                First(c => (c.Id == courseId && c.ApplicationUserId == userId));
 
             if (completed)
             {
@@ -257,6 +258,16 @@ namespace MonsterValueCrew.DataServices
 
             await dbContext.SaveChangesAsync();
         }
+        public void SetAssignmentStartedStatus(int courseId, string userId)
+        {
+            var assignment =  this.dbContext.UserCourseAssignments.
+                 Where(c => c.Id == courseId && c.ApplicationUserId == userId).First();
+
+            assignment.Status = StatusName.Started;
+            
+            dbContext.SaveChanges();
+        }
+
         public IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username)
         {
             var user = GetUserByUserName(username);
@@ -283,5 +294,7 @@ namespace MonsterValueCrew.DataServices
                 .ToList();
             return completedCourses;
         }
+
+        
     }
 }

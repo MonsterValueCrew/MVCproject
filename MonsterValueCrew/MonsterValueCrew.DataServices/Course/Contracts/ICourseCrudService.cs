@@ -18,7 +18,7 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         string GetCourseName(int courseId);
 
-        ICollection<ImageViewModel> GetAllSlidesForCourse(int courseId);
+        IList<ImageViewModel> GetAllSlidesForCourse(int courseId);
 
         IList<Image> GetImages(int courseId);
 
@@ -44,8 +44,11 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId);
 
+        void SetAssignmentStartedStatus(int courseId, string userId);
+
         IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username);
 
         IEnumerable<UserCourseAssignmentViewModel> GetUserCourseAssignmentByStatusName(string username, StatusName status);
+
     }
 }
