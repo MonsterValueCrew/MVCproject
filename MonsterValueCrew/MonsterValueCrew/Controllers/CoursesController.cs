@@ -66,7 +66,7 @@ namespace MonsterValueCrew.Controllers
                     CorrectAnswer = q.CorrectAnswer
                 }).ToList();
 
-            Session["currentCourseId"] = courseId;
+            Session["currentCourseId"] = courseId;  
             return this.PartialView("_Questions", questions);
         }
 
@@ -100,7 +100,7 @@ namespace MonsterValueCrew.Controllers
                     ScoreToPass = passScore.PassScore
                 };
 
-                foreach (var qn in questionsAnswers)
+                foreach (var qn in questionsEnum)
                 {
                     if (questionsAnswers.
                         Where(x => x.QuestionName == qn.QuestionName).
