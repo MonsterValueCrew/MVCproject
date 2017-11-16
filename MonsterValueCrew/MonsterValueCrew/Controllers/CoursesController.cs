@@ -51,6 +51,7 @@ namespace MonsterValueCrew.Controllers
 
             return this.View(slides);
         }
+
         [Authorize]
         public ActionResult GetQuestions(int courseId)
         {
@@ -63,7 +64,7 @@ namespace MonsterValueCrew.Controllers
                     B = q.B,
                     C = q.C,
                     D = q.D,
-                    CorrectAnswer = q.CorrectAnswer
+                    //CorrectAnswer = q.CorrectAnswer
                 }).ToList();
 
             Session["currentCourseId"] = courseId;  
@@ -75,7 +76,7 @@ namespace MonsterValueCrew.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult SendAnswers(IEnumerable<CourseQuestions> questionsEnum)
+        public ActionResult SendAnswers(List<CourseQuestions> questionsEnum)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +108,7 @@ namespace MonsterValueCrew.Controllers
                         Select(x => x.CorrectAnswer).
                         Contains(qn.SelectedAnswer))
                     {
-                        result.Score += pointsPerQuestion;
+                        result.Score++;
                     }
                 }
 
@@ -118,7 +119,7 @@ namespace MonsterValueCrew.Controllers
 
                 var currentUser = services.GetUserByUserName(this.User.Identity.Name);
 
-                services.SetAssignmentCompletionStatus((int)Session["currentCourseId"], result.Pass, currentUser.Id);
+                services.SetAssignmentCompletionStatus((int)Session["currentCourseId"], result.Pass);
 
                 return this.View("Results", result);
 

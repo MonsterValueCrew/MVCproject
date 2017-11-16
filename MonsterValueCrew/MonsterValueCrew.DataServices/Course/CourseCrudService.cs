@@ -242,10 +242,10 @@ namespace MonsterValueCrew.DataServices
                 First();
         }
 
-        public async Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId)
+        public async Task SetAssignmentCompletionStatus(int courseId, bool completed)
         {
             var assignment = this.dbContext.UserCourseAssignments.
-                First(c => (c.Id == courseId && c.ApplicationUserId == userId));
+                First(c => (c.Id == courseId));
 
             if (completed)
             {

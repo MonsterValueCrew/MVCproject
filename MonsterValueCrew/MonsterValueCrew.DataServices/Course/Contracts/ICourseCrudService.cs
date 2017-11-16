@@ -42,7 +42,7 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         CoursePassScore GetCoursePassScoreByCourseId(int courseId);
 
-        Task SetAssignmentCompletionStatus(int courseId, bool completed, string userId);
+        Task SetAssignmentCompletionStatus(int courseId, bool completed);
 
         void SetAssignmentStartedStatus(int courseId, string userId);
 
