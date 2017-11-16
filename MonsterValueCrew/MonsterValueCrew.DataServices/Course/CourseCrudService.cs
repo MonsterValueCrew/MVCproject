@@ -245,7 +245,8 @@ namespace MonsterValueCrew.DataServices
         public async Task SetAssignmentCompletionStatus(int courseId, bool completed)
         {
             var assignment = this.dbContext.UserCourseAssignments.
-                First(c => (c.Id == courseId));
+                Where(c => c.CourseId == courseId).
+                First();
 
             if (completed)
             {
@@ -258,6 +259,7 @@ namespace MonsterValueCrew.DataServices
 
             await dbContext.SaveChangesAsync();
         }
+
         public void SetAssignmentStartedStatus(int courseId, string userId)
         {
             var assignment =  this.dbContext.UserCourseAssignments.
