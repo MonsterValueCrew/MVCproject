@@ -162,6 +162,7 @@
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetAllCourses_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetCourseById_Should.cs" />
     <Compile Include="Services\DataServices\CourseCrudServicesTests\GetCourseName_Should.cs" />
+    <Compile Include="Services\DataServices\CourseCrudServicesTests\GetUsersCourseAssignment_Should.cs" />
     <Compile Include="Services\DateTimeServiceTests\GetCurrentDate_Should.cs" />
     <Compile Include="Services\ImageServiceTests\ByteArrayToImageURL_Should.cs" />
     <Compile Include="Services\ImageServiceTests\GetImage_Should.cs" />
