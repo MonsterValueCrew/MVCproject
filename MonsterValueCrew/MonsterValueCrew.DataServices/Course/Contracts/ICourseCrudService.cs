@@ -20,7 +20,7 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         IList<Image> GetImages(int courseId);
 
-        IEnumerable<CourseQuestions> GetAllCourseQuestions(int courseId);
+        IList<CourseQuestions> GetAllCourseQuestions(int courseId);
 
         Task AddCourseObjectToDb(Course course);
 

@@ -18,6 +18,8 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         private readonly IAdminService adminService;
         private readonly ICourseCrudService courseCrudService;
 
+        public object WhenCallTo { get; set; }
+
         public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, IAdminService adminService, ICourseCrudService courseCrudService)
         {
             Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
@@ -152,14 +154,12 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
                 userCourseAssignmentViewModel.Users = userCourseAssignmentViewModel.Users.Where(u => u.IsSelected).ToList();
                 userCourseAssignmentViewModel.Courses = userCourseAssignmentViewModel.Courses.Where(u => u.IsSelected).ToList();
 
                 return this.View(userCourseAssignmentViewModel);
-
             }
             return this.View(userCourseAssignmentViewModel);
         }
@@ -173,7 +173,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
 
                 Guard.WhenArgument(userCourseAssignmentViewModel, "userCourseAssignmentViewModel").IsNull().Throw();
 
-                var userIds = userCourseAssignmentViewModel.Users.Select(u => u.Id).ToArray();
+                var userIds = userCourseAssignmentViewModel.Users.Select(u => u.    Id).ToArray();
                 var courseIds = userCourseAssignmentViewModel.Courses.Select(c => c.Id).ToArray();
 
                 var users = dbContext.Users.Where(u => userIds.Contains(u.Id)).ToList();

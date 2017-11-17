@@ -91,8 +91,9 @@ namespace MonsterValueCrew.DataServices
         {
             var collectionOfSlides = this.dbContext.Courses
                 .Where(c => c.Id == courseId)
-                .Select(c => c.Images).
-                First();
+                .Select(c => c.Images)
+                .First()
+                .ToList();
 
             var listOfSlides = new List<ImageViewModel>();
 
@@ -107,7 +108,7 @@ namespace MonsterValueCrew.DataServices
             return listOfSlides;
         }
 
-        public IEnumerable<CourseQuestions> GetAllCourseQuestions(int courseId)
+        public IList<CourseQuestions> GetAllCourseQuestions(int courseId)
         {
             var collectionOfQuestions = this.dbContext.Courses
                 .Where(c => c.Id == courseId)
@@ -138,9 +139,9 @@ namespace MonsterValueCrew.DataServices
 
             Guard.WhenArgument(courseId, "courseID").IsLessThanOrEqual(0).Throw();
             Guard.WhenArgument(username, "userName").IsNull().Throw();
-            var assignment = this.dbContext.
-                UserCourseAssignments.
-                First(a => a.ApplicationUser.UserName == username && a.CourseId == courseId);
+            var assignment = this.dbContext
+                .UserCourseAssignments
+                .First(a => a.ApplicationUser.UserName == username && a.CourseId == courseId);
 
             assignment.IsAssigned = false;
 
@@ -149,21 +150,21 @@ namespace MonsterValueCrew.DataServices
 
         public CoursePassScore GetCoursePassScoreByCourseId(int courseId)
         {
-            return this.dbContext.Courses.
-                Where(c => c.Id == courseId).
-                Select(c => new CoursePassScore()
+            return this.dbContext.Courses
+                .Where(c => c.Id == courseId)
+                .Select(c => new CoursePassScore()
                 {
                     PassScore = c.PassScore
-                }).
-                First();
+                })
+                .First();
         }
 
         //tested
         public async Task SetAssignmentCompletionStatus(int courseId, bool completed)
         {
-            var assignment = this.dbContext.UserCourseAssignments.
-                Where(c => c.CourseId == courseId).
-                First();
+            var assignment = this.dbContext.UserCourseAssignments
+                .Where(c => c.CourseId == courseId)
+                .First();
 
             if (completed)
             {

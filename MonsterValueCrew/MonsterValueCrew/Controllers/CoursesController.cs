@@ -41,11 +41,12 @@ namespace MonsterValueCrew.Controllers
         [Authorize]
         public ActionResult TakeCourse(int courseId)
         {
-            var slides = services.GetAllSlidesForCourse(courseId)
+            var slides = this.services.GetAllSlidesForCourse(courseId)
                 .Select(s => new Data.DataModels.ImageViewModel()
                 {
                     ImageUrl = Convert.ToBase64String(s.ImageInBase64)
-                });
+                })
+                .ToList();
 
             ViewBag.courseId = courseId;
 
@@ -56,7 +57,7 @@ namespace MonsterValueCrew.Controllers
         public ActionResult GetQuestions(int courseId)
         {
             var questions =
-                services.GetAllCourseQuestions(courseId).
+                this.services.GetAllCourseQuestions(courseId).
                 Select(q => new CourseQuestions()
                 {
                     QuestionName = q.QuestionName,
@@ -64,7 +65,6 @@ namespace MonsterValueCrew.Controllers
                     B = q.B,
                     C = q.C,
                     D = q.D,
-                    //CorrectAnswer = q.CorrectAnswer
                 }).ToList();
 
             Session["currentCourseId"] = courseId;  
@@ -82,7 +82,7 @@ namespace MonsterValueCrew.Controllers
             {
 
                 var questionsAnswers =
-                    services.GetAllCourseQuestions((int)Session["currentCourseId"])
+                    this.services.GetAllCourseQuestions((int)Session["currentCourseId"])
                     .Select(q => new CourseQuestions()
                     {
                         QuestionName = q.QuestionName,
@@ -117,9 +117,9 @@ namespace MonsterValueCrew.Controllers
                     result.Pass = true;
                 }
 
-                var currentUser = services.GetUserByUserName(this.User.Identity.Name);
+                var currentUser = this.services.GetUserByUserName(this.User.Identity.Name);
 
-                services.SetAssignmentCompletionStatus((int)Session["currentCourseId"], result.Pass);
+                this.services.SetAssignmentCompletionStatus((int)Session["currentCourseId"], result.Pass);
 
                 return this.View("Results", result);
 
