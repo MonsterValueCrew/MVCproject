@@ -16,8 +16,6 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         //CoursePassScore GetCoursePassScoreByCourseId(int courseId);
 
-        string GetCourseName(int courseId);
-
         IList<ImageViewModel> GetAllSlidesForCourse(int courseId);
 
         IList<Image> GetImages(int courseId);
@@ -26,14 +24,7 @@ namespace MonsterValueCrew.DataServices.Interfaces
 
         Task AddCourseObjectToDb(Course course);
 
-        //Do we need to add CourseId here or not?
-        Task AddCourseToDb(string name, string description,
-            int passScore, bool isDeleted);
-
         Task AssignCourseToUser(string userName, int courseId,
-            bool isAssigned, bool isMandatory, DateTime dueDate);
-
-        Task AssignCourseToDepartment(int departmentID, int courseId,
             bool isAssigned, bool isMandatory, DateTime dueDate);
 
         Task UnassignCourseFromUser(int courseId, string username);
@@ -43,8 +34,6 @@ namespace MonsterValueCrew.DataServices.Interfaces
         CoursePassScore GetCoursePassScoreByCourseId(int courseId);
 
         Task SetAssignmentCompletionStatus(int courseId, bool completed);
-
-        void SetAssignmentStartedStatus(int courseId, string userId);
 
         IEnumerable<UserCourseAssignmentViewModel> GetUsersCourseAssignment(string username);
 
