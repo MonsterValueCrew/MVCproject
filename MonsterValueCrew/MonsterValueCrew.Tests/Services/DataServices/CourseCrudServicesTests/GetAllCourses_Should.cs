@@ -46,7 +46,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
             var testedObject = courseService.GetAllCourses().Single();
            
             //Assert
-            Assert.AreEqual  (valueToAssertAgainst.DateAdded, testedObject.DateAdded);
+            Assert.AreEqual(valueToAssertAgainst.DateAdded, testedObject.DateAdded);
             Assert.AreEqual(valueToAssertAgainst.Description,testedObject.Description);
             Assert.AreEqual(valueToAssertAgainst.Name, testedObject.Name);
             Assert.AreEqual(valueToAssertAgainst.PassScore, testedObject.PassScore);

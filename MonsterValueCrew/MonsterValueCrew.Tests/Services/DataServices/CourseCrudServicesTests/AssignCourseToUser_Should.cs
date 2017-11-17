@@ -54,7 +54,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
             var coursesDbSetMock = new Mock<DbSet<Course>>().SetupData(coursesList);
             dbContextMock.SetupGet(x => x.Courses).Returns(coursesDbSetMock.Object);
 
-            CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
+            var courseService = new CourseCrudService(dbContextMock.Object);
             //Act
 
             await courseService.AssignCourseToUser(username, courseId, isAssigned, IsMandatory, date);

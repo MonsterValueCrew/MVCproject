@@ -18,28 +18,23 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseServicesTests
         public async Task AddCourseObjectToDb_WhenParametersAreCorrect()
         {
             //Arrange
-            string name = "course";
-            string description = "description";
-            DateTime dateTime = new DateTime(2017, 11, 10);
-            int passedScore = 10;
-            int id = 8;
-
-            var courses = new List<Course>();
-          
-            var course = new Course()
-            {
-                Id=id,
-                Name = name,
-                Description = description,
-                PassScore = passedScore,
-                DateAdded = dateTime
-            };
-            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
 
             var dbContextMock = new Mock<ApplicationDbContext>();
+
+            var course = new Course()
+            {
+                Id = 8,
+                Name = "course",
+                Description = "description",
+                PassScore = 10,
+                DateAdded = new DateTime(2017, 11, 10)
+            };
+            var courses = new List<Course>();
+            var coursesSetMock = new Mock<DbSet<Course>>().SetupData(courses);
+
             dbContextMock.SetupGet(c => c.Courses).Returns(coursesSetMock.Object);
 
-            CourseCrudService service = new CourseCrudService(dbContextMock.Object);
+            var service = new CourseCrudService(dbContextMock.Object);
 
 
             //Act

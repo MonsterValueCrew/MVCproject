@@ -145,10 +145,12 @@
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\DeassignCoursesPost_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\DeassignCourses_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\DisplayCourses_Should.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\EditUserPost_Should.cs" />
+    <Compile Include="Controllers\CoursesControllerTests\AllCourses_Should.cs" />
     <Compile Include="Controllers\CoursesControllerTests\Constructor_Should.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminControllerTests\AssignCoursesGet_Should.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\EditUser_Should.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\UploadCourseGet_Should.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\EditUserGet_Should.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminControllerTests\UploadCoursePost_Should.cs" />
     <Compile Include="Controllers\CoursesControllerTests\TakeCourse_Should.cs" />
     <Compile Include="Controllers\HomeControllerTests\Index_Should_Dummy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

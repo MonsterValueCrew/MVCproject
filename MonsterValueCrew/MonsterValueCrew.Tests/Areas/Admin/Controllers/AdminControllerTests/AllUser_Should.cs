@@ -26,7 +26,7 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             
             var resultViewModel = new UploadJSONViewModel();
             
-            AdminController controller = new AdminController(
+            var controller = new AdminController(
                                                 userManagerMock.Object, 
                                                 dbContextMock.Object, 
                                                 adminServiceMock.Object,

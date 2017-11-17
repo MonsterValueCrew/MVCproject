@@ -32,16 +32,16 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
                 DateAdded = dateTime,
                 PassScore = 40
             };
-            List<Course> courseList = new List<Course>()
-              {
-                  course
-             };
+            var courseList = new List<Course>()
+            {
+                course
+            };
 
             var coursesMock = new Mock<DbSet<Course>>().SetupData(courseList);
 
             dbContextMock.SetupGet(x => x.Courses).Returns(coursesMock.Object);
 
-            List<ApplicationUser> userList = new List<ApplicationUser>()
+            var userList = new List<ApplicationUser>()
             {
                 new ApplicationUser()
                 {
@@ -51,7 +51,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
             };
 
             var usersDbSetMock = new Mock<DbSet<ApplicationUser>>().SetupData(userList);
-            dbContextMock.SetupGet<IDbSet<ApplicationUser>>(x => x.Users).Returns(usersDbSetMock.Object);
+            dbContextMock.SetupGet(x => x.Users).Returns(usersDbSetMock.Object);
 
             var userCourseAssignmentList = new List<UserCourseAssignment>()
             {
@@ -69,15 +69,13 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
                     Status = StatusName.Pending
                 }
             };
-            var UserCourseAssignmentDbSetMock = 
-                new Mock<DbSet<UserCourseAssignment>>()
+            var UserCourseAssignmentDbSetMock = new Mock<DbSet<UserCourseAssignment>>()
                 .SetupData(userCourseAssignmentList);
 
-            dbContextMock.SetupGet<IDbSet<UserCourseAssignment>>(x => x.UserCourseAssignments)
+            dbContextMock.SetupGet(x => x.UserCourseAssignments)
                 .Returns(UserCourseAssignmentDbSetMock.Object);
 
-            List<UserCourseAssignmentViewModel> UserCourseAssignmentViewModelList = 
-                new List<UserCourseAssignmentViewModel>()
+            var UserCourseAssignmentViewModelList = new List<UserCourseAssignmentViewModel>()
             {
                 new UserCourseAssignmentViewModel()
                 {
@@ -92,7 +90,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
 
 
             //Act
-            CourseCrudService courseServices = new CourseCrudService(dbContextMock.Object);
+            var courseServices = new CourseCrudService(dbContextMock.Object);
             var expectedResultObject = UserCourseAssignmentViewModelList.Single();
             var resultObject = courseServices.GetUsersCourseAssignment(userName).Single();
 

@@ -21,14 +21,13 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
             var dbContextMock = new Mock<ApplicationDbContext>();
 
             int courseId = 4;
-            DateTime date = DateTime.Now;
             
             var course = new Course()
             {
                 Id = courseId,
                 Description = "description",
                 Name = "name",
-                DateAdded = date,
+                DateAdded = DateTime.Now,
                 PassScore = 30
             };
             var courseList = new List<Course>()
@@ -54,14 +53,14 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
         public void ReturnEmptyCourse_WhenNoCourseIsFound()
         {
             var dbContextMock = new Mock<ApplicationDbContext>();
-            var courseList = new List<Course>() { };
+            var courseList = new List<Course>();
             var courseDbSetMock = new Mock<DbSet<Course>>().SetupData(courseList);
 
             dbContextMock.SetupGet(x => x.Courses).Returns(courseDbSetMock.Object);
 
             //Act
 
-            CourseCrudService courseService = new CourseCrudService(dbContextMock.Object);
+            var courseService = new CourseCrudService(dbContextMock.Object);
 
             //Assert
 

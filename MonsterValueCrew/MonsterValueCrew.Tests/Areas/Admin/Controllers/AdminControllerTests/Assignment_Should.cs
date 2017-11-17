@@ -61,7 +61,11 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
                 Courses = coursesList
             };
 
-            var controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseCrudServiceMock.Object);
+            var controller = new AdminController(
+                                        userManagerMock.Object, 
+                                        dbContextMock.Object, 
+                                        adminServiceMock.Object, 
+                                        courseCrudServiceMock.Object);
 
 
             //Act & Assert

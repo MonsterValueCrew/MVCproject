@@ -7,11 +7,8 @@ using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices.Interfaces;
 using MonsterValueCrew.Services.Contracts;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestStack.FluentMVCTesting;
 
 namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
@@ -30,9 +27,19 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             var courseService = new Mock<ICourseCrudService>();
             var model = new DeassignViewModel();
             var models = new List<DeassignViewModel>() { model };
-            var userCourseAssignmentsList = new List<UserCourseAssignment>() { new UserCourseAssignment() { Id = 1 } };
+            var userCourseAssignmentsList = new List<UserCourseAssignment>()
+            {
+                new UserCourseAssignment()
+                {
+                    Id = 1
+                }
+            };
 
-            var controller = new AdminController(userManagerMock.Object, dbContextMock.Object, adminServiceMock.Object, courseService.Object);
+            var controller = new AdminController(
+                                        userManagerMock.Object, 
+                                        dbContextMock.Object, 
+                                        adminServiceMock.Object, 
+                                        courseService.Object);
 
             adminServiceMock.Setup(x => x.GetAllUserCourseAssignments()).Returns(userCourseAssignmentsList);
 

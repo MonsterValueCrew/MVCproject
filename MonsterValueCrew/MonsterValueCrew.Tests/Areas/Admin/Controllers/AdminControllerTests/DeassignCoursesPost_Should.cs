@@ -53,7 +53,10 @@ namespace MonsterValueCrew.Tests.Areas.Admin.Controllers.AdminControllerTests
             var courseServiceMock = new Mock<ICourseCrudService>();
 
             var model = new DeassignViewModel();
-            var models = new List<DeassignViewModel>() { model };
+            var models = new List<DeassignViewModel>()
+            {
+                model
+            };
             var applicationUserManagerMock = new Mock<ApplicationUserManager>(userStore.Object);
 
             var controller = new AdminController(

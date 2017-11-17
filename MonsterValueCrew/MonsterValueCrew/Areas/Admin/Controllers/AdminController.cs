@@ -17,9 +17,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         private readonly ApplicationDbContext dbContext;
         private readonly IAdminService adminService;
         private readonly ICourseCrudService courseCrudService;
-
-        public object WhenCallTo { get; set; }
-
+        
         public AdminController(ApplicationUserManager userManager, ApplicationDbContext dbContext, IAdminService adminService, ICourseCrudService courseCrudService)
         {
             Guard.WhenArgument(userManager, "userManager").IsNull().Throw();
@@ -51,6 +49,7 @@ namespace MonsterValueCrew.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> UploadCourses(UploadJSONViewModel files)
         {
             UploadJSONViewModel file = new UploadJSONViewModel();

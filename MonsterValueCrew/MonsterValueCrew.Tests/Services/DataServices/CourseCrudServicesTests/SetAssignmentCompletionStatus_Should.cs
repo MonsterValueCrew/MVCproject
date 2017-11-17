@@ -75,7 +75,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
 
 
             //Act
-            CourseCrudService services = new CourseCrudService(dbContextMock.Object);
+            var services = new CourseCrudService(dbContextMock.Object);
             await services.SetAssignmentCompletionStatus(courseId, true);
 
             var expectedResult = dbContextMock.Object.UserCourseAssignments.Single();
@@ -116,7 +116,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
             string firstName = "Marko";
             string lastName = "Markov";
 
-            List<ApplicationUser> userList = new List<ApplicationUser>()
+            var userList = new List<ApplicationUser>()
             {
                 new ApplicationUser()
                 {
@@ -148,7 +148,7 @@ namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
 
 
             //Act
-            CourseCrudService services = new CourseCrudService(dbContextMock.Object);
+            var services = new CourseCrudService(dbContextMock.Object);
             await services.SetAssignmentCompletionStatus(courseId, false);
 
             var expectedResult = dbContextMock.Object.UserCourseAssignments.Single();
