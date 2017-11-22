@@ -4,14 +4,13 @@ using MonsterValueCrew.Data.Models;
 using MonsterValueCrew.DataServices;
 using MonsterValueCrew.Services;
 using Moq;
-using System;
-using System.Collections.Generic;
+using System.Collections.Generic;   
 using System.Data.Entity;
 using System.Linq;
 
 namespace MonsterValueCrew.Tests.Services.DataServices.CourseCrudServicesTests
 {
-   [TestClass]
+    [TestClass]
    public class GetAllCourses_Should
     {
         [TestMethod]
